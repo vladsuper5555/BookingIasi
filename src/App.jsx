@@ -21,8 +21,8 @@ function App() {
   return (
     <>
       <div> ce grupa suntem ?</div>
-      <div> { grupa } </div>
-      <button id = 'afla grupa' onClick = {aflaGrupa}>Afla grupa</button>
+      <div id = "content"> { grupa } </div>
+      <button id = 'afla_grupa' onClick = {aflaGrupa}>Afla grupa</button>
     </>
   )
 }
