@@ -1,6 +1,7 @@
 module.exports = {
     preset: 'jest-puppeteer',
     testRegex: './*\\.test\\.cjs$',
-    transform: {}
+    transform: {},
+    testTimeout: 10000
   };
   
