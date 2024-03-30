@@ -6,7 +6,7 @@ describe('Main Button For Finding Group ID', () => {
     const page = await browser.newPage();
 
     // Navigate to your target page
-    await page.goto('YOUR_URL_HERE');
+    await page.goto('http://localhost:5173');
 
     // Click the button with the id 'afla_grupa'
     await page.click('#afla_grupa');
