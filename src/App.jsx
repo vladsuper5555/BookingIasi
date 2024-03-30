@@ -4,30 +4,25 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [grupa, setGrupa] = useState("");
 
+  async function aflaGrupa () {
+    const res = await new Promise((res) => {
+      fetch('http://localhost:5173/api/cegrupasuntem', {
+        method: "POST",
+        body: ""
+      }).then(async (response) => {
+        res(response.text());
+      })
+    })
+    console.log(res);
+    setGrupa(JSON.parse(res).name);
+  }
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div> ce grupa suntem ?</div>
+      <div> { grupa } </div>
+      <button id = 'afla grupa' onClick = {aflaGrupa}>Afla grupa</button>
     </>
   )
 }
