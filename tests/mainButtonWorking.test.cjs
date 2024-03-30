@@ -2,7 +2,8 @@ const puppeteer = require('puppeteer');
 
 describe('Main Button For Finding Group ID', () => {
   it('Should display content in the div after button click', async () => {
-    const browser = await puppeteer.launch({headless: false});
+    // const browser = await puppeteer.launch({headless: false}); // never launch in non headless mode -> github blocks interaction 
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
     // Navigate to your target page
