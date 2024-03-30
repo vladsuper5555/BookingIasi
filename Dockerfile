@@ -6,6 +6,6 @@ ENV PORT 80
 
 COPY . /deploy
 
-RUN cd BookingIasi && npm install
+RUN cd /deploy/BookingIasi && npm install
 
 RUN npm run devr
