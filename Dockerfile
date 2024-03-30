@@ -1,4 +1,4 @@
-FROM node:12.16.3
+FROM node:12.18.1
 
 WORKDIR /deploy
 
@@ -8,4 +8,4 @@ COPY . /deploy
 
 RUN cd /deploy/BookingIasi && npm install
 
-RUN npm run devr
+RUN cd /deploy/BookingIasi && npm run dev
