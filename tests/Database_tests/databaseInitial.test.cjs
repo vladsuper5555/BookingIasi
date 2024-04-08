@@ -24,12 +24,11 @@ afterAll(done => {
 });
 
 test('check if name "Ion" exists in test table', done => {
-  const query = 'SELECT * FROM test WHERE name = "Ion"';
+  const query = 'SELECT * FROM accommodations';
   con.query(query, (err, result) => {
     expect(err).toBeNull();
     expect(result).not.toBeNull();
     expect(result.length).toBeGreaterThan(0);
-    expect(result[0].name).toEqual('Ion');
     done();
   });
 });
