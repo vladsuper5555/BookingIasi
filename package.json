@@ -20,6 +20,9 @@
     "testTimeout": 10000
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.15",
     "express": "^4.19.2",
     "faker": "^6.6.6",
     "mysql": "^2.18.1",

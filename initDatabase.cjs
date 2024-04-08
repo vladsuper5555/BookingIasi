@@ -178,6 +178,37 @@ con.connect(function(err) {
             })
           }
 
+          let createTableSql2 = `CREATE TABLE IF NOT EXISTS attractions (
+            idHotel INT,
+            descrierePOI VARCHAR(255),
+            urlGoogleMapsPOI VARCHAR(255),
+            titluPOI VARCHAR(255)
+          );`;
+
+
+          await new Promise((res) => {
+            conDB.query(createTableSql2, function(err, result) {res(result); console.log(result)});
+          })
+          const insertSql2 = `INSERT INTO attractions 
+          (idHotel, descrierePOI, urlGoogleMapsPOI, titluPOI) 
+          VALUES 
+          (?, ?, ?, ?)`;
+
+          for (let i = 0; i < 10; i++) { // Generate and insert 10 random records
+            const data = [
+              faker.datatype.number({min: 1, max: 5}),
+              faker.lorem.sentence(),
+              faker.image.imageUrl(),
+              faker.random.word(),
+            ];
+            await new Promise((res) => {
+              conDB.query(insertSql2, data, function(err, result) {
+                if (err) throw err;
+                console.log("Random accommodation record inserted:", result.insertId);
+                res(result);
+              });
+            })
+          }
         });
       });
     });

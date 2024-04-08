@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Button from '@mui/material/Button';
 
 function App() {
   const [grupa, setGrupa] = useState("");
@@ -22,7 +23,7 @@ function App() {
     <>
       <div> ce grupa suntem ?</div>
       <div id = "content"> { grupa } </div>
-      <button id = 'afla_grupa' onClick = {aflaGrupa}>Afla grupa</button>
+      <Button id = 'afla_grupa' variant='contained' onClick = {aflaGrupa}>Afla grupa</Button>
     </>
   )
 }
