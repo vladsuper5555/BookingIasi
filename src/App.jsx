@@ -3,9 +3,10 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Updated import
-import LoginPage from './LoginPage';
-import MainPage from './MainPage';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; 
+import LoginPage from './userInteractions/LoginPage';
+import MainPage from './userInteractions/MainPage';
+import Model3D from './model3D/render';
 import NotFoundPage from './NotFoundPage';
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} /> 
         <Route path="/login" element={<LoginPage />} />
+        {/* <Route path="/register" element={<RegisterPage />} /> */}
+        <Route path='/vizualizare3D' element={<Model3D />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>

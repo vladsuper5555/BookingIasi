@@ -1,7 +1,6 @@
 var mysql = require('mysql');
 const { faker } = require('@faker-js/faker');
 
-// Connection setup without specifying a database
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -12,25 +11,21 @@ con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
 
-  // SQL statement to drop the existing database
   let dropDbSql = `DROP DATABASE IF EXISTS BookingIasi`;
 
   con.query(dropDbSql, function(err, result) {
     if (err) throw err;
     console.log("Database dropped.");
 
-    // SQL statement to create the database
     let createDbSql = `CREATE DATABASE BookingIasi`;
 
     con.query(createDbSql, function(err, result) {
       if (err) throw err;
       console.log("Database created.");
 
-      // Close initial connection
       con.end(function(err) {
         if (err) throw err;
 
-        // Reconnect with the specific database selected
         var conDB = mysql.createConnection({
           host: "localhost",
           user: "root",
@@ -42,7 +37,6 @@ con.connect(function(err) {
           if (err) throw err;
           console.log("Connected to BookingIasi!");
 
-          // SQL statement to create a table
           let createTableSql = `CREATE TABLE IF NOT EXISTS users (
             id INT AUTO_INCREMENT PRIMARY KEY,
             email VARCHAR(255) NOT NULL,
@@ -59,7 +53,6 @@ con.connect(function(err) {
             activityIndex DECIMAL(10, 2)
           );`;
 
-          // Execute the create table SQL
           await new Promise((res) => {
             conDB.query(createTableSql, function(err, result) {res(result)});
           })
@@ -69,7 +62,6 @@ con.connect(function(err) {
           VALUES 
           (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
         
-          // Sample user data
           let userData = [
             ['jane.doe@example.com', 'Jane', 'Doe', 'hashed_password', 'janedoe', '1990-01-01', 165.5, 60.2, 'female', false, true, 120],
             ['john.smith@example.com', 'John', 'Smith', 'another_hashed_password', 'johnsmith', '1985-05-15', 180.4, 80.5, 'male', false, true, 150],
@@ -80,7 +72,6 @@ con.connect(function(err) {
           ];
           
         
-          // Execute the insert statement for each user
           userData.forEach(user => {
             new Promise((res) => {
               conDB.query(insertSql, user, function(err, result) {
@@ -135,7 +126,7 @@ con.connect(function(err) {
           VALUES 
           (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-          for (let i = 0; i < 10; i++) { // Generate and insert 10 random records
+          for (let i = 0; i < 10; i++) { 
             const data = [
               faker.image.imageUrl(),
               faker.image.imageUrl(),
@@ -194,7 +185,7 @@ con.connect(function(err) {
           VALUES 
           (?, ?, ?, ?)`;
 
-          for (let i = 0; i < 10; i++) { // Generate and insert 10 random records
+          for (let i = 0; i < 10; i++) { 
             const data = [
               faker.datatype.number({min: 1, max: 5}),
               faker.lorem.sentence(),
