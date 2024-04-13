@@ -28,6 +28,6 @@ To run the project on your local machine, follow these steps:
 3. Navigate to the project directory and run the following commands in parallel:
 
 ```bash
-npm i --force # Keeps dependencies up to date
+npm i --force # * keeps dependencies up to date, to be run before the following two if necessary
 npm run dev # Starts the Vite React server
 npm run dev-node # Starts the Node.js Express server
