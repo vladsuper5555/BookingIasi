@@ -1,0 +1,1 @@
+// function returning a json object for a given panorama... or something

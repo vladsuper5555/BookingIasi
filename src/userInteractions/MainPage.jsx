@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 function MainPage() {
   const [grupa, setGrupa] = useState("");
 
-
   async function aflaGrupa () {
     const res = await new Promise((res) => {
       fetch('http://localhost:5173/api/cegrupasuntem', {
@@ -22,7 +21,7 @@ function MainPage() {
   }
 
   function redirectToImage () {
-    window.location.href =  '/vizualizare3D?hotel=hotel_test';
+    window.location.href =  '/panoramas?hotel=hotel_test';
   }
 
   return (
