@@ -18,6 +18,7 @@ server.post('/api/cegrupasuntem', (req, res) => { // here get would work but in 
     res.send(JSON.stringify({name: "E1"}));
     res.end();
 });
+//
 
 async function startServer() {
     server.listen(PORT, () => console.log(`Server started on PORT ${PORT}!`));

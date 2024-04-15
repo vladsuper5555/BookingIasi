@@ -1,18 +1,16 @@
-import fs from 'node:fs';
-import Path from 'node:path';
-import * as url from 'url';
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+import { getConfig, updateConfig } from '../../models/panoramas.model';
 
-function getPanorama (req, res) {
-    //console.log(req.body);
-    const path = Path.join(__dirname, '..', '..', 'models', req.body.imagePath, 'index.json');
-    fs.readFile(path, 'utf8',  (err, data) => {
-        if (err) 
-            return;
-        res.send(data);
-    });
+function getPanorama(req, res) {
+    res.status(200).json(getConfig());
+}
+
+function updatePanorama(req, res) {
+    const newConfig = req.body;
+    updateConfig(newConfig);
+    res.status(200).json({ message: "Panorama updated!" });
 }
 
 export {
-    getPanorama
+    getPanorama,
+    updatePanorama
 };

@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import { getPanorama } from './panoramas.controller';
+import { getPanorama, updatePanorama } from './panoramas.controller';
 
 const panoramasRouter = Router();
 
-panoramasRouter.post('/', getPanorama);
+panoramasRouter.get('/panoramas', getPanorama);
+panoramasRouter.put('/panoramas', updatePanorama);
 
 export default panoramasRouter;
