@@ -4,7 +4,7 @@ const { faker } = require('@faker-js/faker');
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: ""
+  password: "",
 });
 
 con.connect(function(err) {

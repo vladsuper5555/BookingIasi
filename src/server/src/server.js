@@ -2,6 +2,7 @@ const PORT = 3002;
 import express from "express"
 import panoramasRouter from './routes/panoramas/panoramas.router';
 // import hotelsRouter ... etc.
+import {runQueryOnDatabaseAndFetchEntireResult, runAsyncQueryOnDatabase} from "./models/database.model.js";
 
 const server = express();
 
@@ -12,6 +13,13 @@ const server = express();
 server.use(express.json());
 
 server.use('/api', panoramasRouter); // to change to panoramas
+
+// TEST PURPOSE ONLY TO BE DELETED
+server.get('/api/databaseTest', async (req, res) => {
+    const data = await runQueryOnDatabaseAndFetchEntireResult("SELECT * FROM users");
+    res.send(data);
+    res.end();
+})
 
 // TO BE DELETED
 server.post('/api/cegrupasuntem', (req, res) => { // here get would work but in the frontend we do it this way
