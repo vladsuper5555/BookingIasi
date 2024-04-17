@@ -27,13 +27,23 @@ const MainPage = () => {
         fetchPanoConfig();
     }, []);
 
+    ReactPannellum.addScene("Bathroom", {
+        hfov: 130,
+        pitch: 0,
+        yaw: 0,
+        type: "equirectangular",
+        imageSource: "https://pannellum.org/images/alma.jpg"
+    });
+    // study API events: https://github.com/hoaiduyit/react-pannellum
+    // use examples from here: https://codesandbox.io/p/sandbox/reactpannellum-example-cxhwzg?file=%2Fsrc%2FApp.js%3A191%2C26
+    
     return (
         <div>
             <ReactPannellum
-                key={panoConfig.imageSource}
-                id="panorama"
-                sceneId="firstScene"
                 imageSource={panoConfig.imageSource}
+                key={panoConfig.imageSource}
+                id="mainscene"
+                sceneId="mainscene"
                 config={panoConfig.config}
             >
             </ReactPannellum>
