@@ -32,7 +32,16 @@ const MainPage = () => {
         pitch: 0,
         yaw: 0,
         type: "equirectangular",
-        imageSource: "https://pannellum.org/images/alma.jpg"
+        imageSource: "https://pannellum.org/images/alma.jpg",
+        hotSpots: [
+            {
+                "pitch": 1.1,
+                "yaw": 101.5,
+                "type": "scene",
+                "text": "mainscene",
+                "sceneId": "mainscene"
+            },
+        ]
     });
     // study API events: https://github.com/hoaiduyit/react-pannellum
     // use examples from here: https://codesandbox.io/p/sandbox/reactpannellum-example-cxhwzg?file=%2Fsrc%2FApp.js%3A191%2C26
