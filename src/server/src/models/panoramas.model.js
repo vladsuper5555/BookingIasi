@@ -1,7 +1,9 @@
 /* example
-*a dbconfig.js file might be needed (extra: read about connectionPooling / other efficiency aspects etc.)
 --- in controller, we import the functions and use them accordingly
 *await/async might be required
+check controller functions to see the prototype of the functions you need to implement and 
+throw errors (and messages) accordingly (when hotel/room/panorama do not exist) - only get Functions for now
+the below imports will become, obviously, obsolete
 */
 import fs from 'node:fs';
 import Path from 'node:path';
@@ -27,8 +29,6 @@ const panoramaConfig = {
     imageSource: await readImageURL(path),
     config: {
         autoLoad: true,
-        keyboardZoom: false,
-        hotSpotDebug: true,
         hotSpots: [
             {
                 "pitch": 1.1,
@@ -41,15 +41,30 @@ const panoramaConfig = {
     },
 }
 
-function getConfig() {
+function getConfigDEMO() { // TO DELETE after we implement the database
     return panoramaConfig;
 }
 
-function updateConfig(newConfig) {
-    panoramaConfig.hotSpots = newConfig.hotSpots;
+function getPanorama(hotel, room) {
+    // ...
+}
+
+function getPanoramaScene(hotel, room, scene) {
+    // ...
+}
+
+function uploadPanorama() {
+    // ...
+}
+
+function updatePanoramaScene() {
+    // ...
 }
 
 export {
-    getConfig,
-    updateConfig
+    getPanorama,
+    getPanoramaScene,
+    uploadPanorama,
+    updatePanoramaScene,
+    getConfigDEMO,
 };
