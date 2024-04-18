@@ -35,6 +35,10 @@ function MainPage() {
     console.log(res);
   }
 
+  function hoteluri () {
+    window.location.href = '/hotels';
+  }
+
   return (
     <div>
       <h1>BookingIasi</h1>
@@ -43,6 +47,7 @@ function MainPage() {
       <div id = "content"> { grupa } </div>
       <Button id = 'afla_grupa' variant='contained' onClick = {aflaGrupa}>Afla grupa</Button> <br/> <br/>
       <Button id = 'test_db_query' variant='contained' onClick = {testDB}>Test DB</Button> <br/> <br/>
+      <Button id = 'vizualizare_hoteluri' variant='contained' onClick = {hoteluri}>Vezi Hoteluri</Button> <br/> <br/>
       <Button id = 'image' variant='contained' onClick = {redirectToImage}>Vezi o imagine 3D</Button>
     </div>
   );
