@@ -8,6 +8,7 @@ the below imports will become, obviously, obsolete
 import fs from 'node:fs';
 import Path from 'node:path';
 import * as url from 'url';
+import { runQueryOnDatabaseAndFetchEntireResult } from './database.model';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const path = Path.join(__dirname, 'hotel_test', 'panorama.json');
@@ -41,8 +42,122 @@ const panoramaConfig = {
     },
 }
 
+async function getFacilityType(hotelId, facilityType) {
+    try {
+        
+        let ok_id = false;
+        let ok_type = false;
+
+        if (existsHotelId(hotelId)) {    
+            ok_id = true;
+        }
+
+        if (existsFacilityType(facilityType)) {
+            ok_type = true;
+        }
+
+        if (ok_id && ok_type) {
+            return hotelId.concat('/').concat(facilityType);
+        } else if(!ok_id) {
+            throw new Error(`ID ${hotelId} is not valid.`);
+        } else{
+            throw new Error(`Facility ${facilityType} is not valid.`);
+        }
+    } catch (err) {
+        console.error('An error has occurred:', err);
+    }
+}
+
+async function existsHotelId(hotelId){
+    let hotelPath = "hoteluri/" + hotelId;
+   
+    let sqlStatement = "select count(*) from where imagePath like '%" + hotelPath + "%'";
+
+    let result = runQueryOnDatabaseAndFetchEntireResult(sqlStatement)
+    if(result == 0) {
+        return false;
+    }
+    return true;
+}
+
+function existsFacilityType(hotelId, facilityType){
+    let facilityPath = "hoteluri/" + hotelId + "/" + facilityType;
+   
+    let sqlStatement = "select count(*) from where imagePath like '%" + facilityPath + "%'";
+
+    let result = runQueryOnDatabaseAndFetchEntireResult(sqlStatement)
+    if(result == 0) {
+        return false;
+    }
+    return true;
+}
+
+async function getAppartmentId(facilityPath, idAppRequested) {
+    try {
+
+        if (existIdRequested(facilityPath, idAppRequested)) {    
+            ok_id = true;
+        }
+
+        if (ok_id ) {
+            return facilityPath.concat('/').concat(idAppRequested);
+        } else if(!ok_id) {
+            throw new Error(`ID ${idAppRequested} is not valid.`);
+        }
+    } catch (err) {
+        console.error('An error has occurred:', err);
+    }
+}
+
+function existIdRequested(facilityType, idAppRequested) {
+    let idRequestedPath = facilityPath + "/" + idAppRequested;
+
+    let sqlStatement = "select count(*) from where imagePath like '%" + idRequestedPath + "%'";
+
+    let result = runQueryOnDatabaseAndFetchEntireResult(sqlStatement)
+    if(result == 0) {
+        return false;
+    }
+    return true;
+}
+
+function getRoomType(idRequestedPath, roomType) {
+    try {
+
+        if (existsRoomType(idRequestedPath, roomType)) {    
+            ok_id = true;
+        }
+
+        if (ok_id ) {
+            return idRequestedPath.concat('/').concat(roomType);
+        } else if(!ok_id) {
+            throw new Error(`ID ${roomType} is not valid.`);
+        }
+    } catch (err) {
+        console.error('An error has occurred:', err);
+    }
+}
+
+function existsRoomType(idRequestedPath, roomType) {
+    let roomTypePath = idRequestedPath + "/" + roomType;
+
+    let sqlStatement = "select count(*) from where imagePath like '%" + roomTypePath + "%'";
+
+    let result = runQueryOnDatabaseAndFetchEntireResult(sqlStatement)
+    if(result == 0) {
+        return false;
+    }
+    return true;
+}
+
+
 function getConfigDEMO() { // TO DELETE after we implement the database
     return panoramaConfig;
+}
+
+
+function getRoomType(appartmentId, roomId) {
+    return appartmentId.concat(roomId);
 }
 
 function getPanorama(hotel, room) {
