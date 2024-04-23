@@ -71,28 +71,28 @@ async function getFacilityType(hotelId, facilityType) {
 async function existsHotelId(hotelId){
     let hotelPath = "hoteluri/" + hotelId;
    
-    let sqlStatement = "select count(*) from where imagePath like '%" + hotelPath + "%'";
+    let sqlStatement = "select count(*) from accommodations where imagePath like '%" + hotelPath + "%'";
 
-    let result = runQueryOnDatabaseAndFetchEntireResult(sqlStatement)
+    let result = await runQueryOnDatabaseAndFetchEntireResult(sqlStatement)
     if(result == 0) {
         return false;
     }
     return true;
 }
 
-function existsFacilityType(hotelId, facilityType){
+async function existsFacilityType(hotelId, facilityType){
     let facilityPath = "hoteluri/" + hotelId + "/" + facilityType;
    
-    let sqlStatement = "select count(*) from where imagePath like '%" + facilityPath + "%'";
+    let sqlStatement = "select count(*) from accommodations where imagePath like '%" + facilityPath + "%'";
 
-    let result = runQueryOnDatabaseAndFetchEntireResult(sqlStatement)
+    let result = await runQueryOnDatabaseAndFetchEntireResult(sqlStatement)
     if(result == 0) {
         return false;
     }
     return true;
 }
 
-async function getAppartmentId(facilityPath, idAppRequested) {
+function getAppartmentId(facilityPath, idAppRequested) {
     try {
 
         if (existIdRequested(facilityPath, idAppRequested)) {    
@@ -109,12 +109,12 @@ async function getAppartmentId(facilityPath, idAppRequested) {
     }
 }
 
-function existIdRequested(facilityType, idAppRequested) {
+async function existIdRequested(facilityType, idAppRequested) {
     let idRequestedPath = facilityPath + "/" + idAppRequested;
 
-    let sqlStatement = "select count(*) from where imagePath like '%" + idRequestedPath + "%'";
+    let sqlStatement = "select count(*) from accommodations where imagePath like '%" + idRequestedPath + "%'";
 
-    let result = runQueryOnDatabaseAndFetchEntireResult(sqlStatement)
+    let result = await runQueryOnDatabaseAndFetchEntireResult(sqlStatement)
     if(result == 0) {
         return false;
     }
@@ -138,12 +138,12 @@ function getRoomType(idRequestedPath, roomType) {
     }
 }
 
-function existsRoomType(idRequestedPath, roomType) {
+async function existsRoomType(idRequestedPath, roomType) {
     let roomTypePath = idRequestedPath + "/" + roomType;
 
-    let sqlStatement = "select count(*) from where imagePath like '%" + roomTypePath + "%'";
+    let sqlStatement = "select count(*) from accommodations where imagePath like '%" + roomTypePath + "%'";
 
-    let result = runQueryOnDatabaseAndFetchEntireResult(sqlStatement)
+    let result = await runQueryOnDatabaseAndFetchEntireResult(sqlStatement)
     if(result == 0) {
         return false;
     }
@@ -155,17 +155,17 @@ function getConfigDEMO() { // TO DELETE after we implement the database
     return panoramaConfig;
 }
 
-
-function getRoomType(appartmentId, roomId) {
-    return appartmentId.concat(roomId);
-}
-
 function getPanorama(hotel, room) {
     // ...
 }
 
 function getPanoramaScene(hotel, room, scene) {
-    // ...
+    let path1 = getFacilityType(hotel, roomType);
+    let path2 = getAppartmentId(path1, appartmentId);
+    let path3 = getRoomType(path2, roomType);
+
+    return path3;
+
 }
 
 function uploadPanorama() {
