@@ -24,6 +24,7 @@ describe('Main Button For Finding Group ID', () => {
 
     // Use expect to assert that the content is not empty.
     expect(isContentNotEmpty).toBeTruthy();
+    ;
 
     await browser.close();
   });
