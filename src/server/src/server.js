@@ -33,3 +33,5 @@ async function startServer() {
 }
 
 startServer();
+
+export default server;
