@@ -14,8 +14,25 @@ function Login() {
     const username = formData.get('username');
     const password = formData.get('password');
     
-    const response = await axios.post('http://localhost:3001/login', { username, password });
-    setMessage(response.data.message);
+    try {
+      const response = await fetch('http://localhost:5173/api/login', {
+                method: "POST",
+                body: JSON.stringify({username, password}), 
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            });
+      console.log(response);
+      
+      const responseObject = await response.json();
+      console.log(responseObject);
+      setMessage(()=>responseObject.message);
+
+    } catch (error) {
+      // Handle error
+      console.error('Error:', error);
+      setMessage('An error occurred. Please try again later.');
+    }
    
   };
 

@@ -5,7 +5,7 @@ import {
     httpUploadPanorama,
     httpUpdatePanoramaScene,
     getPanoramaDEMO // TO DELETE
-} from './panoramas.controller';
+} from './panoramas.controller.js';
 
 const panoramasRouter = Router();
 
