@@ -10,41 +10,55 @@ function getPanoramaDEMO(req, res) {
     res.status(200).json(getConfigDEMO());
 }
 
-function httpGetPanorama(req, res) { // panoramas/?hotel=1&room=2
+async function httpGetPanorama(req, res) { // panoramas/?hotel=1&room=2
     const hotel = req.query.hotel;
     const room = req.query.room;
 
     try {
-        const panorama = getPanorama(hotel, room);
-        res.status(200).json(panorama);
+        const panorama = await getPanorama(hotel, room);
+        return res.status(200).json(panorama);
     } catch (error) {
-        res.status(404).json({
-            message: error.message
-        });
+        if (error.message === 'Panorama not found') {
+            res.status(404).json({
+                message: error.message
+            });
+        }
+        else {
+            res.status(500).json({
+                message: "Internal server error"
+            });
+        }
     }
 }
 
-function httpGetPanoramaScene(req, res) { // panoramas/(scene)4/?hotel=1&room=2
+async function httpGetPanoramaScene(req, res) { // panoramas/(scene)4/?hotel=1&room=2
     const hotel = req.query.hotel;
     const room = req.query.room;
     const scene = req.params.sceneId;
 
     try {
-        const panoramaScene = getPanoramaScene(hotel, room, scene);
+        const panoramaScene = await getPanoramaScene(hotel, room, scene);
         res.status(200).json(panoramaScene);
     } catch (error) {
-        res.status(404).json({
-            message: error.message
-        });
+        if (error.message === 'Scene not found') {
+            res.status(404).json({
+                message: error.message
+            });
+        }
+        else {
+            res.status(500).json({
+                message: "Internal server error"
+            });
+        }
     }
 }
 
-function httpUploadPanorama(req, res) {
-    uploadPanorama(); // to do
+async function httpUploadPanorama(req, res) {
+    await uploadPanorama(); // to do
 }
 
-function httpUpdatePanoramaScene(req, res) {
-    updatePanoramaScene(); // to do
+async function httpUpdatePanoramaScene(req, res) {
+    await updatePanoramaScene(); // to do
 }
 
 export {
