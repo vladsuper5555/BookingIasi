@@ -13,14 +13,30 @@ function Signup() {
     const formData = new FormData(event.target);
     const givenName  =  formData.get('givenName');
     const familyName  =  formData.get('familyName');
-    const username  =  formData.get('username');
+    const username = formData.get('username');
     const email = formData.get('email');
     const password = formData.get('password');
-    console.log('Name:', givenName, 'Username:',username,'Email:', email, 'Password:', password);
+    
+    try {
+      const response = await fetch('http://localhost:5173/api/signup', {
+                method: "POST",
+                body: JSON.stringify({givenName, familyName, username, email, password}), 
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            });
+      console.log(response);
+      
+      const responseObject = await response.json();
+      console.log(responseObject);
+      setMessage(()=>responseObject.message);
 
-    const response = await axios.post('http://localhost:5173/signup', { givenName, familyName, username, email, password});
-    setMessage(response.data.message);
-
+    } catch (error) {
+      // Handle error
+      console.error('Error:', error);
+      setMessage('An error occurred. Please try again later.');
+    }
+   
   };
 
   return (
