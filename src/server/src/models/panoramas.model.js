@@ -155,7 +155,7 @@ function getConfigDEMO() { // TO DELETE after we implement the database
     return panoramaConfig;
 }
 
-function getPanorama(hotel, room) {
+function getPanorama(hotel, room, roomType, appartmentId, appartmentType) {
     // ...
 }
 
@@ -165,7 +165,6 @@ function getPanoramaScene(hotel, room, scene) {
     let path3 = getRoomType(path2, roomType);
 
     return path3;
-
 }
 
 function uploadPanorama() {
