@@ -30,5 +30,5 @@ jobs:
     - run: npm run dev &
     - run: npm run dev-node &
     - run: sleep 3
-    - run: npm run test
     - run: npm run test-puppeteer
+    - run: npm run test
