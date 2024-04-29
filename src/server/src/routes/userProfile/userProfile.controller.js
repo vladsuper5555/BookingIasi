@@ -6,11 +6,13 @@ async function checkCredentialsAgainstDatabase(req, res){
 
     if (!username) {
         res.status(400).send({ success: false, message: 'Username field cannot be null!' });
+        res.end();
         return; 
     }
 
     if (!password) {
         res.status(400).send({ success: false, message: 'Password field cannot be null!' });
+        res.end();
         return; 
     }
 
@@ -37,22 +39,27 @@ async function addCredentialsToDatabase(req, res){
 
     if (!givenName) {
         res.status(400).send({ success: false, message: 'Given Name field cannot be null!' });
+        res.end();
         return; 
     }
     if (!familyName) {
         res.status(400).send({ success: false, message: 'Family Name field cannot be null!' });
+        res.end();
         return; 
     }
     if (!username) {
-        res.status(400).send({ success: false, message: 'Username cannot be null!' });
+        res.status(400).send({ success: false, message: 'Username field cannot be null!' });
+        res.end();
         return; 
     }
     if (!email) {
         res.status(400).send({ success: false, message: 'Email field cannot be null!' });
+        res.end();
         return; 
     }
     if (!password) {
         res.status(400).send({ success: false, message: 'Password field cannot be null!' });
+        res.end();
         return; 
     }
 
@@ -62,6 +69,7 @@ async function addCredentialsToDatabase(req, res){
 
     if (results.length > 0) {
         res.send({ success: false, message: 'Signup failed! Username already exists.' });
+        res.end();
         return;
     }
 
