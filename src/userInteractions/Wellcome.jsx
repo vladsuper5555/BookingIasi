@@ -28,6 +28,7 @@ function Welcome() {
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
           className="welcome-button"
+          id = 'connect'
         >
           Connect
         </Button>

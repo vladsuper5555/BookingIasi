@@ -10,6 +10,7 @@ import Welcome from './userInteractions/Wellcome';
 import PanoramaTour from './model3D/PanoramaTour'; 
 import Hotels from './hotels/Hotels';
 import NotFoundPage from './NotFoundPage';
+import AttractionsPage from './attractions/Attractions';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         {/* <Route path="/register" element={<RegisterPage />} /> */}
         <Route path='/panoramas' element={<PanoramaTour />} />
         <Route path='/hotels' element={<Hotels/>} />
+        <Route path='/attractions' element={<AttractionsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>

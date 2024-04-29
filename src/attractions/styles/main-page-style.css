@@ -1,0 +1,65 @@
+.category-card-item {
+    display: flex;
+    width: 30rem;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.main-container-category {
+    margin-top: 50px;
+    overflow: hidden;
+}
+
+.attractions-list {
+    list-style: none;
+    margin-left: -35px;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+}
+
+.category-picture {
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;
+}
+
+.popup-line {
+    border: 1px solid black;
+    margin: 10px 0;
+}
+
+.popup-animation {
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width:768px) {
+
+    .category-card-item {
+        width: 18rem;
+        overflow-x: hidden;
+    }
+
+    .main-container-category {
+        overflow: hidden;
+        margin-top: 15px;
+    }
+
+    .category-picture {
+        width: 20px;
+        height: 20px;
+    }
+}
