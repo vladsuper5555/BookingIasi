@@ -1,5 +1,6 @@
-var mysql = require('mysql');
-const { faker } = require('@faker-js/faker');
+var mysql = require("mysql");
+const { faker } = require("@faker-js/faker");
+const fs = require("node:fs");
 
 var con = mysql.createConnection({
   host: "localhost",
@@ -7,33 +8,33 @@ var con = mysql.createConnection({
   password: "",
 });
 
-con.connect(function(err) {
+con.connect(function (err) {
   if (err) throw err;
   console.log("Connected!");
 
   let dropDbSql = `DROP DATABASE IF EXISTS BookingIasi`;
 
-  con.query(dropDbSql, function(err, result) {
+  con.query(dropDbSql, function (err, result) {
     if (err) throw err;
     console.log("Database dropped.");
 
     let createDbSql = `CREATE DATABASE BookingIasi`;
 
-    con.query(createDbSql, function(err, result) {
+    con.query(createDbSql, function (err, result) {
       if (err) throw err;
       console.log("Database created.");
 
-      con.end(function(err) {
+      con.end(function (err) {
         if (err) throw err;
 
         var conDB = mysql.createConnection({
           host: "localhost",
           user: "root",
           password: "",
-          database: "BookingIasi"
+          database: "BookingIasi",
         });
 
-        conDB.connect(async function(err) {
+        conDB.connect(async function (err) {
           if (err) throw err;
           console.log("Connected to BookingIasi!");
 
@@ -54,32 +55,111 @@ con.connect(function(err) {
           );`;
 
           await new Promise((res) => {
-            conDB.query(createTableSql, function(err, result) {res(result)});
-          })
+            conDB.query(createTableSql, function (err, result) {
+              res(result);
+            });
+          });
 
           let insertSql = `INSERT INTO users 
           (email, givenName, familyName, password, username, birthDate, height, weight, gender, needsSpecialAssistance, userAgreedToFetchData, activityIndex) 
           VALUES 
           (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-        
+
           let userData = [
-            ['jane.doe@example.com', 'Jane', 'Doe', 'hashed_password', 'janedoe', '1990-01-01', 165.5, 60.2, 'female', false, true, 120],
-            ['john.smith@example.com', 'John', 'Smith', 'another_hashed_password', 'johnsmith', '1985-05-15', 180.4, 80.5, 'male', false, true, 150],
-            ['alex.taylor@example.com', 'Alex', 'Taylor', 'secure_hash', 'alextaylor', '1995-08-22', 172.7, 75.3, 'other', true, true, 180],
-            ['sam.jordan@example.com', 'Sam', '', 'pass_hash', 'samj', '2000-12-01', 160.2, 55.8, 'female', false, false, 95],
-            ['casey.lee@example.com', 'Casey', 'Lee', 'password123', 'caseyl', '1978-03-30', 168.9, 68.4, 'other', true, true, 110],
-            ['mike.brown@example.com', 'Mike', 'Brown', 'mikepass', '', '1988-07-19', 175.3, 88.5, 'male', false, true, 130],
+            [
+              "jane.doe@example.com",
+              "Jane",
+              "Doe",
+              "hashed_password",
+              "janedoe",
+              "1990-01-01",
+              165.5,
+              60.2,
+              "female",
+              false,
+              true,
+              120,
+            ],
+            [
+              "john.smith@example.com",
+              "John",
+              "Smith",
+              "another_hashed_password",
+              "johnsmith",
+              "1985-05-15",
+              180.4,
+              80.5,
+              "male",
+              false,
+              true,
+              150,
+            ],
+            [
+              "alex.taylor@example.com",
+              "Alex",
+              "Taylor",
+              "secure_hash",
+              "alextaylor",
+              "1995-08-22",
+              172.7,
+              75.3,
+              "other",
+              true,
+              true,
+              180,
+            ],
+            [
+              "sam.jordan@example.com",
+              "Sam",
+              "",
+              "pass_hash",
+              "samj",
+              "2000-12-01",
+              160.2,
+              55.8,
+              "female",
+              false,
+              false,
+              95,
+            ],
+            [
+              "casey.lee@example.com",
+              "Casey",
+              "Lee",
+              "password123",
+              "caseyl",
+              "1978-03-30",
+              168.9,
+              68.4,
+              "other",
+              true,
+              true,
+              110,
+            ],
+            [
+              "mike.brown@example.com",
+              "Mike",
+              "Brown",
+              "mikepass",
+              "",
+              "1988-07-19",
+              175.3,
+              88.5,
+              "male",
+              false,
+              true,
+              130,
+            ],
           ];
-          
-        
-          userData.forEach(user => {
+
+          userData.forEach((user) => {
             new Promise((res) => {
-              conDB.query(insertSql, user, function(err, result) {
+              conDB.query(insertSql, user, function (err, result) {
                 if (err) throw err;
                 console.log("User record inserted:", result.insertId);
                 res(result);
               });
-            })
+            });
           });
 
           /**Hotel table structure */
@@ -93,7 +173,7 @@ con.connect(function(err) {
             amenityFeature TEXT,
             checkinTime TIME,
             checkoutTime TIME,
-            permittedUsage VARCHAR(255),
+            permittedUsage VARCHAR(512),
             petsAllowed BOOLEAN,
             description TEXT,
             email VARCHAR(255),
@@ -114,29 +194,86 @@ con.connect(function(err) {
             parkingFacility BOOLEAN
           );`;
 
-
           await new Promise((res) => {
-            conDB.query(createTableSql1, function(err, result) {res(result)});
-          })
+            conDB.query(createTableSql1, function (err, result) {
+              res(result);
+            });
+          });
 
           let insertSql1 = `INSERT INTO hotelGeneral
           (imagePath, occupancy, accommodationCategory, name, amenityFeature, checkinTime, checkoutTime, permittedUsage, petsAllowed, description, email, employee, address, aggregateRating, review, telephone, smokingAllowed, event, hotelPhotos, maximumAttendeeCapacity, currenciesAccepted, openingHours, paymentAccepted, priceRange, hasCertification, parkingFacility)
           VALUES
           (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-            let hotelData = [
-              [ 'BookingIasi/images/Gaudeamus', 362, 'Student Housing', 'Camin Gaudeamus', 'private bathroom, air conditioning, fridge, TV, telephone, etc.', '22:00', '07:00', 'Students can stay here of the "Alexandru Ioan Cuza" University in Iasi, students who come through the Erasmus-Socrates programs, teaching staff from abroad who come through university partnerships, to courses organized at the university level and all those from the university network who request accommodation for symposia, colloquiums, days academic etc.', false, 'Gaudeamus Dormitory, came into operation in December 1998, construction and equipment works were completed in August 2002. Currently, the Dormitory has 362 accommodation places and two conference rooms. Located close to important academic objectives and student campuses, offers University students and professors from abroad special accommodation conditions in rooms with 2 and 3 beds.', 'lidia.vranceanu@uaic.ro', 'Financial administrator: Lidia VRANCEANU', 'Str. Codrescu Nr.1, Iași', 4.3, 'Good: the services at the facilities are really competent and helpful, as well as fast; the rose garden in front is really pretty; the interior environment is not bad because of the natural stone floors and walls; the reception is open 24/7 and you can buy some juice and water there; the kitchen is not bad and was always spacious enough for the whole floor; the cafeteria is really worth the money; the rooms are spacious enough for two people living in the room; there are some surveillance cameras on the floors so that no one enters your room unseen', '0232201102', false, 'allowed', 'yes', 400, 'RON','Cash and card', '07:00', '600-800', true, true ],
-              [ 'BookingIasi/images/Akademos',   312,  'Student Housing',  'Camin Akademos',  'air conditioning, own bathroom and shower cabins, fridge, modern furniture, internet connection.', '10:00' ,  '07:00',  ' Students of the "Alexandru Ioan Cuza" University in Iasi can stay here, students who come through the Erasmus-Socrates programs, teaching staff from abroad who come through university partnerships, to courses organized at the university level and all those from the university network who request accommodation for symposia, colloquiums, academic days, etc.', false, 'The "Akademos" dormitory came into operation in 2007 and the works and facilities were completed in August 2008 when the last two sections were put into use 312 places to stay. The location near the "Mihai Eminescu" Central University Library and the Student Cultural Center offers students the opportunity to spend their time in a constructive and pleasant way. Students staying here can reach classes in less than 10 minutes, on foot.', 'valentin.burdea@uaic.ro', 'Financial administrator: Valentin BURDEA',  'Str. Păcurari, no. 6', 4.6,  'Student dormitory with hotel regime. Very good conditions, spacious rooms, pleasant atmosphere, canteen in the dormitory and own laundry.',  '0232201102 ',   false,   'allowed',  'yes',   500,   'RON',    '07:00',    'Cash and card',  '700-900', true, true ],
+          let hotelData = [
+            [
+              "BookingIasi/images/Gaudeamus",
+              362,
+              "Student Housing",
+              "Camin Gaudeamus",
+              "private bathroom, air conditioning, fridge, TV, telephone, etc.",
+              "22:00",
+              "07:00",
+              'Students can stay here of the "Alexandru Ioan Cuza" University in Iasi, students who come through the Erasmus-Socrates programs, teaching staff from abroad who come through university partnerships, to courses organized at the university level and all those from the university network who request accommodation for symposia, colloquiums, days academic etc.',
+              false,
+              "Gaudeamus Dormitory, came into operation in December 1998, construction and equipment works were completed in August 2002. Currently, the Dormitory has 362 accommodation places and two conference rooms. Located close to important academic objectives and student campuses, offers University students and professors from abroad special accommodation conditions in rooms with 2 and 3 beds.",
+              "lidia.vranceanu@uaic.ro",
+              "Financial administrator: Lidia VRANCEANU",
+              "Str. Codrescu Nr.1, Iași",
+              4.3,
+              "Good: the services at the facilities are really competent and helpful, as well as fast; the rose garden in front is really pretty; the interior environment is not bad because of the natural stone floors and walls; the reception is open 24/7 and you can buy some juice and water there; the kitchen is not bad and was always spacious enough for the whole floor; the cafeteria is really worth the money; the rooms are spacious enough for two people living in the room; there are some surveillance cameras on the floors so that no one enters your room unseen",
+              "0232201102",
+              false,
+              "allowed",
+              "yes",
+              400,
+              "RON",
+              "Cash and card",
+              "07:00",
+              "600-800",
+              true,
+              true,
+            ],
+            [
+              "BookingIasi/images/Akademos",
+              312,
+              "Student Housing",
+              "Camin Akademos",
+              "air conditioning, own bathroom and shower cabins, fridge, modern furniture, internet connection.",
+              "10:00",
+              "07:00",
+              ' Students of the "Alexandru Ioan Cuza" University in Iasi can stay here, students who come through the Erasmus-Socrates programs, teaching staff from abroad who come through university partnerships, to courses organized at the university level and all those from the university network who request accommodation for symposia, colloquiums, academic days, etc.',
+              false,
+              'The "Akademos" dormitory came into operation in 2007 and the works and facilities were completed in August 2008 when the last two sections were put into use 312 places to stay. The location near the "Mihai Eminescu" Central University Library and the Student Cultural Center offers students the opportunity to spend their time in a constructive and pleasant way. Students staying here can reach classes in less than 10 minutes, on foot.',
+              "valentin.burdea@uaic.ro",
+              "Financial administrator: Valentin BURDEA",
+              "Str. Păcurari, no. 6",
+              4.6,
+              "Student dormitory with hotel regime. Very good conditions, spacious rooms, pleasant atmosphere, canteen in the dormitory and own laundry.",
+              "0232201102 ",
+              false,
+              "allowed",
+              "yes",
+              500,
+              "RON",
+              "07:00",
+              "Cash and card",
+              "700-900",
+              true,
+              true,
+            ],
           ];
-          hotelData.forEach(hotel => {
+          hotelData.forEach((hotel) => {
             new Promise((res) => {
-              conDB.query(insertSql1, hotel, function(err, result) {
+              conDB.query(insertSql1, hotel, function (err, result) {
                 if (err) throw err;
-                console.log("Hotel accomodation record inserted:", result.insertId);
+                console.log(
+                  "Hotel accomodation record inserted:",
+                  result.insertId
+                );
                 res(result);
               });
-            })
+            });
           });
-
 
           /**Hotel rooms table structure */
 
@@ -150,29 +287,30 @@ con.connect(function(err) {
           );`;
 
           await new Promise((res) => {
-            conDB.query(createTableSql3, function(err, result) {res(result); console.log(result)});
-          })
+            conDB.query(createTableSql3, function (err, result) {
+              res(result);
+              console.log(result);
+            });
+          });
 
           const insertSql3 = `INSERT INTO rooms
           (idHotel, numberOfBedrooms, numberOfRooms, bed, floorLevel)
           VALUES
           (?, ?, ?, ?, ?)`;
 
-
           let roomsData = [
-            [1, 2, 312, 'single', '5'],
-            [2, 2, 362, 'single', '4'],
+            [1, 2, 312, "single", "5"],
+            [2, 2, 362, "single", "4"],
           ];
 
-
-          roomsData.forEach(user => {
+          roomsData.forEach((user) => {
             new Promise((res) => {
-              conDB.query(insertSql3, user, function(err, result) {
+              conDB.query(insertSql3, user, function (err, result) {
                 if (err) throw err;
                 console.log("User record inserted:", result.insertId);
                 res(result);
               });
-            })
+            });
           });
 
           let createTableSql2 = `CREATE TABLE IF NOT EXISTS attractions (
@@ -182,30 +320,135 @@ con.connect(function(err) {
             titluPOI VARCHAR(255)
           );`;
 
-
           await new Promise((res) => {
-            conDB.query(createTableSql2, function(err, result) {res(result); console.log(result)});
-          })
+            conDB.query(createTableSql2, function (err, result) {
+              res(result);
+              console.log(result);
+            });
+          });
           const insertSql2 = `INSERT INTO attractions 
           (idHotel, descrierePOI, urlGoogleMapsPOI, titluPOI) 
           VALUES 
           (?, ?, ?, ?)`;
 
-          for (let i = 0; i < 10; i++) { 
+          for (let i = 0; i < 10; i++) {
             const data = [
-              faker.datatype.number({min: 1, max: 5}),
+              faker.number.int({ min: 1, max: 5 }),
               faker.lorem.sentence(),
-              faker.image.imageUrl(),
-              faker.random.word(),
+              faker.image.url(),
+              faker.lorem.word(),
             ];
             await new Promise((res) => {
-              conDB.query(insertSql2, data, function(err, result) {
+              conDB.query(insertSql2, data, function (err, result) {
                 if (err) throw err;
-                console.log("Random accommodation record inserted:", result.insertId);
+                console.log(
+                  "Random accommodation record inserted:",
+                  result.insertId
+                );
                 res(result);
               });
-            })
+            });
           }
+
+          let createTableHoteluri = `CREATE TABLE IF NOT EXISTS Hoteluri (
+            ID_hotel INT PRIMARY KEY,
+            Nume_hotel VARCHAR(255),
+            Adresa VARCHAR(255),
+            Telefon VARCHAR(20),
+            Rating DECIMAL(3, 1),
+            Latitudine DECIMAL(9, 6),
+            Longitudine DECIMAL(9, 6),
+            Adresa_coordonate VARCHAR(255),
+            Latitudine_hotel DECIMAL(9, 6),
+            Longitudine_hotel DECIMAL(9, 6)
+            );`;
+
+          await new Promise((res) => {
+            conDB.query(createTableHoteluri, function (err, result) {
+              res(result);
+              console.log(result);
+            });
+          });
+
+          const hoteluriInsert = `INSERT INTO Hoteluri 
+            (ID_hotel, Nume_hotel, Adresa, Telefon, Rating, Latitudine, Longitudine, Adresa_coordonate, Latitudine_hotel, Longitudine_hotel) 
+            VALUES 
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
+          try {
+            const hoteluriFileContent = fs.readFileSync(
+              "Hoteluri.json",
+              "utf8"
+            );
+            const fileData = JSON.parse(hoteluriFileContent);
+            fileData.Hoteluri.forEach((hotel) => {
+              var data = Object.values(hotel);
+              new Promise((res) => {
+                conDB.query(
+                  hoteluriInsert,
+                  data,
+                  function (err, result) {
+                    if (err) throw err;
+                    console.log("Hotel record inserted:", result.insertId);
+                    res(result);
+                  }
+                );
+              });
+            });
+          } catch (err) {
+            console.error(err);
+          }
+
+          let createTableAtractii = `CREATE TABLE IF NOT EXISTS Atractii_turistice (
+            ID_atractie INT PRIMARY KEY,
+            Nume_atractie VARCHAR(255),
+            Descriere VARCHAR(4000),
+            Adresa VARCHAR(255),
+            Latitudine DECIMAL(9, 6),
+            Longitudine DECIMAL(9, 6),
+            ID_hotel INT,
+            Adresa_coordonate VARCHAR(255),
+            Latitudine_atractie DECIMAL(9, 6),
+            Longitudine_atractie DECIMAL(9, 6),
+            Categorie VARCHAR(100),
+            Distanta_de_la_hotel DECIMAL(10, 2)
+            );`;
+
+          await new Promise((res) => {
+            conDB.query(createTableAtractii, function (err, result) {
+              res(result);
+              console.log(result);
+            });
+          });
+  
+          const atractiiInsert = `INSERT INTO Atractii_turistice
+            (Adresa, ID_hotel, Categorie, Descriere, Latitudine, ID_atractie, Longitudine, Nume_atractie, Adresa_coordonate, Latitudine_atractie, Distanta_de_la_hotel, Longitudine_atractie)
+            VALUES
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
+            try {
+              const atractiiFileContent = fs.readFileSync(
+                "Atractii.json",
+                "utf8"
+              );
+              const fileData = JSON.parse(atractiiFileContent);
+              fileData.Atractii.forEach((atractie) => {
+                var data = Object.values(atractie);
+                new Promise((res) => {
+                  conDB.query(
+                    atractiiInsert,
+                    data,
+                    function (err, result) {
+                      if (err) throw err;
+                      console.log("Attraction record inserted:", result.insertId);
+                      res(result);
+                    }
+                  );
+                });
+              });
+            } catch (err) {
+              console.error(err);
+            }
         });
       });
     });
