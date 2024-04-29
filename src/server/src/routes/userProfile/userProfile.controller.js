@@ -4,6 +4,16 @@ async function checkCredentialsAgainstDatabase(req, res){
     
     const { username, password } = req.body;
 
+    if (!username) {
+        res.status(400).send({ success: false, message: 'Username field cannot be null!' });
+        return; 
+    }
+
+    if (!password) {
+        res.status(400).send({ success: false, message: 'Password field cannot be null!' });
+        return; 
+    }
+
     const hash = crypto.createHash('md5');
     hash.update(password);
     const hashedPassword = hash.digest('hex');
@@ -24,6 +34,27 @@ async function checkCredentialsAgainstDatabase(req, res){
 
 async function addCredentialsToDatabase(req, res){
     const { givenName, familyName, username, email, password } = req.body;
+
+    if (!givenName) {
+        res.status(400).send({ success: false, message: 'Given Name field cannot be null!' });
+        return; 
+    }
+    if (!familyName) {
+        res.status(400).send({ success: false, message: 'Family Name field cannot be null!' });
+        return; 
+    }
+    if (!username) {
+        res.status(400).send({ success: false, message: 'Username cannot be null!' });
+        return; 
+    }
+    if (!email) {
+        res.status(400).send({ success: false, message: 'Email field cannot be null!' });
+        return; 
+    }
+    if (!password) {
+        res.status(400).send({ success: false, message: 'Password field cannot be null!' });
+        return; 
+    }
 
     let sqlQuery = `SELECT * FROM users WHERE username = "${username}"`;
 
