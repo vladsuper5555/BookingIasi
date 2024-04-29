@@ -10,14 +10,8 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "jest --testRegex='./*\\.ui_test\\.cjs$'",
-    "test-no-database": "jest --testRegex='./*\\.ui_test\\.cjs$' --testPathIgnorePatterns='.*database.*'"
-  },
-  "jest": {
-    "preset": "jest-puppeteer",
-    "testRegex": "./*\\.ui_test\\.cjs$",
-    "transform": {},
-    "testTimeout": 10000
+    "test": "jest --config jest.config.cjs --testPathIgnorePatterns='.*tests/UI_tests.*'",
+    "test-puppeteer": "jest --config jest-puppeteer.config.cjs"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
