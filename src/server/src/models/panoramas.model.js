@@ -29,13 +29,19 @@ function readImageURL(filePath) {
 const panoramaConfig = {
     imageSource: await readImageURL(path),
     config: {
+        hfov: 130,
+        pitch: 0,
+        yaw: 0,
         autoLoad: true,
+        "title": "Hallway View",
+        "autoRotate": 2,
+        showControls : false,
         hotSpots: [
             {
-                "pitch": 1.1,
-                "yaw": 101.5,
+                "pitch": 0,
+                "yaw": -65,
                 "type": "scene",
-                "text": "Baltimore Museum of Art",
+                "text": "Enter C401",
                 "sceneId": "Bathroom"
             },
         ]

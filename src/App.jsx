@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './userInteractions/Login';
 import Signup from './userInteractions/Signup';
 import Welcome from './userInteractions/Wellcome';
-import Model3D from './model3D/render';
+import PanoramaTour from './model3D/PanoramaTour'; 
 import Hotels from './hotels/Hotels';
 import NotFoundPage from './NotFoundPage';
 import AttractionsPage from './attractions/Attractions';
@@ -20,7 +20,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         {/* <Route path="/register" element={<RegisterPage />} /> */}
-        <Route path='/panoramas' element={<Model3D />} />
+        <Route path='/panoramas' element={<PanoramaTour />} />
         <Route path='/hotels' element={<Hotels/>} />
         <Route path='/attractions' element={<AttractionsPage />} />
         <Route path="*" element={<NotFoundPage />} />
