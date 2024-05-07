@@ -36,6 +36,10 @@
     animation-duration: 0.5s;
 }
 
+.button-to-attractions {
+    margin-top: 25px;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;

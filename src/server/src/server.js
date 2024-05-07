@@ -2,8 +2,9 @@ const PORT = 3002;
 import express from "express"
 import panoramasRouter from './routes/panoramas/panoramas.router.js';
 import userProfileRouter from "./routes/userProfile/userProfile.router.js";
+import attractionsRouter from "./routes/attractionsInfo/attractionsInfo.router.js";
 // import hotelsRouter ... etc.
-import {runQueryOnDatabaseAndFetchEntireResult, runAsyncQueryOnDatabase} from "./models/database.model.js";
+import {runQueryOnDatabaseAndFetchEntireResult, runAsyncQueryOnDatabase} from "./models/database.model.js"; 
 
 const server = express();
 
@@ -15,6 +16,7 @@ server.use(express.json());
 
 server.use('/api', panoramasRouter); // to change to panoramas
 server.use('/api', userProfileRouter);
+server.use('/api', attractionsRouter);
 
 // TEST PURPOSE ONLY TO BE DELETEDy
 server.get('/api/databaseTest', async (req, res) => {
