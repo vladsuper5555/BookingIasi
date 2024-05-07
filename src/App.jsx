@@ -11,7 +11,7 @@ import PanoramaTour from './model3D/PanoramaTour';
 import Hotels from './hotels/Hotels';
 import NotFoundPage from './NotFoundPage';
 import AttractionsPage from './attractions/Attractions';
-import AttractionDetailsPage from "./attractions/AttractionDetailsPage"; // New component
+import AttractionDetailsPage from "./attractions/AttractionDetailsPage";
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
         <Route path="/" element={<Welcome />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        {/* <Route path="/register" element={<RegisterPage />} /> */}
         <Route path="/panoramas" element={<PanoramaTour />} />
         <Route path="/hotels" element={<Hotels />} />
         <Route path="/attractions" element={<AttractionsPage />} />
@@ -33,4 +34,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
