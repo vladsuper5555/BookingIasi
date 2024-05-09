@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; 
 import Login from './userInteractions/Login';
@@ -12,6 +11,7 @@ import Hotels from './hotels/Hotels';
 import NotFoundPage from './NotFoundPage';
 import AttractionsPage from './attractions/Attractions';
 import AttractionDetailsPage from "./attractions/AttractionDetailsPage";
+// import "./App.css"; TO BE SOLVED
 
 function App() {
   return (
