@@ -12,7 +12,7 @@ import Hotels from './hotels/Hotels';
 import NotFoundPage from './NotFoundPage';
 import AttractionsPage from './attractions/Attractions';
 import AttractionDetailsPage from "./attractions/AttractionDetailsPage";
-// import "./App.css"; TO BE SOLVED THE CSS CONFLICTS
+import "./App.css";
 
 function App() {
   return (

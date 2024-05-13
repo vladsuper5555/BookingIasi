@@ -1,5 +1,5 @@
 TN:
-SF:src\server\src\routes\panoramas\panoramas.controller.js
+SF:src/server/src/routes/panoramas/panoramas.controller.js
 FN:9,getPanoramaDEMO
 FN:13,httpGetPanorama
 FN:34,httpGetPanoramaScene
@@ -42,7 +42,7 @@ BRF:4
 BRH:3
 end_of_record
 TN:
-SF:src\server\src\routes\userProfile\userProfile.controller.js
+SF:src/server/src/routes/userProfile/userProfile.controller.js
 FN:3,checkCredentialsAgainstDatabase
 FN:37,addCredentialsToDatabase
 FNF:2

@@ -77,7 +77,10 @@ async function addCredentialsToDatabase(req, res){
     hash.update(password);
     const hashedPassword = hash.digest('hex');
 
-    let sqlInsertQuery = `INSERT INTO users (givenName, familyName, username, email, password) VALUES ("${givenName}", "${familyName}", "${username}", "${email}", "${hashedPassword}")`;
+    let sqlInsertQuery = `INSERT INTO users (givenName, familyName, username, email, password, birthDate, height, weight, gender, needsSpecialAssistance, userAgreedToFetchData, activityIndex) VALUES ("${givenName}", "${familyName}", "${username}", "${email}", "${hashedPassword}", 
+    "1990-01-01", 165.5, 60.2, "female", false, true, 120
+    )`;
+    console.log(sqlInsertQuery);
     let result = await runQueryOnDatabaseAndFetchEntireResult(sqlInsertQuery);
     if (result.error) {
         res.send({ success: false, message: 'An error occurred while signing up. Please try again later.' });

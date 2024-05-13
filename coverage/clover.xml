@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1714456671328" clover="3.2.0">
-  <project timestamp="1714456671328" name="All files">
+<coverage generated="1715624456430" clover="3.2.0">
+  <project timestamp="1715624456430" name="All files">
     <metrics statements="74" coveredstatements="71" conditionals="24" coveredconditionals="22" methods="7" coveredmethods="6" elements="105" coveredelements="99" complexity="0" loc="74" ncloc="74" packages="2" files="2" classes="2"/>
     <package name="panoramas">
       <metrics statements="20" coveredstatements="18" conditionals="4" coveredconditionals="3" methods="5" coveredmethods="4"/>
-      <file name="panoramas.controller.js" path="C:\Users\Vlad\Documents\BookingIasi\src\server\src\routes\panoramas\panoramas.controller.js">
+      <file name="panoramas.controller.js" path="/Users/butnaruvlad/Documents/BookingIasi/src/server/src/routes/panoramas/panoramas.controller.js">
         <metrics statements="20" coveredstatements="18" conditionals="4" coveredconditionals="3" methods="5" coveredmethods="4"/>
         <line num="10" count="0" type="stmt"/>
         <line num="14" count="4" type="stmt"/>
@@ -30,7 +30,7 @@
     </package>
     <package name="userProfile">
       <metrics statements="54" coveredstatements="53" conditionals="20" coveredconditionals="19" methods="2" coveredmethods="2"/>
-      <file name="userProfile.controller.js" path="C:\Users\Vlad\Documents\BookingIasi\src\server\src\routes\userProfile\userProfile.controller.js">
+      <file name="userProfile.controller.js" path="/Users/butnaruvlad/Documents/BookingIasi/src/server/src/routes/userProfile/userProfile.controller.js">
         <metrics statements="54" coveredstatements="53" conditionals="20" coveredconditionals="19" methods="2" coveredmethods="2"/>
         <line num="5" count="4" type="stmt"/>
         <line num="7" count="4" type="cond" truecount="2" falsecount="0"/>
