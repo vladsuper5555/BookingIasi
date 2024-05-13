@@ -32,7 +32,7 @@ const MainPage = () => {
         pitch: 0,
         yaw: 0,
         type: "equirectangular",
-        imageSource: "https://pannellum.org/images/alma.jpg",
+        imageSource: "src/server/src/models/Hotels/FII/Apps/App1/Bathroom/bath_fii copy.jpg",
         hotSpots: [
             {
                 "pitch": 1.1,

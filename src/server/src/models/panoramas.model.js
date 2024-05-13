@@ -9,6 +9,7 @@ import fs from 'node:fs';
 import Path from 'node:path';
 import * as url from 'url';
 import { runQueryOnDatabaseAndFetchEntireResult } from './database.model';
+import { json } from 'express';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const path = Path.join(__dirname, 'hotel_test', 'panorama.json');
@@ -155,8 +156,32 @@ function getConfigDEMO() { // TO DELETE after we implement the database
     return panoramaConfig;
 }
 
-function getPanorama(hotel, room, roomType, appartmentId, appartmentType) {
-    // ...
+//src/server/src/models/Hotels/FII/Apps/
+async function getPanorama(hotel, appType, appartmentId, roomType, fileType) {
+    let path = 'src/server/src/models/Hotels/'.concat(hotel);
+    let path1 = getFacilityType(path, appType); //src/server/src/models/Hotels/FII/Apps/
+    let path2 = getAppartmentId(path1, appartmentId);//src/server/src/models/Hotels/FII/Apps/App1
+    let path3 = getRoomType(path2, roomType).concat('/').concat(fileType);
+
+    console.log(path3);
+
+    const panoramaConfig = {
+        imageSource: await readImageURL(path3),
+        config: {
+            autoLoad: true,
+            hotSpots: [
+                {
+                    "pitch": 1.1,
+                    "yaw": 101.5,
+                    "type": "scene",
+                    "text": "Baltimore Museum of Art",
+                    "sceneId": "Bathroom"
+                },
+            ]
+        },
+    }
+
+    return panoramaConfig;
 }
 
 function getPanoramaScene(hotel, room, scene) {
