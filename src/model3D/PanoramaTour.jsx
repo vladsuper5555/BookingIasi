@@ -12,6 +12,7 @@ const ModelPage = () => {
       <div className="panoramaTour">
         <PanoramaTour/>
       </div>
+      <button type="button" >Upload Panorama</button>
     </div>
   );
 };

@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './userInteractions/Login';
 import Signup from './userInteractions/Signup';
 import Welcome from './userInteractions/Wellcome';
-import PanoramaTour from './model3D/PanoramaTour'; 
+import PanoramaTour from './model3D/PanoramaTour';
+import Form from './model3D/Form';
 import Hotels from './hotels/Hotels';
 import NotFoundPage from './NotFoundPage';
 import AttractionsPage from './attractions/Attractions';
@@ -22,6 +23,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         {/* <Route path="/register" element={<RegisterPage />} /> */}
         <Route path="/panoramas" element={<PanoramaTour />} />
+        <Route path="/uploadPanoramaForm" element={<Form/>} />
         <Route path="/hotels" element={<Hotels />} />
         <Route path="/attractions" element={<AttractionsPage />} />
         <Route
