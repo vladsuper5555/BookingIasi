@@ -61,7 +61,7 @@ function Signup() {
             margin="normal"
             required
             fullWidth
-            id="First Name"
+            id="First_Name"
             label="First Name"
             name="givenName"
             className='TextField'
@@ -71,7 +71,7 @@ function Signup() {
             margin="normal"
             required
             fullWidth
-            id="Last Name"
+            id="Last_Name"
             label="Last Name"
             name="familyName"
             className='TextField'
@@ -110,11 +110,11 @@ function Signup() {
             autoComplete="current-password"
             className='TextField'
           />
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+          <Button type="submit" id = "submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Sign up
           </Button>
         </form>
-        {message && <div>{message}</div>}
+        {message && <div id = 'responseMessage'>{message}</div>}
         <Grid container justifyContent="flex">
           <Grid item>
                 <Typography variant="body2" color="textSecondary" align="center" gutterBottom>
