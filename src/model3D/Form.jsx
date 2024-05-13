@@ -89,6 +89,19 @@ function Form() {
     const dataToExport = items.map(({ id, ...item }) => item);
     const jsonData = JSON.stringify(dataToExport);
     console.log(jsonData);
+  
+    fetch('/api/panoramas', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: jsonData
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => {
+      console.error('Error:', error);
+    });
   };
 
   const handleSubmit = (event) => {
