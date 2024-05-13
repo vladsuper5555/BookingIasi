@@ -13,7 +13,6 @@ const server = express();
     origin: 'http://localhost:5173'
 }));*/
 server.use(express.json());
-
 server.use('/api', panoramasRouter); // to change to panoramas
 server.use('/api', userProfileRouter);
 server.use('/api', attractionsRouter);

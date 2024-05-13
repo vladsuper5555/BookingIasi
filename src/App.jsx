@@ -12,7 +12,9 @@ import Hotels from './hotels/Hotels';
 import NotFoundPage from './NotFoundPage';
 import AttractionsPage from './attractions/Attractions';
 import AttractionDetailsPage from "./attractions/AttractionDetailsPage";
-import "./App.css";
+import Map from './pointsOfInterest/map';
+
+import "./App.css"; 
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
         <Route path="/panoramas" element={<PanoramaTour />} />
         <Route path="/uploadPanoramaForm" element={<Form/>} />
         <Route path="/hotels" element={<Hotels />} />
+        <Route path='/map' element={<Map />} />
         <Route path="/attractions" element={<AttractionsPage />} />
         <Route
           path="/attractions/:hotelName"
