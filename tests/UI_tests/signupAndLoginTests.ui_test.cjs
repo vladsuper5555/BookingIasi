@@ -16,7 +16,7 @@ describe('Signup and Login Test', () => {
   };
 
   beforeAll(async () => {
-    browser = await puppeteer.launch({ headless: false });
+    browser = await puppeteer.launch({ headless: true });
     page = await browser.newPage();
   });
 
