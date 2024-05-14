@@ -1,32 +1,42 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; 
 import Login from './userInteractions/Login';
 import Signup from './userInteractions/Signup';
 import Welcome from './userInteractions/Wellcome';
-import Model3D from './model3D/render';
+import PanoramaTour from './model3D/PanoramaTour';
+import Form from './model3D/Form';
 import Hotels from './hotels/Hotels';
 import NotFoundPage from './NotFoundPage';
 import AttractionsPage from './attractions/Attractions';
+import AttractionDetailsPage from "./attractions/AttractionDetailsPage";
+import Map from './pointsOfInterest/map';
+
+import "./App.css"; 
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Welcome />} /> 
+        <Route path="/" element={<Welcome />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         {/* <Route path="/register" element={<RegisterPage />} /> */}
-        <Route path='/panoramas' element={<Model3D />} />
-        <Route path='/hotels' element={<Hotels/>} />
-        <Route path='/attractions' element={<AttractionsPage />} />
+        <Route path="/panoramas" element={<PanoramaTour />} />
+        <Route path="/uploadPanoramaForm" element={<Form/>} />
+        <Route path="/hotels" element={<Hotels />} />
+        <Route path='/map' element={<Map />} />
+        <Route path="/attractions" element={<AttractionsPage />} />
+        <Route
+          path="/attractions/:hotelName"
+          element={<AttractionDetailsPage />}
+        />{" "}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
-  )
+  );
 }
 
 export default App

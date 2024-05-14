@@ -5,7 +5,7 @@ import {
     uploadPanorama,
     updatePanoramaScene,
     getConfigDEMO // TO DELETE
-} from '../../models/panoramas.model';
+} from '../../models/panoramas.model.js';
 
 function getPanoramaDEMO(req, res) {
     res.status(200).json(getConfigDEMO());

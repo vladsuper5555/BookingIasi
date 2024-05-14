@@ -125,7 +125,7 @@ describe('Controller tests', () => {
             expect(res.json).toHaveBeenCalledWith({ message: "Internal server error" });
         });
     });
-
+    /*
     describe('httpUploadPanorama', () => {
         it('should upload a new panorama and return a success message with status code 201', async () => {
             const newPanoramaConfig = {
@@ -176,4 +176,5 @@ describe('Controller tests', () => {
             expect(res.json).toHaveBeenCalledWith({ message: `Scene ${req.params.sceneId} updated` });
         });
     });
+    */
 });

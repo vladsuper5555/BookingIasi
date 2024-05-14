@@ -77,11 +77,11 @@ function Login() {
             autoComplete="current-password"
             className='TextField'
           />
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+          <Button type="submit" id='submit' fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Login
           </Button>
         </form>
-        {message && <div>{message}</div>}
+        {message && <div id = 'responseMessage'>{message}</div>}
         <Grid container justifyContent="flex">
         <Grid item>
           <Typography variant="body2" color="textSecondary" align="center" gutterBottom>

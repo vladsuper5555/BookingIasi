@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles/attractions-card-style.css";
 
-const CategoryCard = ({ categoryName, attractions, picture }) => {
+const CategoryCard = ({ category, attractions }) => {
   const [activeDescription, setActiveDescription] = useState(null);
 
   const handleTextClick = (description) => {
@@ -15,8 +15,7 @@ const CategoryCard = ({ categoryName, attractions, picture }) => {
   return (
     <div className="main-container-category">
       <div className="category-header">
-        <h2>{categoryName}</h2>
-        <img src={picture} alt="Category" className="category-picture" />
+        <h2>{category}</h2>
       </div>
       <ul className="attractions-list">
         {attractions.map((attraction, index) => (
@@ -33,9 +32,12 @@ const CategoryCard = ({ categoryName, attractions, picture }) => {
                 <p>
                   <strong>{attraction.description}</strong>
                 </p>
-                <a href={attraction.link} target="_blank">
-                  More Info
-                </a>
+                {/* Add the link if available */}
+                {attraction.link && (
+                  <a href={attraction.link} target="_blank">
+                    More Info
+                  </a>
+                )}
                 <hr className="popup-line" />
               </div>
             )}
