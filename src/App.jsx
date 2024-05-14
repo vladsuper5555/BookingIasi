@@ -14,7 +14,7 @@ import AttractionsPage from './attractions/Attractions';
 import AttractionDetailsPage from "./attractions/AttractionDetailsPage";
 import Map from './pointsOfInterest/map';
 
-// import "./App.css"; TO BE SOLVED THE CSS CONFLICTS
+import "./App.css"; 
 
 function App() {
   return (
