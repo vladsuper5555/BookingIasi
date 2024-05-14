@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import { Button, TextField, Container, Grid, Typography, Select, MenuItem, IconButton } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Dialog from '@mui/material/Dialog';
+import SetCoordsPanorama from './SetCoordsPanorama';
 
 
 function Form() {
   const [items, setItems] = useState([{ id: Math.random().toString(), type: 'fridge' }]);
   const [errors, setErrors] = useState({});
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [open, setOpen] = useState(false);
+
 
   const handleAddItem = () => {
     const newItem = { id: Math.random().toString(), type: 'fridge', details: '', coords: { lat: '', lng: '' } };
@@ -36,6 +41,18 @@ function Form() {
     const newItems = [...items];
     newItems[index].coords = event.target.value;
     setItems(newItems);
+  };
+
+  const handleFileUpload = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const getItemDetailsLabel = (type) => {
@@ -89,7 +106,7 @@ function Form() {
     const dataToExport = items.map(({ id, ...item }) => item);
     const jsonData = JSON.stringify(dataToExport);
     console.log(jsonData);
-  
+
     fetch('/api/panoramas', {
       method: 'POST',
       headers: {
@@ -97,11 +114,11 @@ function Form() {
       },
       body: jsonData
     })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
 
   const handleSubmit = (event) => {
@@ -124,6 +141,21 @@ function Form() {
               {items.map((item, index) => (
                 <Grid item xs={12} key={item.id}>
                   <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                      <input
+                        accept="image/jpeg"
+                        style={{ display: 'none' }}
+                        id="raised-button-file"
+                        type="file"
+                        onChange={handleFileUpload}
+                      />
+                      <label htmlFor="raised-button-file">
+                        <Button variant="raised" component="span">
+                          Upload Panorama
+                        </Button>
+                      </label>
+                      {selectedFile && <p>{selectedFile.name}</p>}
+                    </Grid>
                     <Grid item xs={12}>
                       <Select value={item.type} onChange={(event) => handleSelectChange(event, index)} fullWidth>
                         <MenuItem value="fridge">Fridge</MenuItem>
@@ -153,6 +185,7 @@ function Form() {
                         label={`${item.type}-coordinates`}
                         variant="outlined"
                         fullWidth
+                        onClick={handleClickOpen}
                         onChange={(event) => handleCoordsChange(event, index)}
                       />
                     </Grid>
@@ -166,6 +199,11 @@ function Form() {
                         </IconButton>
                       )}
                     </Grid>
+
+                    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                    <SetCoordsPanorama />
+                    </Dialog>
+
                   </Grid>
                 </Grid>
               ))}
