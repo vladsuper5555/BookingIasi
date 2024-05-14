@@ -46,12 +46,6 @@ const MainPage = () => {
         setViewer(viewerInstance);
     };
 
-    const handleControlClick = () => {
-        if (viewer) {
-            const newPitch = viewer.getPitch() + 10;
-            viewer.lookAt({ pitch: newPitch });
-        }
-    };
 
     ReactPannellum.addScene("Bathroom", {
         hfov: 130,
@@ -87,15 +81,6 @@ const MainPage = () => {
                 config={panoConfig.config}
                 onLoad={(viewer) => handleViewerLoad(viewer)}
             >
-                <div id="controls" onMouseDown={(evt) => handleControlClick(evt.target.title)} >
-                    <div class="ctrl" id="pan-up" onClick={() => handleControlClick('pan-up')} >&#9650;</div>
-                    <div class="ctrl" id="pan-down" >&#9660;</div>
-                    <div class="ctrl" id="pan-left">&#9664;</div>
-                    <div class="ctrl" id="pan-right">&#9654;</div>
-                    <div class="ctrl" id="zoom-in">+</div>
-                    <div class="ctrl" id="zoom-out">-</div>
-                    <div class="ctrl" id="fullscreen">&#x2922;</div>
-                </div>
             </ReactPannellum>
         </div>
     );
