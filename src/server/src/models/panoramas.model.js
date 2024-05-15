@@ -6,14 +6,14 @@ throw errors (and messages) accordingly (when hotel/room/panorama do not exist) 
 the below imports will become, obviously, obsolete
 */
 import fs from 'node:fs';
-import Path from 'node:path';
-import * as url from 'url';
+// import Path from 'node:path';
+// import * as url from 'url';
 import { runQueryOnDatabaseAndFetchEntireResult } from './database.model';
-import { json } from 'express';
+// import { json } from 'express';
 import { httpGetPanorama } from '../routes/panoramas/panoramas.controller';
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+// const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-const path = Path.join(__dirname, 'hotel_test', 'panorama.json');
+// const path = Path.join(__dirname, 'hotel_test', 'panorama.json');
 // demo, will be changed with db models and the imports will become unnecessary, as well
 
 function readImageURL(filePath) {
@@ -28,53 +28,39 @@ function readImageURL(filePath) {
     });
 }
 
-const panoramaConfig = {
-    imageSource: await readImageURL(path),
-    config: {
-        hfov: 130,
-        pitch: 0,
-        yaw: 0,
-        autoLoad: true,
-        "title": "Hallway View",
-        "autoRotate": 2,
-        showControls : false,
-        hotSpots: [
-            {
-                "pitch": 0,
-                "yaw": -65,
-                "type": "scene",
-                "text": "Enter C401",
-                "sceneId": "Bathroom"
-            },
-        ]
-    },
+function readImagePinPoints(filePath) {
+    return new Promise((resolve, reject) => {
+        fs.readFile(filePath, 'utf8', (err, data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(JSON.parse(data).pinPoints);
+            }
+        });
+    });
 }
 
-async function getFacilityType(hotelId, facilityType) {
-    try {
-        
-        let ok_id = false;
-        let ok_type = false;
-
-        if (existsHotelId(hotelId)) {    
-            ok_id = true;
-        }
-
-        if (existsFacilityType(facilityType)) {
-            ok_type = true;
-        }
-
-        if (ok_id && ok_type) {
-            return hotelId.concat('/').concat(facilityType);
-        } else if(!ok_id) {
-            throw new Error(`ID ${hotelId} is not valid.`);
-        } else{
-            throw new Error(`Facility ${facilityType} is not valid.`);
-        }
-    } catch (err) {
-        console.error('An error has occurred:', err);
-    }
-}
+// const panoramaConfig = {
+//     imageSource: await readImageURL(path),
+//     config: {
+//         hfov: 130,
+//         pitch: 0,
+//         yaw: 0,
+//         autoLoad: true,
+//         "title": "Hallway View",
+//         "autoRotate": 2,
+//         showControls : false,
+//         hotSpots: [
+//             {
+//                 "pitch": 0,
+//                 "yaw": -65,
+//                 "type": "scene",
+//                 "text": "Enter C401",
+//                 "sceneId": "Bathroom"
+//             },
+//         ]
+//     },
+// }
 
 async function existsHotelId(hotelId){
     let hotelPath = "hoteluri/" + hotelId;
@@ -100,17 +86,26 @@ async function existsFacilityType(hotelId, facilityType){
     return true;
 }
 
-function getAppartmentId(facilityPath, idAppRequested) {
+async function getFacilityType(hotelId, facilityType) {
     try {
+        
+        let ok_id = false;
+        let ok_type = false;
 
-        if (existIdRequested(facilityPath, idAppRequested)) {    
+        if (await existsHotelId(hotelId)) {    
             ok_id = true;
         }
 
-        if (ok_id ) {
-            return facilityPath.concat('/').concat(idAppRequested);
+        if (await existsFacilityType(facilityType)) {
+            ok_type = true;
+        }
+
+        if (ok_id && ok_type) {
+            return hotelId.concat('/').concat(facilityType);
         } else if(!ok_id) {
-            throw new Error(`ID ${idAppRequested} is not valid.`);
+            throw new Error(`ID ${hotelId} is not valid.`);
+        } else{
+            throw new Error(`Facility ${facilityType} is not valid.`);
         }
     } catch (err) {
         console.error('An error has occurred:', err);
@@ -129,17 +124,17 @@ async function existIdRequested(facilityType, idAppRequested) {
     return true;
 }
 
-function getRoomType(idRequestedPath, roomType) {
+async function getAppartmentId(facilityPath, idAppRequested) {
     try {
 
-        if (existsRoomType(idRequestedPath, roomType)) {    
+        if (await existIdRequested(facilityPath, idAppRequested)) {    
             ok_id = true;
         }
 
         if (ok_id ) {
-            return idRequestedPath.concat('/').concat(roomType);
+            return facilityPath.concat('/').concat(idAppRequested);
         } else if(!ok_id) {
-            throw new Error(`ID ${roomType} is not valid.`);
+            throw new Error(`ID ${idAppRequested} is not valid.`);
         }
     } catch (err) {
         console.error('An error has occurred:', err);
@@ -158,34 +153,39 @@ async function existsRoomType(idRequestedPath, roomType) {
     return true;
 }
 
+async function getRoomType(idRequestedPath, roomType) {
+    try {
 
-function getConfigDEMO() { // TO DELETE after we implement the database
-    return panoramaConfig;
+        if (await existsRoomType(idRequestedPath, roomType)) {    
+            ok_id = true;
+        }
+
+        if (ok_id ) {
+            return idRequestedPath.concat('/').concat(roomType);
+        } else if(!ok_id) {
+            throw new Error(`ID ${roomType} is not valid.`);
+        }
+    } catch (err) {
+        console.error('An error has occurred:', err);
+    }
 }
 
-//src/server/src/models/Hotels/FII/Apps/
-async function getPanorama(hotel, appType, appartmentId, roomType, fileType) {
-    let path = 'src/server/src/models/Hotels/'.concat(hotel);
-    let path1 = getFacilityType(path, appType); //src/server/src/models/Hotels/FII/Apps/
-    let path2 = getAppartmentId(path1, appartmentId);//src/server/src/models/Hotels/FII/Apps/App/Bedroom/Pano
-    let path3 = getRoomType(path2, roomType).concat('/').concat(fileType);
 
-    console.log(path3);
+// function getConfigDEMO() { // TO DELETE after we implement the database
+//     return panoramaConfig;
+// }
+
+//src/server/src/models/Hotels/FII/Apps/
+async function getPanorama(hotel, appType, appartmentId, roomType) {
+    let path = 'src/server/src/models/Hotels/'.concat(hotel);
+    let path1 = await getFacilityType(path, appType); //src/server/src/models/Hotels/FII/Apps/
+    let path2 = await getAppartmentId(path1, appartmentId);//src/server/src/models/Hotels/FII/Apps/App/Bedroom/Pano
+    let path3 = await getRoomType(path2, roomType);
+    path3 = path3.concat('/file.json');
 
     const panoramaConfig = {
         imageSource: await readImageURL(path3),
-        config: {
-            autoLoad: true,
-            hotSpots: [
-                {
-                    "pitch": 1.1,
-                    "yaw": 101.5,
-                    "type": "scene",
-                    "text": "Baltimore Museum of Art",
-                    "sceneId": "Bathroom"
-                },
-            ]
-        },
+        config: await readImagePinPoints(path3)
     }
 
     return panoramaConfig;
@@ -200,20 +200,20 @@ function getPanoramaScene(hotel, room, scene) {
 }
 
 async function uploadPanorama() {
-    try {
-        const { imagePath, imagePinpoints } = await httpGetPanorama();
+//     try {
+//         const { imagePath, imagePinpoints } = await httpGetPanorama();
 
-        let sqlStatement = "insert into accommodations (imagePath, imagePinPoints) values (" + imagePath + "," + imagePinpoints + ")";
-        await runAsyncQueryOnDatabase(sqlStatement);
+//         let sqlStatement = "insert into accommodations (imagePath, imagePinPoints) values (" + imagePath + "," + imagePinpoints + ")";
+//         await runAsyncQueryOnDatabase(sqlStatement);
 
-        console.log("Panorama uploaded successfully");
-    } catch (error) {
-        console.error("Error uploading panorama:", error);
-    }
+//         console.log("Panorama uploaded successfully");
+//     } catch (error) {
+//         console.error("Error uploading panorama:", error);
+//     }
 }
 
 
-function updatePanoramaScene() {
+async function updatePanoramaScene() {
     // ...
 }
 

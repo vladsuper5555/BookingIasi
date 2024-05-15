@@ -18,8 +18,6 @@ async function httpGetPanorama(req, res) { // panoramas/?hotel=unirea&appType=ap
     const roomType = req.query.roomType;
     const fileType = req.query.fileType;
 
-    console.log(hotel, appType, appId, roomType, fileType);
-
     try {
         const panorama = await getPanorama(hotel, appType, appId, roomType, fileType);
         return res.status(200).json(panorama);
