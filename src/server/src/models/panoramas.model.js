@@ -175,7 +175,7 @@ async function getRoomType(idRequestedPath, roomType) {
 //     return panoramaConfig;
 // }
 
-//src/server/src/models/Hotels/FII/Apps/
+//src/server/src/models/Hotels/FII/Apps/   App1/         Rooms/     file.json
 async function getPanorama(hotel, appType, appartmentId, roomType) {
     let path = 'src/server/src/models/Hotels/'.concat(hotel);
     let path1 = await getFacilityType(path, appType); //src/server/src/models/Hotels/FII/Apps/

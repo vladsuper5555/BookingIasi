@@ -11,15 +11,14 @@ function getPanoramaDEMO(req, res) {
     res.status(200).json(getConfigDEMO());
 }
 
-async function httpGetPanorama(req, res) { // panoramas/?hotel=unirea&appType=app&appId=1&roomType=bedroom&fileType=panorama.json
+async function httpGetPanorama(req, res) { // panoramas/?hotel=FII&appType=Apps&appId=App1&roomType=Rooms
     const hotel = req.query.hotel;
     const appType = req.query.appType;
     const appId = req.query.appId;
     const roomType = req.query.roomType;
-    const fileType = req.query.fileType;
 
     try {
-        const panorama = await getPanorama(hotel, appType, appId, roomType, fileType);
+        const panorama = await getPanorama(hotel, appType, appId, roomType);
         return res.status(200).json(panorama);
     } catch (error) {
         if (error.message === 'Panorama not found') {
