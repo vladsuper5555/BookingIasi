@@ -1,5 +1,3 @@
-// MapComponent.jsx
-
 import React, { useEffect } from 'react';
 
 const apiKey = "AIzaSyB66hTrBl9RqFQsBqzwbCcBtVECWaqHrkE";
@@ -23,7 +21,7 @@ function MapComponent() {
             .catch((error) => {
                 console.error('Error loading Google Maps API:', error);
             });
-    }, []); 
+    }, []);
 
     function initMap() {
         if (typeof google === 'undefined') {
@@ -31,33 +29,42 @@ function MapComponent() {
             return;
         }
 
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: 46.643461716274906, lng: 27.73332159484119 },
+        const map = new google.maps.Map(document.getElementById('map'), {
             zoom: 15
         });
 
-        var placesService = new google.maps.places.PlacesService(map);
+        const placesService = new google.maps.places.PlacesService(map);
 
-        var request = {
-            location: map.getCenter(),
-            radius: '1500',
-            type: 'restaurant'
-        }
+        const request = {
+            query: 'Gara Iasi', 
+            fields: ['name', 'geometry']
+        };
 
-        placesService.nearbySearch(request, callback);
+        placesService.textSearch(request, (results, status) => {
+            if (status === google.maps.places.PlacesServiceStatus.OK && results.length > 0) {
+                const firstPlace = results[0];
+                map.setCenter(firstPlace.geometry.location);
 
-        function callback(results, status, pagination) {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-                for (var i = 0; i < results.length; i++) {
-                    var place = results[i];
-                    console.log(place.name, place.geometry.location);
-                }
+                const requestNearby = {
+                    location: firstPlace.geometry.location,
+                    radius: '1500' 
+                };
+
+                placesService.nearbySearch(requestNearby, (resultsNearby, statusNearby) => {
+                    if (statusNearby === google.maps.places.PlacesServiceStatus.OK) {
+                        for (let i = 0; i < resultsNearby.length; i++) {
+                            const placeNearby = resultsNearby[i];
+
+                            console.log(placeNearby.name, placeNearby.geometry.location);
+                        }
+                    } else {
+                        console.error('Nearby search request failed:', statusNearby);
+                    }
+                });
+            } else {
+                console.error('Text search request failed:', status);
             }
-
-            if (pagination.hasNextPage) {
-                pagination.nextPage();
-            }
-        }
+        });
     }
 
     return (
