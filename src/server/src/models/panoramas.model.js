@@ -10,6 +10,7 @@ import Path from 'node:path';
 import * as url from 'url';
 import { runQueryOnDatabaseAndFetchEntireResult } from './database.model';
 import { json } from 'express';
+import { httpGetPanorama } from '../routes/panoramas/panoramas.controller';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const path = Path.join(__dirname, 'hotel_test', 'panorama.json');
@@ -166,7 +167,7 @@ function getConfigDEMO() { // TO DELETE after we implement the database
 async function getPanorama(hotel, appType, appartmentId, roomType, fileType) {
     let path = 'src/server/src/models/Hotels/'.concat(hotel);
     let path1 = getFacilityType(path, appType); //src/server/src/models/Hotels/FII/Apps/
-    let path2 = getAppartmentId(path1, appartmentId);//src/server/src/models/Hotels/FII/Apps/App1
+    let path2 = getAppartmentId(path1, appartmentId);//src/server/src/models/Hotels/FII/Apps/App/Bedroom/Pano
     let path3 = getRoomType(path2, roomType).concat('/').concat(fileType);
 
     console.log(path3);
@@ -198,9 +199,19 @@ function getPanoramaScene(hotel, room, scene) {
     return path3;
 }
 
-function uploadPanorama() {
-    // ...
+async function uploadPanorama() {
+    try {
+        const { imagePath, imagePinpoints } = await httpGetPanorama();
+
+        let sqlStatement = "insert into accommodations (imagePath, imagePinPoints) values (" + imagePath + "," + imagePinpoints + ")";
+        await runAsyncQueryOnDatabase(sqlStatement);
+
+        console.log("Panorama uploaded successfully");
+    } catch (error) {
+        console.error("Error uploading panorama:", error);
+    }
 }
+
 
 function updatePanoramaScene() {
     // ...

@@ -60,7 +60,7 @@ async function httpGetPanoramaScene(req, res) { // panoramas/(scene)4/?hotel=1&r
 }
 
 async function httpUploadPanorama(req, res) {
-    await uploadPanorama(); // to do
+    await uploadPanorama();
 }
 
 async function httpUpdatePanoramaScene(req, res) {
