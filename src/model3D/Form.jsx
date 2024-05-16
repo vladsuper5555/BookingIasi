@@ -3,7 +3,7 @@ import { Button, TextField, Container, Grid, Typography, Select, MenuItem, IconB
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Dialog from '@mui/material/Dialog';
-import SetCoordsPanorama from './SetCoordsPanorama';
+// import SetCoordsPanorama from './SetCoordsPanorama';
 
 
 function Form() {
@@ -201,7 +201,7 @@ function Form() {
                     </Grid>
 
                     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                    <SetCoordsPanorama />
+                    {/* <SetCoordsPanorama /> */}
                     </Dialog>
 
                   </Grid>
