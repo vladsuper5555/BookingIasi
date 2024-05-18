@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ReactPannellum from "react-pannellum";
-import pano2 from "./Street_View_361.jpg";
 
 const MainPage = () => {
     const [panoConfig, setPanoConfig] = useState({ imageSource: "", config: {} });
-        const [viewer, setViewer] = useState(null);
-
+    const [viewer, setViewer] = useState(null);
     const fetchPanoConfig = async () => {
+
         try {
             const response = await fetch('http://localhost:5173/api/panoramas/?hotel=FII&appType=Apps&appId=App1&roomType=Rooms', {
                 method: "GET",
@@ -14,11 +13,10 @@ const MainPage = () => {
                     "Content-Type": "application/json",
                 }
             });
-            const data = await response.json();
-            setPanoConfig({
-                imageSource: data.imageSource,
-                config: data.config
-            });
+            const panoramas = await response.json();
+            console.log(panoramas);
+            panoramas.forEach(myFunction)
+  
         } catch (error) {
             // additional error handling
             console.error("Failed to fetch panorama config:", error);
@@ -46,8 +44,20 @@ const MainPage = () => {
         setViewer(viewerInstance);
     };
 
+    function myFunction(item, index) { 
 
-    ReactPannellum.addScene("Bathroom", {
+        //setting the initial panorama
+        if (item.sceneId === "Start") {
+            setPanoConfig({
+                imageSource: item.url,
+                config: item.pinPoints
+            });
+        }
+
+    }
+
+
+    ReactPannellum.addScene("Room2", {
         hfov: 130,
         pitch: 0,
         yaw: 0,
@@ -55,14 +65,14 @@ const MainPage = () => {
         "autoRotate": -3,
         "title": "Classroom View",
         showControls: false,
-        imageSource: pano2,
+        imageSource: "https://pannellum.org/images/alma.jpg",
         hotSpots: [
             {
                 "pitch": 1.1,
                 "yaw": 90,
                 "type": "info",
                 "text": "Bogdanel View",
-                "sceneId": "window"
+                "sceneId": "Start"
             },
         ]
     });
@@ -77,7 +87,7 @@ const MainPage = () => {
                 imageSource={panoConfig.imageSource}
                 key={panoConfig.imageSource}
                 id="mainscene"
-                sceneId="window"
+                sceneId="Start"
                 config={panoConfig.config}
                 onLoad={(viewer) => handleViewerLoad(viewer)}
             >

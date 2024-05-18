@@ -31,12 +31,15 @@ async function httpGetPanorama(req, res) { // panoramas/?hotel=FII&appType=Apps&
 }
 
 async function httpGetPanoramaScene(req, res) { // panoramas/(scene)4/?hotel=1&room=2
+    
+    console.log('httpGetPanoramaScene');
     const hotel = req.query.hotel;
-    const room = req.query.room;
-    const scene = req.params.sceneId;
+    const appType = req.query.appType;
+    const appId = req.query.appId;
 
     try {
-        const panoramaScene = await getPanoramaScene(hotel, room, scene);
+        console.log('getPanoramaScene');
+        const panoramaScene = await getPanoramaScene(hotel, appType, appId);
         res.status(200).json(panoramaScene);
     } catch (error) {
         if (error.message === 'Scene not found') {
@@ -45,6 +48,7 @@ async function httpGetPanoramaScene(req, res) { // panoramas/(scene)4/?hotel=1&r
             });
         }
         else {
+            console.log(error);
             res.status(500).json({
                 message: "Internal server error"
             });
