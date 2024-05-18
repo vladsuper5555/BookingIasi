@@ -8,9 +8,9 @@ the below imports will become, obviously, obsolete
 import fs from 'node:fs';
 // import Path from 'node:path';
 // import * as url from 'url';
-import { runQueryOnDatabaseAndFetchEntireResult } from './database.model';
+import { runQueryOnDatabaseAndFetchEntireResult } from './database.model.js';
 // import { json } from 'express';
-import { httpGetPanorama } from '../routes/panoramas/panoramas.controller';
+import { httpGetPanorama } from '../routes/panoramas/panoramas.controller.js';
 // const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 // const path = Path.join(__dirname, 'hotel_test', 'panorama.json');
@@ -228,10 +228,5 @@ export {
     getPanorama,
     getPanoramaScene,
     uploadPanorama,
-<<<<<<< HEAD
-    updatePanoramaScene,
-    //getConfigDEMO,
-=======
     updatePanoramaScene
->>>>>>> d24ddd8f728b3e5f641c2e4a003e4d9042cd30af
 };
