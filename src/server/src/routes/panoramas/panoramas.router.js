@@ -3,13 +3,11 @@ import {
     httpGetPanorama,
     httpGetPanoramaScene,
     httpUploadPanorama,
-    httpUpdatePanoramaScene,
-    getPanoramaDEMO // TO DELETE
+    httpUpdatePanoramaScene
 } from './panoramas.controller.js';
 
 const panoramasRouter = Router();
 
-// panoramasRouter.get('/panoramas', getPanoramaDEMO);
 panoramasRouter.get('/panoramas', httpGetPanorama);
 panoramasRouter.get('/panoramas/:sceneId', httpGetPanoramaScene);
 panoramasRouter.post('/panoramas', httpUploadPanorama); // middleware authentication/authorize admin

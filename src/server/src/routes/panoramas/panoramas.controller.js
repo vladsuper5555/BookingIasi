@@ -1,15 +1,9 @@
-import rootShouldForwardProp from '@mui/material/styles/rootShouldForwardProp';
 import {
     getPanorama,
     getPanoramaScene,
     uploadPanorama,
     updatePanoramaScene,
-    //getConfigDEMO // TO DELETE
 } from '../../models/panoramas.model.js';
-
-function getPanoramaDEMO(req, res) {
-    res.status(200).json(getConfigDEMO());
-}
 
 async function httpGetPanorama(req, res) { // panoramas/?hotel=FII&appType=Apps&appId=App1&roomType=Rooms
     const hotel = req.query.hotel;
@@ -18,6 +12,8 @@ async function httpGetPanorama(req, res) { // panoramas/?hotel=FII&appType=Apps&
     const roomType = req.query.roomType;
 
     try {
+        console.log('httpGetPanorama');
+        console.log(hotel, appType, appId, roomType);
         const panorama = await getPanorama(hotel, appType, appId, roomType);
         return res.status(200).json(panorama);
     } catch (error) {
@@ -68,6 +64,5 @@ export {
     httpGetPanorama,
     httpGetPanoramaScene,
     httpUploadPanorama,
-    httpUpdatePanoramaScene,
-    getPanoramaDEMO // TO DELETE
+    httpUpdatePanoramaScene
 };

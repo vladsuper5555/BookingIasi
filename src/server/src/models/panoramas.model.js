@@ -65,7 +65,7 @@ function readImagePinPoints(filePath) {
 async function existsHotelId(hotelId){
     let hotelPath = "hoteluri/" + hotelId;
    
-    let sqlStatement = "select count(*) from accommodations where imagePath like '%" + hotelPath + "%'";
+    let sqlStatement = "select count(*) from hotelgeneral where imagePath like '%" + hotelPath + "%'";
 
     let result = await runQueryOnDatabaseAndFetchEntireResult(sqlStatement)
     if(result == 0) {
@@ -77,7 +77,7 @@ async function existsHotelId(hotelId){
 async function existsFacilityType(hotelId, facilityType){
     let facilityPath = "hoteluri/" + hotelId + "/" + facilityType;
    
-    let sqlStatement = "select count(*) from accommodations where imagePath like '%" + facilityPath + "%'";
+    let sqlStatement = "select count(*) from hotelgeneral where imagePath like '%" + facilityPath + "%'";
 
     let result = await runQueryOnDatabaseAndFetchEntireResult(sqlStatement)
     if(result == 0) {
@@ -112,10 +112,10 @@ async function getFacilityType(hotelId, facilityType) {
     }
 }
 
-async function existIdRequested(facilityType, idAppRequested) {
+async function existIdRequested(facilityPath, idAppRequested) {
     let idRequestedPath = facilityPath + "/" + idAppRequested;
 
-    let sqlStatement = "select count(*) from accommodations where imagePath like '%" + idRequestedPath + "%'";
+    let sqlStatement = "select count(*) from hotelgeneral where imagePath like '%" + idRequestedPath + "%'";
 
     let result = await runQueryOnDatabaseAndFetchEntireResult(sqlStatement)
     if(result == 0) {
@@ -125,6 +125,10 @@ async function existIdRequested(facilityType, idAppRequested) {
 }
 
 async function getAppartmentId(facilityPath, idAppRequested) {
+
+    let ok_id = false;
+
+
     try {
 
         if (await existIdRequested(facilityPath, idAppRequested)) {    
@@ -144,7 +148,7 @@ async function getAppartmentId(facilityPath, idAppRequested) {
 async function existsRoomType(idRequestedPath, roomType) {
     let roomTypePath = idRequestedPath + "/" + roomType;
 
-    let sqlStatement = "select count(*) from accommodations where imagePath like '%" + roomTypePath + "%'";
+    let sqlStatement = "select count(*) from hotelgeneral where imagePath like '%" + roomTypePath + "%'";
 
     let result = await runQueryOnDatabaseAndFetchEntireResult(sqlStatement)
     if(result == 0) {
@@ -154,6 +158,9 @@ async function existsRoomType(idRequestedPath, roomType) {
 }
 
 async function getRoomType(idRequestedPath, roomType) {
+
+    let ok_id = false;
+
     try {
 
         if (await existsRoomType(idRequestedPath, roomType)) {    
@@ -175,13 +182,13 @@ async function getRoomType(idRequestedPath, roomType) {
 //     return panoramaConfig;
 // }
 
-//src/server/src/models/Hotels/FII/Apps/   App1/         Rooms/     file.json
+//src/server/src/models/Hotels/FII/Apps/App1/Rooms/panorama.json
 async function getPanorama(hotel, appType, appartmentId, roomType) {
     let path = 'src/server/src/models/Hotels/'.concat(hotel);
     let path1 = await getFacilityType(path, appType); //src/server/src/models/Hotels/FII/Apps/
     let path2 = await getAppartmentId(path1, appartmentId);//src/server/src/models/Hotels/FII/Apps/App/Bedroom/Pano
     let path3 = await getRoomType(path2, roomType);
-    path3 = path3.concat('/file.json');
+    path3 = path3.concat('/panorama.json');
 
     const panoramaConfig = {
         imageSource: await readImageURL(path3),
@@ -203,7 +210,7 @@ async function uploadPanorama() {
 //     try {
 //         const { imagePath, imagePinpoints } = await httpGetPanorama();
 
-//         let sqlStatement = "insert into accommodations (imagePath, imagePinPoints) values (" + imagePath + "," + imagePinpoints + ")";
+//         let sqlStatement = "insert into hotelgeneral (imagePath, imagePinPoints) values (" + imagePath + "," + imagePinpoints + ")";
 //         await runAsyncQueryOnDatabase(sqlStatement);
 
 //         console.log("Panorama uploaded successfully");
@@ -221,6 +228,10 @@ export {
     getPanorama,
     getPanoramaScene,
     uploadPanorama,
+<<<<<<< HEAD
     updatePanoramaScene,
     //getConfigDEMO,
+=======
+    updatePanoramaScene
+>>>>>>> d24ddd8f728b3e5f641c2e4a003e4d9042cd30af
 };

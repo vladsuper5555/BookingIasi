@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactPannellum from "react-pannellum";
-import pano2 from './pano2.jpg'; //hardcoded panorama -> will be replaced by real panorama from the database 
+import pano2 from "./Street_View_361.jpg";
 
 const MainPage = () => {
     const [panoConfig, setPanoConfig] = useState({ imageSource: "", config: {} });
@@ -8,7 +8,7 @@ const MainPage = () => {
 
     const fetchPanoConfig = async () => {
         try {
-            const response = await fetch('http://localhost:5173/api/panoramas', {
+            const response = await fetch('http://localhost:5173/api/panoramas/?hotel=FII&appType=Apps&appId=App1&roomType=Rooms', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -52,16 +52,16 @@ const MainPage = () => {
         pitch: 0,
         yaw: 0,
         type: "equirectangular",
-        imageSource: pano2,
         "autoRotate": -3,
         "title": "Classroom View",
         showControls: false,
+        imageSource: pano2,
         hotSpots: [
             {
                 "pitch": 1.1,
                 "yaw": 90,
-                "type": "scene",
-                "text": "Hallway View",
+                "type": "info",
+                "text": "Bogdanel View",
                 "sceneId": "window"
             },
         ]
