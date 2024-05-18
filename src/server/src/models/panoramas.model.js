@@ -222,5 +222,5 @@ export {
     getPanoramaScene,
     uploadPanorama,
     updatePanoramaScene,
-    getConfigDEMO,
+    //getConfigDEMO,
 };

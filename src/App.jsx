@@ -13,8 +13,9 @@ import NotFoundPage from './NotFoundPage';
 import AttractionsPage from './attractions/Attractions';
 import AttractionDetailsPage from "./attractions/AttractionDetailsPage";
 import Map from './pointsOfInterest/map';
-
 import "./App.css"; 
+import UserProf from './userInteractions/UserProf';
+import HealthForm from './userInteractions/HealthForm';
 
 function App() {
   return (
@@ -23,11 +24,15 @@ function App() {
         <Route path="/" element={<Welcome />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/userProf" element={<UserProf />} />
+        <Route path="/health-form" element={<HealthForm />} />
         {/* <Route path="/register" element={<RegisterPage />} /> */}
         <Route path="/panoramas" element={<PanoramaTour />} />
         <Route path="/uploadPanoramaForm" element={<Form/>} />
         <Route path="/hotels" element={<Hotels />} />
         <Route path='/map' element={<Map />} />
+        <Route path='/check-auth' />
+        <Route path='/logout' />
         <Route path="/attractions" element={<AttractionsPage />} />
         <Route
           path="/attractions/:hotelName"

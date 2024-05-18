@@ -1,8 +1,9 @@
 // UserProf.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './UserProf.css';
 import profilePicture from './profilepic.jpg';
+import { useNavigate } from 'react-router-dom';
 
 function UserProf() {
   const [editingProfile, setEditingProfile] = useState(false);
@@ -25,6 +26,56 @@ function UserProf() {
   const [weightTemp, setWeightTemp] = useState('');
   const [genderTemp, setGenderTemp] = useState('');
   const [needsSpecialAssistanceTemp, setNeedsSpecialAssistanceTemp] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('http://localhost:5173/api/check-auth', {
+          method: "GET",
+          credentials: "include",
+        });
+
+        if (response.ok) {
+          navigate('/userProf');
+        }else{
+          navigate('/login');
+        }
+      } catch (error) {
+        
+        console.error("An error occurred while checking authentication:", error);
+      }
+    };
+
+    checkAuth();
+  }, [navigate]);
+
+
+  const handleLogout = async (event) => {
+    event.preventDefault();
+    
+    try {
+      const response = await fetch('http://localhost:5173/api/logout', {
+                method: "GET",
+                credentials: "include"
+            });
+
+            if (response.ok) {
+              console.log("Logout successful and cookie deleted");
+              navigate('/')
+          } else {
+            //navigate('/login')
+            console.error("Logout failed");
+          }     
+
+    } catch (error) {
+      // Handle error
+      console.error('Error:', error);
+      setMessage('An error occurred. Please try again later.');
+    }
+   
+  };
+
 
   const handleEditProfile = () => {
     setFirstNameTemp(firstName);
@@ -91,7 +142,7 @@ function UserProf() {
             <img className="profile-picture" src={profilePicture} alt="Profile" />
             <div className="edit-buttons">
               <button className="header-btn" onClick={handleEditProfile}>Edit</button>
-              <button className="header-btn logout-btn">Logout</button>
+              <button className="header-btn logout-btn" onClick={handleLogout}>Logout</button>
             </div>
           </div>
         </div>

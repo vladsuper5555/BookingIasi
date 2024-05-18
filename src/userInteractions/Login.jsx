@@ -1,12 +1,31 @@
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Container, Typography, TextField, Button, Grid, Avatar, Box } from '@mui/material';
-import axios from 'axios';
 import { Link as RouterLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('http://localhost:5173/api/check-auth', {
+          method: "GET",
+          credentials: "include",
+        });
+
+        if (response.ok) {
+          navigate('/userProf');
+        }
+      } catch (error) {
+        console.error("An error occurred while checking authentication:", error);
+      }
+    };
+
+    checkAuth();
+  }, [navigate]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,10 +39,19 @@ function Login() {
                 body: JSON.stringify({username, password}), 
                 headers: {
                     "Content-Type": "application/json",
-                }
+                },
+                credentials: "include"
             });
+
+            if (response.ok) {
+              console.log("Login successful and cookie set");
+              navigate('/userProf')
+          } else {
+            navigate('/login')
+            console.error("Login failed");
+          }     
+
       console.log(response);
-      
       const responseObject = await response.json();
       console.log(responseObject);
       setMessage(()=>responseObject.message);
@@ -35,6 +63,8 @@ function Login() {
     }
    
   };
+  //make a function that sends a get request to the backend to check if the user is already logged in, if he is then send him to userProf, otherwise randeaza pagina asta de login
+
 
   return (
     <Container component="main" maxWidth="xs">

@@ -1,7 +1,7 @@
 // HealthForm.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './UserProf.css'; // Importăm stilurile din UserProf.css
-
+import { useNavigate } from 'react-router-dom';
 function HealthForm() {
   const [birthDate, setBirthDate] = useState('');
   const [height, setHeight] = useState('');
@@ -9,6 +9,30 @@ function HealthForm() {
   const [gender, setGender] = useState('Other');
   const [needsSpecialAssistance, setNeedsSpecialAssistance] = useState(false);
 
+//redirect to userProf?
+  const navigate = useNavigate();
+  //we need a smarter way for this, right now you can't access it at all 
+  /* useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('http://localhost:5173/api/check-auth', {
+          method: "GET",
+          credentials: "include",
+        });
+
+        if (response.ok) {
+          navigate('/userProf');
+        }else{
+          navigate('/login');
+        }
+      } catch (error) {
+        console.error("An error occurred while checking authentication:", error);
+      }
+    };
+
+    checkAuth();
+  }, [navigate]); */
+  
   const handleSaveHealthData = () => {
     // Aici poți adăuga logica pentru salvarea datelor în baza de date
     console.log('Saving health data...');

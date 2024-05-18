@@ -1,5 +1,40 @@
 import { runQueryOnDatabaseAndFetchEntireResult } from '../../models/database.model.js';
 import crypto from 'crypto';
+
+async function logout(req, res){
+    if (req.cookies && req.cookies.pass && req.cookies.username) {
+        res.clearCookie('username', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None'
+          });
+
+          res.clearCookie('pass', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None'
+          });
+          return res.status(200).send({ success: false, message: 'User is logged out' }); 
+    } else {
+        return res.status(401).send({ success: false, message: 'User is not authenticated' });
+    }
+}
+
+async function checkCookie(req, res){
+    console.log("check cookie function");
+    if (req.cookies && req.cookies.pass && req.cookies.username) {
+        let sqlQuery = `SELECT * FROM users WHERE username = "${req.cookies.username}" AND password = "${req.cookies.pass}"`;
+        let results = await runQueryOnDatabaseAndFetchEntireResult(sqlQuery);
+        if (results.length === 0) {
+            res.status(401).send({ success: false, message: 'Invalid cookies!' });
+        }else{
+            return res.status(200).send({ success: true, message: 'User is authenticated' });
+        }
+    } else {
+        return res.status(401).send({ success: false, message: 'User is not authenticated' });
+    }
+}
+
 async function checkCredentialsAgainstDatabase(req, res){
     
     const { username, password } = req.body;
@@ -25,12 +60,27 @@ async function checkCredentialsAgainstDatabase(req, res){
     let results = await runQueryOnDatabaseAndFetchEntireResult(sqlQuery);
 
     if (results.length === 0) {
-        res.send({ success: false, message: 'Login failed! Invalid username or password' });
+        res.status(401).send({ success: false, message: 'Login failed! Invalid username or password' });
     }
     else{
-        res.send({ success: true, message: 'Login successful!' });
+        if (!req.cookies || !req.cookies.pass ||!req.cookies.username ) {
+            res.cookie('username', username, {
+                httpOnly: true, 
+                secure: true,    
+                sameSite: 'None', 
+                maxAge: 3600000  // 1 hour
+            });
+            res.cookie('pass', hashedPassword, {
+                httpOnly: true,  
+                secure: true,    
+                sameSite: 'None', 
+                maxAge: 3600000  
+            });
+        }else{
+            console.log("Cookie already set");
+        }
+        res.status(200).send({ success: true, message: 'Login successful!' });
     }
-  
     res.end();
 }
 
@@ -83,9 +133,26 @@ async function addCredentialsToDatabase(req, res){
     console.log(sqlInsertQuery);
     let result = await runQueryOnDatabaseAndFetchEntireResult(sqlInsertQuery);
     if (result.error) {
-        res.send({ success: false, message: 'An error occurred while signing up. Please try again later.' });
+        res.status(401).send({ success: false, message: 'An error occurred while signing up. Please try again later.' });
       } else {
-        res.send({ success: true, message: 'Signup successful!' });
+        //set the cookie and redirect him to the health data page
+        if (!req.cookies || !req.cookies.pass ||!req.cookies.username ) {
+            res.cookie('username', username, {
+                httpOnly: true, 
+                secure: true,    
+                sameSite: 'None', 
+                maxAge: 3600000  // 1 hour
+            });
+            res.cookie('pass', hashedPassword, {
+                httpOnly: true,  
+                secure: true,    
+                sameSite: 'None', 
+                maxAge: 3600000  
+            });
+        }else{
+            console.log("Cookie already set");
+        }
+        res.status(200).send({ success: true, message: 'Signup successful!' });
       }
 
       res.end();
@@ -93,5 +160,7 @@ async function addCredentialsToDatabase(req, res){
 
 export {
     checkCredentialsAgainstDatabase,
-    addCredentialsToDatabase
+    addCredentialsToDatabase,
+    checkCookie,
+    logout
 }
