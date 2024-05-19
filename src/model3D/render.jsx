@@ -7,7 +7,7 @@ const MainPage = () => {
     const fetchPanoConfig = async () => {
 
         try {
-            const response = await fetch('http://localhost:5173/api/panoramas/?hotel=FII&appType=Apps&appId=App1&roomType=Rooms', {
+            const response = await fetch('http://localhost:5173/api/panoramas/?hotel=Unirea&appType=Apartments&appId=Apartment1', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -16,25 +16,12 @@ const MainPage = () => {
             const panoramas = await response.json();
             console.log(panoramas);
             panoramas.forEach(myFunction)
-  
+
         } catch (error) {
             // additional error handling
             console.error("Failed to fetch panorama config:", error);
         }
     };
-
-    const fetchPanoScene = async () => {
-        try {
-            setPanoConfig({
-                imageSource: pano2.imageSource,
-                config: pano2.config
-            });
-        } catch (error) {
-            // additional error handling
-            console.error("Failed to fetch panorama config:", error);
-        }
-    };
-
 
     useEffect(() => {
         fetchPanoConfig();
@@ -44,28 +31,26 @@ const MainPage = () => {
         setViewer(viewerInstance);
     };
 
-    function myFunction(item, index) { 
+    function myFunction(item, index) {
 
         //setting the initial panorama
         if (item.sceneId === "Start") {
             setPanoConfig({
                 imageSource: item.url,
-                config: item.pinPoints
+                config: item.config
             });
         }
-
     }
 
-
+    
     ReactPannellum.addScene("Room2", {
         hfov: 130,
         pitch: 0,
         yaw: 0,
         type: "equirectangular",
-        "autoRotate": -3,
-        "title": "Classroom View",
+        autoRotate: -3,
+        title: "Classroom View",
         showControls: false,
-        imageSource: "https://pannellum.org/images/alma.jpg",
         hotSpots: [
             {
                 "pitch": 1.1,
@@ -74,7 +59,9 @@ const MainPage = () => {
                 "text": "Bogdanel View",
                 "sceneId": "Start"
             },
-        ]
+        ],
+        imageSource: "https://pannellum.org/images/alma.jpg"
+
     });
 
 
