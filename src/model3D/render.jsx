@@ -8,7 +8,7 @@ const MainPage = () => {
 
     const fetchPanoConfig = async () => {
         try {
-            const response = await fetch('http://localhost:5173/api/panoramas/?hotel=Unirea&appType=Apartments&appId=Apartment1', {
+            const response = await fetch('http://localhost:5173/api/panoramas/?hotel=Unirea&appType=ConferenceRoom&appId=Apartment1', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
