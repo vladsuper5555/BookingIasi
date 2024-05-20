@@ -22,7 +22,7 @@ function MapComponent({ query }) {
       }
 
       const map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 17
+        zoom: 20
       });
 
       const placesService = new google.maps.places.PlacesService(map);
