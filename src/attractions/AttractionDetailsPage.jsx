@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import CategoryCard from "./components/CategoryCard";
+import CategoryCard from "./components/CategoryCard"; 
+import MapComponent from "../pointsOfInterest/mapComponent"; 
 
 const AttractionDetailsPage = () => {
   const [attractions, setAttractions] = useState([]);
@@ -78,6 +79,8 @@ const AttractionDetailsPage = () => {
           )
         )}
       </div>
+      {/*<h1>Titlu pentru harta inca nu m am gandit...</h1>*/}
+      <MapComponent /> {/* */}
     </div>
   );
 };

@@ -1,4 +1,3 @@
-//map.jsx
 import React from 'react';
 import MapComponent from './mapComponent';
 
