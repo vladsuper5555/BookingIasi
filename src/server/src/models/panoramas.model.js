@@ -6,15 +6,8 @@ throw errors (and messages) accordingly (when hotel/room/panorama do not exist) 
 the below imports will become, obviously, obsolete
 */
 import fs from 'node:fs';
-// import Path from 'node:path';
-// import * as url from 'url';
 import { runQueryOnDatabaseAndFetchEntireResult } from './database.model.js';
-// import { json } from 'express';
 import { httpGetPanorama } from '../routes/panoramas/panoramas.controller.js';
-// const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-
-// const path = Path.join(__dirname, 'hotel_test', 'panorama.json');
-// demo, will be changed with db models and the imports will become unnecessary, as well
 
 function readImageURL(filePath) {
     return new Promise((resolve, reject) => {
@@ -177,11 +170,6 @@ async function getRoomType(idRequestedPath, roomType) {
     }
 }
 
-
-// function getConfigDEMO() { // TO DELETE after we implement the database
-//     return panoramaConfig;
-// }
-
 //src/server/src/models/Hotels/FII/Apps/App1/Rooms/panorama.json
 async function getPanorama(hotel, appType, appartmentId, roomType) {
     let path = 'src/server/src/models/Hotels/'.concat(hotel);
@@ -198,12 +186,42 @@ async function getPanorama(hotel, appType, appartmentId, roomType) {
     return panoramaConfig;
 }
 
-function getPanoramaScene(hotel, room, scene) {
-    let path1 = getFacilityType(hotel, roomType);
-    let path2 = getAppartmentId(path1, appartmentId);
-    let path3 = getRoomType(path2, roomType);
+async function getPanoramaScene(hotel, roomType, roomId) {
 
-    return path3;
+    console.log("Hotel: ", hotel);
+    console.log("Room Type: ", roomType);
+    console.log("Room ID: ", roomId);
+
+    let jsonArray = [];
+    let dir = null;
+
+    
+    dir = "src/server/src/models/Hotels/".concat(hotel).concat("/").concat(roomType).concat("/").concat(roomId);
+    
+    async function readDirRecursive(currentPath) {
+        const entries = await fs.promises.readdir(currentPath, { withFileTypes: true });
+
+        for (const entry of entries) {
+            const entryPath = path.join(currentPath, entry.name);
+
+            if (entry.isDirectory()) {
+                await readDirRecursive(entryPath);
+            } else if (entry.isFile() && path.extname(entry.name) === '.json') {
+                const fileContents = await fs.promises.readFile(entryPath, 'utf-8');
+                try {
+                    const json = JSON.parse(fileContents);
+                    jsonArray.push(json);
+                } catch (error) {
+                    console.error(`Error parsing JSON from file ${entryPath}: ${error.message}`);
+                }
+            }
+        }
+    
+    }
+
+    await readDirRecursive(dir);
+
+    return jsonArray;
 }
 
 async function uploadPanorama() {
