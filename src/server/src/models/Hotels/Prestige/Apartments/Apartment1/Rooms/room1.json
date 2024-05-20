@@ -11,6 +11,18 @@
                 "type": "scene",
                 "text": "Balcony",
                 "sceneId": "Balcony"
+            },
+            {
+                "pitch": 20,
+                "yaw": -92,
+                "type": "info",
+                "text": "Air Conditioner"
+            },
+            {
+                "pitch": 7,
+                "yaw": -158,
+                "type": "info",
+                "text": "32-inch TV"
             }
         ]
     },

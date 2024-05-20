@@ -71,7 +71,6 @@ const MainPage = ({ url }) => {
                 pitch: 0,
                 yaw: 0,
                 type: "equirectangular",
-                autoRotate: -3,
                 title: item.config.title || "Untitled Scene",
                 imageSource: item.config.imageSource,
                 showControls: false,
