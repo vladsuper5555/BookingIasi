@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import "../styles/attractions-card-style.css";
 
-const CategoryCard = ({ category, attractions }) => {
+const CategoryCard = ({ category, attractions, onAttractionClick }) => {
   const [activeDescription, setActiveDescription] = useState(null);
 
-  const handleTextClick = (description) => {
+  const handleTextClick = (description, name) => {
     if (activeDescription === description) {
       setActiveDescription(null);
     } else {
       setActiveDescription(description);
+      onAttractionClick(name); 
     }
   };
 
@@ -21,7 +22,7 @@ const CategoryCard = ({ category, attractions }) => {
         {attractions.map((attraction, index) => (
           <li key={index}>
             <div className="category-card-item">
-              <p onClick={() => handleTextClick(attraction.description)}>
+              <p onClick={() => handleTextClick(attraction.description, attraction.name)}>
                 {attraction.name}
               </p>
               <p className="attraction-distance">{attraction.distance} m</p>
@@ -34,7 +35,7 @@ const CategoryCard = ({ category, attractions }) => {
                 </p>
                 {/* Add the link if available */}
                 {attraction.link && (
-                  <a href={attraction.link} target="_blank">
+                  <a href={attraction.link} target="_blank" rel="noopener noreferrer">
                     More Info
                   </a>
                 )}

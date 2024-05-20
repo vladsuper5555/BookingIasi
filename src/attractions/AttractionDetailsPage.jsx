@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import CategoryCard from "./components/CategoryCard";
 import MapComponent from "../pointsOfInterest/mapComponent"; 
@@ -7,6 +7,8 @@ const AttractionDetailsPage = () => {
   const [attractions, setAttractions] = useState([]);
   const [error, setError] = useState("");
   const { hotelName } = useParams();
+  const [selectedAttraction, setSelectedAttraction] = useState(null);
+  const mapRef = useRef(null);
 
   useEffect(() => {
     const fetchAttractionsForHotel = async () => {
@@ -64,6 +66,13 @@ const AttractionDetailsPage = () => {
     return groupedAttractions;
   };
 
+  const handleAttractionClick = (attractionName) => {
+    setSelectedAttraction(attractionName);
+    if (mapRef.current) {
+      mapRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="main-body-attractions">
       <h3 className="attr-title-page">Attractions for {hotelName}</h3>
@@ -75,12 +84,14 @@ const AttractionDetailsPage = () => {
               key={category}
               category={category}
               attractions={attractions}
+              onAttractionClick={handleAttractionClick}
             />
           )
         )}
       </div>
-      {/*<h1>Titlu pentru harta inca nu m am gandit...</h1>*/}
-      <MapComponent /> {/* */}
+      <div ref={mapRef}>
+        <MapComponent query={selectedAttraction || hotelName} />
+      </div>
     </div>
   );
 };
