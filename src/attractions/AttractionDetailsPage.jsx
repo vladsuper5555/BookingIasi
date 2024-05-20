@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import CategoryCard from "./components/CategoryCard"; 
+import CategoryCard from "./components/CategoryCard";
 import MapComponent from "../pointsOfInterest/mapComponent"; 
 
 const AttractionDetailsPage = () => {
