@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import { Button, Checkbox, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { Link, useNavigate} from 'react-router-dom';
 import  './UserProf.css';
@@ -25,6 +25,55 @@ function UserProf() {
   const [weightTemp, setWeightTemp] = useState('');
   const [genderTemp, setGenderTemp] = useState('');
   const [needsSpecialAssistanceTemp, setNeedsSpecialAssistanceTemp] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('http://localhost:5173/api/check-auth', {
+          method: "GET",
+          credentials: "include",
+        });
+
+        if (response.ok) {
+          navigate('/userProf');
+        }else{
+          navigate('/login');
+        }
+      } catch (error) {
+        
+        console.error("An error occurred while checking authentication:", error);
+      }
+    };
+
+    checkAuth();
+  }, [navigate]);
+
+
+  const handleLogout = async (event) => {
+    event.preventDefault();
+    
+    try {
+      const response = await fetch('http://localhost:5173/api/logout', {
+                method: "GET",
+                credentials: "include"
+            });
+
+            if (response.ok) {
+              console.log("Logout successful and cookie deleted");
+              navigate('/')
+          } else {
+            //navigate('/login')
+            console.error("Logout failed");
+          }     
+
+    } catch (error) {
+      // Handle error
+      console.error('Error:', error);
+      setMessage('An error occurred. Please try again later.');
+    }
+   
+  };
 
   const handleEditProfile = () => {
     setFirstNameTemp(firstName);
@@ -42,7 +91,7 @@ function UserProf() {
     setEditingProfile(false);
     // logica pentru salvarea in baza de date
   };
-  const navigate = useNavigate();
+  
   const handleCancelProfile = () => {
     setEditingProfile(false);
   };
@@ -108,7 +157,7 @@ function UserProf() {
             <img className="profile-picture" src={profilePicture} alt="Profile" />
             <div className="edit-buttons">
               <Button variant="outlined" className="header-btn" style={commonStyles} onClick={handleEditProfile}>Edit</Button>
-              <Button variant="outlined" className="header-btn logout-btn" style={commonStyles}>Logout</Button>
+              <Button variant="outlined" className="header-btn logout-btn" style={commonStyles} onClick={handleLogout}>Logout</Button>
             </div>
           </div>
         </div>
