@@ -158,9 +158,43 @@ async function addCredentialsToDatabase(req, res){
       res.end();
 }
 
+//poate o folosesc si la editare profil 
+async function saveHealthData(req, res) {
+
+    const username = req.cookies.username;
+
+    const {
+        birthDate, height, weight, gender, needsSpecialAssistance, activityIndex
+    } = req.body;
+
+  
+    if (!username) {
+        return res.status(401).send({ success: false, message: 'User is not authenticated' });
+    }
+
+    const sqlUpdateQuery = `UPDATE users SET
+        birthDate = ?, height = ?, weight = ?, gender = ?, needsSpecialAssistance = ?,
+        activityIndex = ?
+        WHERE username = ?`;
+
+    try {
+        await runQueryOnDatabaseAndFetchEntireResult(sqlUpdateQuery, [
+            birthDate, height, weight, gender, needsSpecialAssistance,
+            activityIndex, username
+        ]);
+        res.send({ success: true, message: 'Health data updated successfully' });
+    } catch (error) {
+        console.error('Failed to update health data:', error);
+        res.status(500).send({ success: false, message: 'Failed to update health data' });
+    }
+}
+
+
+
 export {
     checkCredentialsAgainstDatabase,
     addCredentialsToDatabase,
     checkCookie,
+    saveHealthData,
     logout
 }

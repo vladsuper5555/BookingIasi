@@ -66,7 +66,7 @@ function HealthForm() {
     console.log('Activity Index:', activityIndex);
   
     try {
-      const response = await fetch('http://localhost:3000/api/saveHealthData', {
+      const response = await fetch('http://localhost:5173/api/saveHealthForm', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -77,11 +77,8 @@ function HealthForm() {
           weight,
           gender,
           needsSpecialAssistance,
-          walkFrequency,
-          walkDistance,
-          sportsPracticed,
-          sportsFrequency,
-          sportsIntensity,
+         // cred ca lipseste 
+        // userAgreedToFetchData,
           activityIndex
         })
       });
@@ -239,6 +236,6 @@ function HealthForm() {
       </div>
     </div>
   );
-}
+} 
 
 export default HealthForm;
