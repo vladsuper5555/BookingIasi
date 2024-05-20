@@ -3,12 +3,12 @@ import express from "express"
 import panoramasRouter from './routes/panoramas/panoramas.router.js';
 import userProfileRouter from "./routes/userProfile/userProfile.router.js";
 import attractionsRouter from "./routes/attractionsInfo/attractionsInfo.router.js";
+import hotelsRouter from "./routes/hotels/hotels.router.js";
 import cookieParser from "cookie-parser";
-// import hotelsRouter ... etc.
 import {runQueryOnDatabaseAndFetchEntireResult, runAsyncQueryOnDatabase} from "./models/database.model.js"; 
 
 const server = express();
-
+    
 // middleware
 /*server.use(cors({  // ?!
     origin: 'http://localhost:5173'
@@ -18,6 +18,7 @@ server.use(cookieParser());
 server.use('/api', panoramasRouter); // to change to panoramas
 server.use('/api', userProfileRouter);
 server.use('/api', attractionsRouter);
+server.use('/api', hotelsRouter);
 
 
 // TEST PURPOSE ONLY TO BE DELETEDy
