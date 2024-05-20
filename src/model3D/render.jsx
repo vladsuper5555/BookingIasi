@@ -4,8 +4,9 @@ import ReactPannellum from "react-pannellum";
 const MainPage = () => {
     const [panoConfig, setPanoConfig] = useState({ imageSource: "", config: {} });
     const [viewer, setViewer] = useState(null);
-    const fetchPanoConfig = async () => {
+    const [panoramas, setPanoramas] = useState([]);
 
+    const fetchPanoConfig = async () => {
         try {
             const response = await fetch('http://localhost:5173/api/panoramas/?hotel=Unirea&appType=Apartments&appId=Apartment1', {
                 method: "GET",
@@ -14,59 +15,71 @@ const MainPage = () => {
                 }
             });
             const panoramas = await response.json();
+            panoramas.forEach(addInitialPanorama);
+            setPanoramas(panoramas);
             console.log(panoramas);
-            panoramas.forEach(myFunction)
 
         } catch (error) {
-            // additional error handling
             console.error("Failed to fetch panorama config:", error);
         }
     };
 
     useEffect(() => {
+        
         fetchPanoConfig();
     }, []);
 
-    const handleViewerLoad = (viewerInstance) => {
-        setViewer(viewerInstance);
+    useEffect(() => {
+        handleViewerLoad();
+        if (viewer) {
+            console.log("Viewer is loaded, adding scenes");
+            if (panoramas.length > 0) {
+                console.log("Panoramas array is not empty, adding scenes");
+                panoramas.forEach(addScenes);
+            } else {
+                console.log("Panoramas array is empty, not adding scenes");
+            }
+        } else {
+            console.log("Viewer is not loaded, not adding scenes");
+        }
+    }, [viewer, panoramas]);
+
+    const handleViewerLoad = () => {
+        const viewer = ReactPannellum.getViewer();
+        if (viewer) {
+            setViewer(viewer);
+        } else {
+            console.log("Viewer is not loaded");
+        }
     };
-
-    function myFunction(item, index) {
-
-        //setting the initial panorama
+    const addInitialPanorama = (item) => {
         if (item.sceneId === "Start") {
             setPanoConfig({
                 imageSource: item.url,
                 config: item.config
             });
         }
-    }
+    };
 
-    
-    ReactPannellum.addScene("Room2", {
-        hfov: 130,
-        pitch: 0,
-        yaw: 0,
-        type: "equirectangular",
-        autoRotate: -3,
-        title: "Classroom View",
-        showControls: false,
-        hotSpots: [
-            {
-                "pitch": 1.1,
-                "yaw": 90,
-                "type": "info",
-                "text": "Bogdanel View",
-                "sceneId": "Start"
-            },
-        ],
-        imageSource: "https://pannellum.org/images/alma.jpg"
+    const addScenes = (item) => {
 
-    });
+        console.log("Enters addScenes");
 
+        if (viewer && item.sceneId !== "Start") {
+            ReactPannellum.addScene(item.sceneId, {
+                hfov: 130,
+                pitch: 0,
+                yaw: 0,
+                type: "equirectangular",
+                autoRotate: -3,
+                title: item.config.title || "Untitled Scene",
+                imageSource: item.config.imageSource,
+                showControls: false,
+                hotSpots: item.config.hotSpots || []
+            });
+        }
+    };
 
-    // study API events: https://github.com/hoaiduyit/react-pannellum
-    // use examples from here: https://codesandbox.io/p/sandbox/reactpannellum-example-cxhwzg?file=%2Fsrc%2FApp.js%3A191%2C26
 
     return (
         <div className="render">
@@ -76,9 +89,8 @@ const MainPage = () => {
                 id="mainscene"
                 sceneId="Start"
                 config={panoConfig.config}
-                onLoad={(viewer) => handleViewerLoad(viewer)}
-            >
-            </ReactPannellum>
+                onScenechange={handleViewerLoad}
+            />
         </div>
     );
 };
