@@ -44,7 +44,7 @@ jobs:
         cache: 'npm'
     - run: npm ci --force
     - run: sleep 10 # Wait for MySQL to be fully up and running
-    - run: mysql -h 127.0.0.1 -u user -e "source path/to/your/setup-script.sql"
+    - run: node initDatabase.cjs
     - run: npm run dev &
     - run: npm run dev-node &
     - run: sleep 3
