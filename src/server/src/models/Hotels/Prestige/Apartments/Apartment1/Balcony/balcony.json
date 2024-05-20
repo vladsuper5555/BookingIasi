@@ -5,7 +5,6 @@
         "pitch": 0,
         "yaw": 0,
         "type": "equirectangular",
-        "autoRotate": -3,
         "title": "Room 2",
         "showControls": false,
         "hotSpots": [
