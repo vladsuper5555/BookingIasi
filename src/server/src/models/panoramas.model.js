@@ -6,8 +6,16 @@ throw errors (and messages) accordingly (when hotel/room/panorama do not exist) 
 the below imports will become, obviously, obsolete
 */
 import fs from 'node:fs';
+import path from 'node:path';
+// import Path from 'node:path';
+// import * as url from 'url';
 import { runQueryOnDatabaseAndFetchEntireResult } from './database.model.js';
-import { httpGetPanorama } from '../routes/panoramas/panoramas.controller.js';
+// import { json } from 'express';
+import { httpGetPanorama,httpGetPanoramaScene } from '../routes/panoramas/panoramas.controller.js';
+// const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+
+// const path = Path.join(__dirname, 'hotel_test', 'panorama.json');
+// demo, will be changed with db models and the imports will become unnecessary, as well
 
 function readImageURL(filePath) {
     return new Promise((resolve, reject) => {
@@ -185,6 +193,8 @@ async function getPanorama(hotel, appType, appartmentId, roomType) {
 
     return panoramaConfig;
 }
+
+
 
 async function getPanoramaScene(hotel, roomType, roomId) {
 

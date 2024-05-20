@@ -8,8 +8,8 @@ import {
 
 const panoramasRouter = Router();
 
-panoramasRouter.get('/panoramas', httpGetPanorama);
-panoramasRouter.get('/panoramas/:sceneId', httpGetPanoramaScene);
+// panoramasRouter.get('/panoramas', httpGetPanorama);
+panoramasRouter.get('/panoramas', httpGetPanoramaScene);
 panoramasRouter.post('/panoramas', httpUploadPanorama); // middleware authentication/authorize admin
 panoramasRouter.put('/panoramas/:sceneId', httpUpdatePanoramaScene);  // middleware authentication/authorize admin
 
