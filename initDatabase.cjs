@@ -18,7 +18,8 @@ con.connect(function (err) {
     if (err) throw err;
     console.log("Database dropped.");
 
-    let createDbSql = `CREATE DATABASE BookingIasi`;
+    let createDbSql = `CREATE DATABASE IF NOT EXISTS BookingIasi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+    `;
 
     con.query(createDbSql, function (err, result) {
       if (err) throw err;
