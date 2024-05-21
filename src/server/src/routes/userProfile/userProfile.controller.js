@@ -173,7 +173,7 @@ async function saveHealthData(req, res) {
     }
 
     const sqlUpdateQuery = `UPDATE users SET
-        birthDate = "${birthDate}", height = "${height}", weight = "${weight}", gender = "${gender}", needsSpecialAssistance = "${needsSpecialAssistance}",
+        birthDate = "${birthDate}", height = "${height}", weight = "${weight}", gender = "${gender}", needsSpecialAssistance = "${needsSpecialAssistance == true ? 1 : 0}",
         activityIndex = ${activityIndex}
         WHERE username = "${username}"`;
 
