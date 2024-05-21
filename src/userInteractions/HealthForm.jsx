@@ -167,6 +167,7 @@ function HealthForm() {
         <Select
           className="health-data-input"
           value={walkFrequency}
+          id = "walkFrequency"
           onChange={(e) => setWalkFrequency(e.target.value)}
           style={commonStyles}
         >
@@ -185,6 +186,7 @@ function HealthForm() {
         <TextField
           className="health-data-input"
           type="text"
+          id = "walkDistance"
           value={walkDistance}
           onChange={(e) => setWalkDistance(e.target.value)}
           style={commonStyles}
@@ -199,6 +201,7 @@ function HealthForm() {
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <FormControlLabel
                   control={<Checkbox checked={sportsPracticed.includes(sport)} onChange={() => handleSportSelection(sport)} />}
+                  id = {'${sport}'}
                   label={sport}
                   style={commonStyles}
                 />
@@ -208,6 +211,7 @@ function HealthForm() {
                     <Select
                       className="health-data-input"
                       value={sportsFrequency[sport]}
+                      id={`${sport}_frequency`}
                       onChange={(e) => setSportsFrequency({...sportsFrequency, [sport]: e.target.value})}
                       style={commonStyles}
                     >
