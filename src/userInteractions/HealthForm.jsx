@@ -52,6 +52,7 @@ function HealthForm() {
         <input
           className="health-data-input"
           type="date"
+          id="Birth_Date"
           value={birthDate}
           onChange={(e) => setBirthDate(e.target.value)}
         />
@@ -62,6 +63,7 @@ function HealthForm() {
         <input
           className="health-data-input"
           type="text"
+          id="height"
           value={height}
           onChange={(e) => setHeight(e.target.value)}
         />
@@ -72,6 +74,7 @@ function HealthForm() {
         <input
           className="health-data-input"
           type="text"
+          id="weight"
           value={weight}
           onChange={(e) => setWeight(e.target.value)}
         />
@@ -81,6 +84,7 @@ function HealthForm() {
         <h2 className="input-label">Gender:</h2>
         <select
           className="health-data-input"
+          id="gender"
           value={gender}
           onChange={(e) => setGender(e.target.value)}
         >
@@ -95,13 +99,14 @@ function HealthForm() {
         <input
           className="health-data-input"
           type="checkbox"
+          id="Special_Assistance"
           checked={needsSpecialAssistance}
           onChange={(e) => setNeedsSpecialAssistance(e.target.checked)}
         />
       </div>
       <div className="info-divider"></div>
       <div className="health-data-buttons">
-        <button className="save-btn" onClick={handleSaveHealthData}>Save</button>
+        <button className="save-btn" id = "save-btn" onClick={handleSaveHealthData}>Save</button>
       </div>
     </div>
   );
