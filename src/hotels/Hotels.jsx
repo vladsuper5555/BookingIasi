@@ -4,8 +4,10 @@ import { Link, redirect } from 'react-router-dom';
 import { useState } from 'react'
 import Button from '@mui/material/Button';
 import Mesaj from './Mesaj';
+import PrincipalImage from "./images/hotels/UnireaHotelSpa/principal.jpg";
 //import mainPhoto from ".images/";//update dupa ce se aleg pozele
 import "./styles/main-page.css";
+
 
 const Hotels = () => {
   return (
@@ -20,7 +22,7 @@ const Hotels = () => {
         <header className="header">
           <h1>Unirea Hotel & Spa</h1>
           <div className="header-image">
-            <img src="path-to-hotel-image.jpg" alt="Unirea Hotel & Spa" />
+            <img src={PrincipalImage} alt="Unirea Hotel & Spa" />
             <div className="header-info">
               <p>Check-in: 14:00 PM</p>
               <p>Check-out: 12:00 PM</p>
