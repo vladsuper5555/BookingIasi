@@ -158,6 +158,7 @@ function HealthForm() {
         <InputLabel className='input-laber' style={labelStyles}>Needs Special Assistance:</InputLabel>
         <FormControlLabel
           control={<Checkbox checked={needsSpecialAssistance} onChange={(e) => setNeedsSpecialAssistance(e.target.checked)} />}
+          id = "Special_Assistance"
           style={commonStyles}
         />
       </div>
@@ -183,10 +184,10 @@ function HealthForm() {
         <InputLabel className="input-label" style={labelStyles}>The average distance of the walk (km):</InputLabel>
         <TextField
           className="health-data-input"
-          type="checkbox"
-          id="Special_Assistance"
-          checked={needsSpecialAssistance}
-          onChange={(e) => setNeedsSpecialAssistance(e.target.checked)}
+          type="text"
+          value={walkDistance}
+          onChange={(e) => setWalkDistance(e.target.value)}
+          style={commonStyles}
         />
       </div>
 
@@ -237,7 +238,7 @@ function HealthForm() {
       </div>
 
       <div className="health-data-buttons">
-        <button className="save-btn" id = "save-btn" onClick={handleSaveHealthData}>Save</button>
+        <Button variant="outlined" className="save-btn" id="save-btn" style={commonStyles} onClick={handleSaveHealthData}>Save</Button>
       </div>
     </div>
   );
