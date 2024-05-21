@@ -160,7 +160,7 @@ async function addCredentialsToDatabase(req, res){
 
 //poate o folosesc si la editare profil 
 async function saveHealthData(req, res) {
-
+    
     const username = req.cookies.username;
 
     const {
@@ -173,22 +173,18 @@ async function saveHealthData(req, res) {
     }
 
     const sqlUpdateQuery = `UPDATE users SET
-        birthDate = ?, height = ?, weight = ?, gender = ?, needsSpecialAssistance = ?,
-        activityIndex = ?
-        WHERE username = ?`;
+        birthDate = "${birthDate}", height = "${height}", weight = "${weight}", gender = "${gender}", needsSpecialAssistance = "${needsSpecialAssistance}",
+        activityIndex = ${activityIndex}
+        WHERE username = "${username}"`;
 
     try {
-        await runQueryOnDatabaseAndFetchEntireResult(sqlUpdateQuery, [
-            birthDate, height, weight, gender, needsSpecialAssistance,
-            activityIndex, username
-        ]);
+        await runQueryOnDatabaseAndFetchEntireResult(sqlUpdateQuery);
         res.send({ success: true, message: 'Health data updated successfully' });
     } catch (error) {
         console.error('Failed to update health data:', error);
         res.status(500).send({ success: false, message: 'Failed to update health data' });
     }
 }
-
 
 
 export {
