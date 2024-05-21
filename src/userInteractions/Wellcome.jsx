@@ -1,7 +1,7 @@
 import React from 'react';
 import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';// poti sa te joci aici cu orice icon vrei sau gasesti 
 import { Container, Typography, Button, Avatar, Box } from '@mui/material';
-import "./App.css"
+import "./user.css"
 import { Link as RouterLink } from 'react-router-dom';
 
 function Welcome() {

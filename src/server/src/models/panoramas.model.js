@@ -178,11 +178,6 @@ async function getRoomType(idRequestedPath, roomType) {
     }
 }
 
-
-// function getConfigDEMO() { // TO DELETE after we implement the database
-//     return panoramaConfig;
-// }
-
 //src/server/src/models/Hotels/FII/Apps/App1/Rooms/panorama.json
 async function getPanorama(hotel, appType, appartmentId, roomType) {
     let path = 'src/server/src/models/Hotels/'.concat(hotel);

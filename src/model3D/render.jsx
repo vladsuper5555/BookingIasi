@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import ReactPannellum from "react-pannellum";
 
-const MainPage = () => {
+const MainPage = ({ url }) => {
     const [panoConfig, setPanoConfig] = useState({ imageSource: "", config: {} });
     const [viewer, setViewer] = useState(null);
     const [panoramas, setPanoramas] = useState([]);
 
     const fetchPanoConfig = async () => {
         try {
-            const response = await fetch('http://localhost:5173/api/panoramas/?hotel=Unirea&appType=Apartments&appId=Apartment1', {
+            const response = await fetch(url, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -27,7 +27,7 @@ const MainPage = () => {
     useEffect(() => {
         
         fetchPanoConfig();
-    }, []);
+    }, [url]);
 
     useEffect(() => {
         handleViewerLoad();
@@ -71,7 +71,6 @@ const MainPage = () => {
                 pitch: 0,
                 yaw: 0,
                 type: "equirectangular",
-                autoRotate: -3,
                 title: item.config.title || "Untitled Scene",
                 imageSource: item.config.imageSource,
                 showControls: false,

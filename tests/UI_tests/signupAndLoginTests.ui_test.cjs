@@ -16,7 +16,9 @@ describe('Signup and Login Test', () => {
     height: String(faker.datatype.number({ min: 150, max: 200 })), // Height in cm
     weight: String(faker.datatype.number({ min: 50, max: 120 })), // Weight in kg
     gender: faker.name.gender(),
-    specialAssistance: faker.datatype.boolean(), // Random boolean for special assistance
+    specialAssistance: faker.datatype.boolean(),
+    walkFrequency: faker.datatype.number({ min: 1, max: 7 }).toString(),
+
 };
 
   beforeAll(async () => {
@@ -56,11 +58,13 @@ describe('Signup and Login Test', () => {
         checkbox.checked = false; // If specialAssistance is false, uncheck the checkbox
       }
     }, userData.specialAssistance);
+    // const walkFrequency = faker.datatype.number({ min: 1, max: 7 }).toString(); // Random walk frequency between 1 and 7
+    // await page.select('#walkFrequency', walkFrequency);
     await page.click('#save-btn');
     await page.waitForNetworkIdle({ idleTime: 300 });
 
     const responseMessage = page.url();
-    console.log(responseMessage);
+    // console.log(responseMessage);
     expect(responseMessage == 'http://localhost:5173/health-form').toBeTruthy();
   });
   

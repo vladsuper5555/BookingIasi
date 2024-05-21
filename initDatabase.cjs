@@ -180,73 +180,71 @@ con.connect(async function (err) {
 
       await queryAsync(conDB, createTableSql1);
 
-      let insertSql1 = `INSERT INTO hotelGeneral
-      (imagePath, occupancy, accommodationCategory, name, amenityFeature, checkinTime, checkoutTime, permittedUsage, petsAllowed, description, email, employee, address, aggregateRating, review, telephone, smokingAllowed, event, hotelPhotos, maximumAttendeeCapacity, currenciesAccepted, openingHours, paymentAccepted, priceRange, hasCertification, parkingFacility)
-      VALUES
-      (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-      let hotelData = [
-        [
-          "BookingIasi/images/Gaudeamus",
-          362,
-          "Student Housing",
-          "Camin Gaudeamus",
-          "private bathroom, air conditioning, fridge, TV, telephone, etc.",
-          "22:00",
-          "07:00",
-          'Students can stay here of the "Alexandru Ioan Cuza" University in Iasi, students who come through the Erasmus-Socrates programs, teaching staff from abroad who come through university partnerships, to courses organized at the university level and all those from the university network who request accommodation for symposia, colloquiums, days academic etc.',
-          false,
-          "Gaudeamus Dormitory, came into operation in December 1998, construction and equipment works were completed in August 2002. Currently, the Dormitory has 362 accommodation places and two conference rooms. Located close to important academic objectives and student campuses, offers University students and professors from abroad special accommodation conditions in rooms with 2 and 3 beds.",
-          "lidia.vranceanu@uaic.ro",
-          "Financial administrator: Lidia VRANCEANU",
-          "Str. Codrescu Nr.1, Iași",
-          4.3,
-          "Good: the services at the facilities are really competent and helpful, as well as fast; the rose garden in front is really pretty; the interior environment is not bad because of the natural stone floors and walls; the reception is open 24/7 and you can buy some juice and water there; the kitchen is not bad and was always spacious enough for the whole floor; the cafeteria is really worth the money; the rooms are spacious enough for two people living in the room; there are some surveillance cameras on the floors so that no one enters your room unseen",
-          "0232201102",
-          false,
-          "allowed",
-          "yes",
-          400,
-          "RON",
-          "Cash and card",
-          "07:00",
-          "600-800",
-          true,
-          true,
-        ],
-        [
-          "BookingIasi/images/Akademos",
-          312,
-          "Student Housing",
-          "Camin Akademos",
-          "air conditioning, own bathroom and shower cabins, fridge, modern furniture, internet connection.",
-          "10:00",
-          "07:00",
-          ' Students of the "Alexandru Ioan Cuza" University in Iasi can stay here, students who come through the Erasmus-Socrates programs, teaching staff from abroad who come through university partnerships, to courses organized at the university level and all those from the university network who request accommodation for symposia, colloquiums, academic days, etc.',
-          false,
-          'The "Akademos" dormitory came into operation in 2007 and the works and facilities were completed in August 2008 when the last two sections were put into use 312 places to stay. The location near the "Mihai Eminescu" Central University Library and the Student Cultural Center offers students the opportunity to spend their time in a constructive and pleasant way. Students staying here can reach classes in less than 10 minutes, on foot.',
-          "valentin.burdea@uaic.ro",
-          "Financial administrator: Valentin BURDEA",
-          "Str. Păcurari, no. 6",
-          4.6,
-          "Student dormitory with hotel regime. Very good conditions, spacious rooms, pleasant atmosphere, canteen in the dormitory and own laundry.",
-          "0232201102 ",
-          false,
-          "allowed",
-          "yes",
-          500,
-          "RON",
-          "07:00",
-          "Cash and card",
-          "700-900",
-          true,
-          true,
-        ],
-      ];
-
-      for (let hotel of hotelData) {
-        await queryAsync(conDB, insertSql1, hotel);
-        console.log("Hotel accommodation record inserted");
-      }
+          let insertSql1 = `INSERT INTO hotelGeneral
+          (imagePath, occupancy, accommodationCategory, name, amenityFeature, checkinTime, checkoutTime, permittedUsage, petsAllowed, description, email, employee, address, aggregateRating, review, telephone, smokingAllowed, event, hotelPhotos, maximumAttendeeCapacity, currenciesAccepted, openingHours, paymentAccepted, priceRange, hasCertification, parkingFacility)
+          VALUES
+          (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+          let hotelData = [
+              ['BookingIasi/images/Unirea', 
+              186, 
+              'Hotel 4 stars' , 
+              'Unirea Hotel & Spa', 
+              'Indoor swimming pool, Free parking, Free WiFi, Spa and wellness centre, Airport shuttle, Family rooms, 2 restaurants, Tea/coffee maker in all rooms,Bar', '14:00', '12:00',  'At Hotel Unirea can stay every person that has a reservation',  true, 'Centrally located on Union Square in the heart of Iasi, steps away of Alexandru Ioan Cuza University, Unirea Hotel & Spa provides free access to an indoor pool, jacuzzi and fitness centre. Copou Park, where you can find Eminescu s Linden Tree, is a 10-minute walk away.',
+               'comercial@hotelunirea.ro', 
+               'Piața Unirii 5, Iași 700056', 
+               4.5, 
+               'The breakfast is excellent. The swimming pool, gym and SPA conditions make the stay worth to be planned for more days, although the city is not big and all the sightseeing could be compressed in 2 days. The rooms are cosy. The staff of the hotel is polite and helpful. The only complaint: the service (staff) at Panoramic restaurant-would rate it 6 out of 10-not very well instructed', 
+               '0232205278', 
+               false, 
+               'allowed', 
+               360, 
+               'RON', 
+               '24 hours', 
+               'Cash or card', 
+               '500-700', 
+               true, 
+               true],
+              
+              ['BookingIasi/images/ApartamentHotelPrestige', 
+              17, 
+              'Hotel',
+              'Prestige Hotel', 
+              'air conditioning, own bathroom and shower cabins, fridge, modern furniture, internet connection.', 
+              '14:00', 
+              '07:00',
+              'Making a reservation and arriving within the agreed time frame is necessary to gain access to the establsihment', 
+              false, 
+              'Prestige Hotel is a historical monument. It has a spot on the Iasi monument list at nr.1112, code IS-II-B-03933. The first owners of this building were Iancu and Victoria Corjescu in 1895. In 2011, the building was claimed by the descendants of the Cerchez family, namely Don Rosetti Maria Ioana, Rosetti Scarlat Alexandru Anton and Rosetti Catrina Irina. Political meetings with important people of the time took place here. From 2014 until today, this building belongs to the owners Cogălniceanu Dumitru and Cogălniceanu Geta.',            
+              '-',             
+              '-',            
+              'Str Titu Maiorescu, Nr. 1, Iasi, Romania',           
+              4.6,            
+              'Impeccable, very friendly and welcoming staff. A nice familial atmosphere, including the owner of the hotel, who is very friendly and warm. For a pleasant holiday I recommend this hotel.',           
+              '0724502502 ',             
+              false,             
+              '-',             
+              'yes',             
+              50,             
+              'RON',             
+              '07:00',             
+              'Cash and card',             
+              '329-499',            
+              true,            
+              true,          
+            ]
+          ];
+          hotelData.forEach((hotel) => {
+            new Promise((res) => {
+              conDB.query(insertSql1, hotel, function (err, result) {
+                if (err) throw err;
+                console.log(
+                  "Hotel accomodation record inserted:",
+                  result.insertId
+                );
+                res(result);
+              });
+            });
+          });
 
       /**Hotel rooms table structure */
       let createTableSql3 = `CREATE TABLE IF NOT EXISTS rooms (
@@ -265,10 +263,10 @@ con.connect(async function (err) {
       VALUES
       (?, ?, ?, ?, ?)`;
 
-      let roomsData = [
-        [1, 2, 312, "single", "5"],
-        [2, 2, 362, "single", "4"],
-      ];
+          let roomsData = [
+            [1, 2, 186, 'single or double', '13'],
+            [2, 2, 17, 'single or double', '1'],
+          ];
 
       for (let room of roomsData) {
         await queryAsync(conDB, insertSql3, room);
