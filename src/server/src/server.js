@@ -8,7 +8,7 @@ import cookieParser from "cookie-parser";
 import {runQueryOnDatabaseAndFetchEntireResult, runAsyncQueryOnDatabase} from "./models/database.model.js"; 
 
 const server = express();
-
+    
 // middleware
 /*server.use(cors({  // ?!
     origin: 'http://localhost:5173'

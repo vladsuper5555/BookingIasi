@@ -1,12 +1,21 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif; /* Updated font family */
   background-color: #f0f0f0;
   display: flex;
   justify-content: center;
-  min-height: 80vh;
+  min-height: 100vh;
   flex-direction: column;
+  color: #18181A; /* Updated font color */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body>#root {
+  width: 100%;
 }
 
 header.navbar {
@@ -15,14 +24,15 @@ header.navbar {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  width: 100%;
   display: flex-start;
   justify-content: space-between;
   align-items: center;
+  margin: 20px;
+  color: #18181A; /* Updated font color */
 }
 
 .navbar-container {
-  width: 90%;
+  width: 100%;
 }
 
 .breadcrumbs {
@@ -44,9 +54,11 @@ header.navbar {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  width: 100%;
-  max-width: 900px;
   margin: 20px;
+}
+
+.profile-container-wrapper {
+  justify-content: center;
 }
 
 .profile-container {
@@ -61,6 +73,7 @@ header.navbar {
   max-width: 450px;
   height: 70vh;
   margin-right: 20px;
+  color: #18181A; /* Updated font color */
 }
 
 .profile-picture {
@@ -111,10 +124,12 @@ header.navbar {
   max-width: 800px; 
   height: 70vh;
   width: 100%; 
+  margin: 0;
+  color: #18181A; /* Updated font color */
 }
 
 .profile-header {
-  color: rgb(0, 0, 40);
+  color: #18181A; /* Updated font color */
 }
 
 .info-item {
@@ -125,19 +140,13 @@ header.navbar {
 
 .input-label {
   font-size: 20px; 
-  color: #333; 
+  color: #18181A; /* Updated font color */
   margin-right: 10px;
-}
-
-.info-divider {
-  height: 2px;
-  background-color: #a8a8a8;
-  margin: 10px 0;
 }
 
 .info-content {
   font-size: 16px; 
-  color: #555; 
+  color: #18181A; /* Updated font color */
 }
 
 .health-data-container {
@@ -148,9 +157,8 @@ header.navbar {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 1800px;
   margin: 20px;
+  color: #18181A; /* Updated font color */
 }
 
 .health-data-item {
@@ -161,7 +169,7 @@ header.navbar {
 
 .health-data-label {
   font-size: 16px;
-  color: #333;
+  color: #18181A; /* Updated font color */
   margin-right: 10px;
 }
 
@@ -170,9 +178,18 @@ header.navbar {
   padding: 5px;
 }
 
-.edit-health-btn {
-  width: 160px;
+.health-data-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
   margin-top: 20px;
+}
+
+.save-btn,
+.cancel-btn,
+.edit-health-btn,
+.health-formular-btn {
+  width: 140px;
 }
 
 @media (max-width: 750px) {
@@ -180,7 +197,6 @@ header.navbar {
   .profile-info-container {
     flex-direction: column;
     align-items: center;
-    width: 100%;
     margin: 20px;
   }
 
@@ -191,11 +207,10 @@ header.navbar {
   }
 
   .profile-info-container {
-    width: 100%;
+    margin-top: 80px !important;
   }
 
   .health-data-container {
-    width: 100%;
     margin: 20px;
   }
 }
