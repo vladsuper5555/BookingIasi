@@ -64,7 +64,7 @@ function HealthForm() {
     activityIndex = Math.min(activityIndex, 100);
   
     console.log('Activity Index:', activityIndex);
-  
+    ///mai trebuie un checkCookie call
     try {
       const response = await fetch('http://localhost:5173/api/saveHealthForm', {
         method: 'POST',
@@ -80,7 +80,8 @@ function HealthForm() {
          // cred ca lipseste 
         // userAgreedToFetchData,
           activityIndex
-        })
+        }),
+        credentials: "include"
       });
       
       if (response.ok) {
