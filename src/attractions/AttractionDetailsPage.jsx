@@ -5,9 +5,11 @@ import MapComponent from "../pointsOfInterest/mapComponent";
 
 const AttractionDetailsPage = () => {
   const [attractions, setAttractions] = useState([]);
+  const [filteredAttractions, setFilteredAttractions] = useState([]);
   const [error, setError] = useState("");
   const { hotelName } = useParams();
   const [selectedAttraction, setSelectedAttraction] = useState(null);
+  const [maxDistance, setMaxDistance] = useState(300); // Default to 300 meters
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -54,6 +56,11 @@ const AttractionDetailsPage = () => {
     };
   }, [hotelName]);
 
+  useEffect(() => {
+    const filtered = attractions.filter(attraction => attraction.distance <= maxDistance);
+    setFilteredAttractions(filtered);
+  }, [maxDistance, attractions]);
+
   // Function to group attractions by category
   const groupAttractionsByCategory = (attractions) => {
     const groupedAttractions = {};
@@ -73,12 +80,26 @@ const AttractionDetailsPage = () => {
     }
   };
 
+  const handleDistanceChange = (e) => {
+    setMaxDistance(Number(e.target.value));
+  };
+
   return (
     <div className="main-body-attractions">
       <h3 className="attr-title-page">Attractions for {hotelName}</h3>
       {error && <p>{error}</p>}
+      <div className="distance-filter-container">
+        <label htmlFor="distanceFilter">Show attractions within (meters):</label>
+        <input
+          type="input"
+          id="distanceFilter"
+          value={maxDistance}
+          onChange={handleDistanceChange}
+          min="0"
+        />
+      </div>
       <div className="grid-layout">
-        {Object.entries(groupAttractionsByCategory(attractions)).map(
+        {Object.entries(groupAttractionsByCategory(filteredAttractions)).map(
           ([category, attractions]) => (
             <CategoryCard
               key={category}
