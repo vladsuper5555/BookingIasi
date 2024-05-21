@@ -14,17 +14,45 @@ import "./styles/main-page.css";
 
 
 const Hotels = () => {
+//   const [hotelData, setHotelData] = useState(null);
+//   const [error, setError] = useState('');
+//   const navigate = useNavigate();
+//   const hotelName = 'Unirea Hotel & Spa';
+
+//   useEffect(() => {
+//   const fetchInfoForHotel = async (hotelName) => {
+//     try {
+//       const response = await fetch("http://localhost:5173/api/hotelsinfo",
+//         {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//           body: JSON.stringify({ hotelName }),
+//         }
+//     );
+//       if (!response.ok) {
+//         throw new Error("Response was not ok");
+//       }
+//       const data = await response.json();
+//       //console.log(data);
+//       if (data.success) {
+//         setHotelData(data.hotel);
+//       } else {
+//         setError(data.message);
+//       }
+//     } catch (error) {
+//       setError("An error occurred. Please try again later");
+//     }
+//   };
+//   fetchInfoForHotel(hotelName);
+// }, [hotelName]);
+
   return (
-  <div className='general-stucture'>   
-    {/* <div>
-      <h1>Unirea Hotel & Spa</h1> 
-      <Mesaj/>
-      <h3>Hotel</h3>
-    </div> */}
-    
+  <div className='general-stucture'>       
       <div className="hotels">
         <header className="header">
-          <h1>Unirea Hotel & Spa</h1>
+          <h1>Hotel Unirea & Spa</h1>
           <div className='subtitle'>
           <div className="horizontal-line"></div> Hotel <div className="horizontal-line"></div>
           </div>

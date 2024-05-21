@@ -211,7 +211,7 @@ con.connect(async function (err) {
                '500-700', 
                true, 
                true],
-              
+               
               ['BookingIasi/images/ApartamentHotelPrestige', 
               17, 
               'Hotel',

@@ -8,7 +8,6 @@ const AttractionsPage = () => {
   const [hotelNames, setHotelNames] = useState([]);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
   const fetchAttractionsForHotel = async (hotelName) => {
     try {
       const response = await fetch(

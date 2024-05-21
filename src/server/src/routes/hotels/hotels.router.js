@@ -3,7 +3,7 @@ import { getHotelsNames} from './hotels.controller.js';
 
 const hotelsRouter = new Router();
 
-hotelsRouter.post('/hotels', getHotelsNames);
-
+hotelsRouter.post('/hotelsnames', getHotelsNames);
+hotelsRouter.post('/hotelsinfo', getInformationAboutHotel);
 
 export default hotelsRouter;
