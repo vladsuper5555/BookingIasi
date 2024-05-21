@@ -10,7 +10,6 @@ import ContactImage from "./images/hotels/UnireaHotelSpa/iasi.jpg";
 import Feature1 from "./images/hotels/UnireaHotelSpa/event rooms/restaurant1.jpg";
 import Feature2 from "./images/hotels/UnireaHotelSpa/pool or spa/pool.jpg";
 import Feature3 from "./images/hotels/UnireaHotelSpa/apartments/app_id_1/rooms/room1/room1.jpg";
-//import mainPhoto from ".images/";//update dupa ce se aleg pozele
 import "./styles/main-page.css";
 
 
