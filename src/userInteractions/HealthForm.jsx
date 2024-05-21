@@ -112,6 +112,7 @@ function HealthForm() {
         <TextField
           className="health-data-input"
           type="date"
+          id="Birth_Date"
           value={birthDate}
           onChange={(e) => setBirthDate(e.target.value)}
           style={commonStyles}
@@ -122,6 +123,7 @@ function HealthForm() {
         <TextField
           className="health-data-input"
           type="text"
+          id="height"
           value={height}
           onChange={(e) => setHeight(e.target.value)}
           style={commonStyles}
@@ -132,6 +134,7 @@ function HealthForm() {
         <TextField
           className="health-data-input"
           type="text"
+          id="weight"
           value={weight}
           onChange={(e) => setWeight(e.target.value)}
           style={commonStyles}
@@ -141,6 +144,7 @@ function HealthForm() {
         <InputLabel className="input-label" style={labelStyles}>Gender:</InputLabel>
         <Select
           className="health-data-input"
+          id="gender"
           value={gender}
           onChange={(e) => setGender(e.target.value)}
           style={commonStyles}
@@ -154,6 +158,7 @@ function HealthForm() {
         <InputLabel className='input-laber' style={labelStyles}>Needs Special Assistance:</InputLabel>
         <FormControlLabel
           control={<Checkbox checked={needsSpecialAssistance} onChange={(e) => setNeedsSpecialAssistance(e.target.checked)} />}
+          id = "Special_Assistance"
           style={commonStyles}
         />
       </div>
@@ -162,6 +167,7 @@ function HealthForm() {
         <Select
           className="health-data-input"
           value={walkFrequency}
+          id = "walkFrequency"
           onChange={(e) => setWalkFrequency(e.target.value)}
           style={commonStyles}
         >
@@ -180,6 +186,7 @@ function HealthForm() {
         <TextField
           className="health-data-input"
           type="text"
+          id = "walkDistance"
           value={walkDistance}
           onChange={(e) => setWalkDistance(e.target.value)}
           style={commonStyles}
@@ -194,6 +201,7 @@ function HealthForm() {
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <FormControlLabel
                   control={<Checkbox checked={sportsPracticed.includes(sport)} onChange={() => handleSportSelection(sport)} />}
+                  id = {'${sport}'}
                   label={sport}
                   style={commonStyles}
                 />
@@ -203,6 +211,7 @@ function HealthForm() {
                     <Select
                       className="health-data-input"
                       value={sportsFrequency[sport]}
+                      id={`${sport}_frequency`}
                       onChange={(e) => setSportsFrequency({...sportsFrequency, [sport]: e.target.value})}
                       style={commonStyles}
                     >
@@ -233,7 +242,7 @@ function HealthForm() {
       </div>
 
       <div className="health-data-buttons">
-        <Button variant="outlined" className="save-btn"   style={commonStyles} onClick={handleSaveHealthData}>Save</Button>
+        <Button variant="outlined" className="save-btn" id="save-btn" style={commonStyles} onClick={handleSaveHealthData}>Save</Button>
       </div>
     </div>
   );
