@@ -29,7 +29,7 @@ function MapComponent({ query }) {
 
       const request = {
         query: query,
-        fields: ['name', 'geometry']
+        // fields: ['name', 'geometry']
       };
 
       placesService.textSearch(request, (results, status) => {

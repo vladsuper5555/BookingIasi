@@ -33,6 +33,7 @@ function App() {
         <Route path='/map' element={<Map />} />
         <Route path='/check-auth' />
         <Route path='/logout' />
+        <Route path='/saveHealthForm' />
         <Route path="/attractions" element={<AttractionsPage />} />
         <Route
           path="/attractions/:hotelName"

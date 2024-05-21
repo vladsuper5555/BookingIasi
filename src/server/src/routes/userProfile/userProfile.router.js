@@ -13,6 +13,6 @@ userProfileRouter.post('/login', checkCredentialsAgainstDatabase);
 userProfileRouter.post('/signup', addCredentialsToDatabase);
 userProfileRouter.get('/check-auth', checkCookie);
 userProfileRouter.get('/logout', logout);
-userProfileRouter.get('/handleSaveHealthData', saveHealthData);
+userProfileRouter.post('/saveHealthForm', saveHealthData);
 
 export default userProfileRouter;
