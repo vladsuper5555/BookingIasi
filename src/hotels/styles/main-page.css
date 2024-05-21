@@ -1,10 +1,101 @@
 general-structure{
-overflow-x: hidden;
-padding: 0;
-margin: 0;
-width: 100vw;
-height: auto;
-background-color: #FFFFFF;
-color: var(--font-color);
-font-family: 'Montserrat', sans-serif;
-}
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: auto;
+    background-color: #FFFFFF;
+    color: var(--font-color);
+    font-family: 'Montserrat', sans-serif;
+    }
+    
+    .hotels {
+        font-family: 'Montserrat', sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      
+      .header {
+        text-align: center;
+        background: #f5f5f5;
+        padding: 20px;
+      }
+      
+      .header-image {
+        position: relative;
+        display: inline-block;
+      }
+      
+      .header-image img {
+        width: 100%;
+        max-width: 600px;
+      }
+      
+      .header-info {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        color: black;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      
+      .about, .features, .reviews, .contact {
+        padding: 20px;
+        text-align: center;
+      }
+      
+      .about img, .feature-images img {
+        width: 100%;
+        max-width: 600px;
+        margin-top: 10px;
+      }
+      
+      .feature-images {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+      }
+      
+      .feature-images img {
+        width: 30%;
+        margin: 10px 0;
+      }
+      
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      
+      ul li {
+        margin: 10px 0;
+      }
+      
+      blockquote {
+        font-style: italic;
+        margin: 20px;
+        padding: 10px;
+        border-left: 5px solid #ccc;
+      }
+      
+      address {
+        font-style: normal;
+      }
+      
+      .contact {
+        background-image: url('path-to-contact-background.jpg');
+        background-size: cover;
+        background-position: center;
+        color: black;
+        padding: 40px 20px;
+      }
+      
+    .contact p, .contact address {
+        color: black;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+    
+     h1, h2 , p, li {
+        color: black;
+    }
