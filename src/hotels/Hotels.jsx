@@ -12,47 +12,50 @@ import Feature2 from "./images/hotels/UnireaHotelSpa/pool or spa/pool.jpg";
 import Feature3 from "./images/hotels/UnireaHotelSpa/apartments/app_id_1/rooms/room1/room1.jpg";
 import "./styles/main-page.css";
 
+const Hotels = ({name, checkinTime, checkoutTime, openingHours, priceRange, description, petsAllowed, 
+                parkingFacility, smokingAllowed, event, review, aggregateRating, address, email, 
+                telephone, paymentAccepted, currencyAccepted }) => {
 
-const Hotels = () => {
-//   const [hotelData, setHotelData] = useState(null);
-//   const [error, setError] = useState('');
-//   const navigate = useNavigate();
-//   const hotelName = 'Unirea Hotel & Spa';
+  const [hotelData, setHotelData] = useState([]);
+  const [error, setError] = useState('');
+  const hotelName = 'Unirea Hotel & Spa';
 
-//   useEffect(() => {
-//   const fetchInfoForHotel = async (hotelName) => {
-//     try {
-//       const response = await fetch("http://localhost:5173/api/hotelsinfo",
-//         {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify({ hotelName }),
-//         }
-//     );
-//       if (!response.ok) {
-//         throw new Error("Response was not ok");
-//       }
-//       const data = await response.json();
-//       //console.log(data);
-//       if (data.success) {
-//         setHotelData(data.hotel);
-//       } else {
-//         setError(data.message);
-//       }
-//     } catch (error) {
-//       setError("An error occurred. Please try again later");
-//     }
-//   };
-//   fetchInfoForHotel(hotelName);
-// }, [hotelName]);
+  const fetchInfoForHotel = async (hotelName) => {
+    try {
+      const response = await fetch(
+        "http://localhost:5173/api/hotelsinfo",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ hotelName }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Response was not ok");
+      }
+      const data = await response.json();
+      console.log(data);
+      if (data.success) {
+        setHotelData(data.hotelData);
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      setError("An error occurred. Please try again later");
+    }
+  };
+
+  if (error) {
+    return <div className="error">{error}</div>;
+  }
 
   return (
-  <div className='general-stucture'>       
+  <div className='general-stucture'>      
       <div className="hotels">
         <header className="header">
-          <h1>Hotel Unirea & Spa</h1>
+          <h1>{hotelData.name}</h1>
           <div className='subtitle'>
           <div className="horizontal-line"></div> Hotel <div className="horizontal-line"></div>
           </div>

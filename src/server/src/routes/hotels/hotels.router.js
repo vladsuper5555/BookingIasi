@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { getHotelsNames} from './hotels.controller.js';
+import { getHotelsNamesFromDatabase,getInformationAboutHotel} from './hotels.controller.js';
 
 const hotelsRouter = new Router();
 
-hotelsRouter.post('/hotelsnames', getHotelsNames);
+hotelsRouter.post('/hotelsnames', getHotelsNamesFromDatabase);
 hotelsRouter.post('/hotelsinfo', getInformationAboutHotel);
 
 export default hotelsRouter;
