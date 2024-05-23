@@ -4,7 +4,7 @@ var config = {
     host: "localhost",
     user: "root",
     password: "",
-    database: "bookingiasi",
+    database: "BookingIasi",
 };
 
 /*

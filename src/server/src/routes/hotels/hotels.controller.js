@@ -5,7 +5,7 @@ async function getHotelsNamesFromDatabase(req, res) {
         const sqlQuery = `SELECT name from hotelGeneral`;
         const hotels = await runQueryOnDatabaseAndFetchEntireResult(sqlQuery);
         console.log(hotels);
-        const hotelNames = hotels.map(hotel => hotel.Nume_hotel);
+        const hotelNames = hotels.map(hotel => hotel.name);
         res.status(200).send({ success: true, hotelNames });
     } catch (error) {
         console.error('Error on hotel names: ', error);
@@ -21,13 +21,8 @@ async function getInformationAboutHotel(req, res) {
     const hotelName = req.body.hotelName;
     try {
         const sqlQuery = 
-            `SELECT name, checkinTime, checkoutTime, openingHours, priceRange, description, petsAllowed, parkingFacility, smokingAllowed, event, review, aggregateRating, address, email, telephone, paymentAccepted, currencyAccepted 
-            FROM hotelGeneral
-            WHERE id = (
-                SELECT id 
-                FROM hotelGeneral 
-                WHERE name = '${hotelName}'
-            )`;
+            `SELECT name, checkinTime, checkoutTime, openingHours, priceRange, description, petsAllowed, parkingFacility, smokingAllowed, event, review, aggregateRating, address, email, telephone, paymentAccepted, currenciesAccepted 
+            FROM hotelGeneral WHERE name = '${hotelName}'`;
         
             const info = await runQueryOnDatabaseAndFetchEntireResult(sqlQuery);
             res.status(200).json({ success: true, info });

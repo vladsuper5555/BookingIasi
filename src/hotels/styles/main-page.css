@@ -8,6 +8,10 @@ general-structure{
     color: var(--font-color);
     font-family: 'Montserrat', sans-serif;
     }
+
+    .smallerSize{
+      width: 20px;
+    }
     
     .hotels {
         font-family: 'Montserrat', sans-serif;
@@ -162,7 +166,7 @@ general-structure{
     margin-left: 50%; 
   }
 
-  .contactBox p,address{
+  .contactBox p,.address{
     font-size: 2em;
     box-shadow: none;
   }

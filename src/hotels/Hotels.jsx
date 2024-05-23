@@ -1,26 +1,41 @@
 // MainPage.jsx
 import React from 'react';
 import { Link, redirect } from 'react-router-dom';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Button from '@mui/material/Button';
 import Mesaj from './Mesaj';
-import PrincipalImage from "./images/hotels/UnireaHotelSpa/principal.jpg";
-import Principal2 from "./images/hotels/UnireaHotelSpa/principal2.jpg";
-import ContactImage from "./images/hotels/UnireaHotelSpa/iasi.jpg";
-import Feature1 from "./images/hotels/UnireaHotelSpa/event rooms/restaurant1.jpg";
-import Feature2 from "./images/hotels/UnireaHotelSpa/pool or spa/pool.jpg";
-import Feature3 from "./images/hotels/UnireaHotelSpa/apartments/app_id_1/rooms/room1/room1.jpg";
+import PrincipalImageUnirea from "./images/hotels/UnireaHotelSpa/principal.jpg";
+import PrincipalImagePrestige from "./images/hotels/ApartamentHotelPrestige/principal.jpg";
+import Principal2Unirea from "./images/hotels/UnireaHotelSpa/principal2.jpg";
+import ContactImageUnirea from "./images/hotels/UnireaHotelSpa/iasi.jpg";
+import Feature1Unirea from "./images/hotels/UnireaHotelSpa/event rooms/restaurant1.jpg";
+import Feature2Unirea from "./images/hotels/UnireaHotelSpa/pool or spa/pool.jpg";
+import Feature3Unirea from "./images/hotels/UnireaHotelSpa/apartments/app_id_1/rooms/room1/room1.jpg";
+import Feature1Prestige from "./images/hotels/ApartamentHotelPrestige/apartments/app_id_1/rooms/room1/dormitor.jpg";
+import Feature2Prestige from "./images/hotels/ApartamentHotelPrestige/Kitchen/bucatarie.jpg";
+import Feature3Prestige from "./images/hotels/ApartamentHotelPrestige/apartments/app_id_2/bathroom/baie.jpg";
+import No_parking from "./images/Icons/features/no_parking_lot.svg";
+import Parking from "./images/Icons/features/parking_lot.svg";
+import No_pets from "./images/Icons/features/no_pets.svg";
+import Pets from "./images/Icons/features/pets.svg";
+import No_smoking from "./images/Icons/features/no_smoking.svg";
+import Smoking from "./images/Icons/features/smoking.svg";
+import event_allowed from "./images/Icons/features/events.svg";
+import contact_cash_or_card from "./images/Icons/contact/cash_or_card.svg";
+import contact_email from "./images/Icons/contact/email.svg";
+import contact_location from "./images/Icons/contact/location.svg";
+import contact_telephone from "./images/Icons/contact/telephone.svg";
 import "./styles/main-page.css";
 
-const Hotels = ({name, checkinTime, checkoutTime, openingHours, priceRange, description, petsAllowed, 
-                parkingFacility, smokingAllowed, event, review, aggregateRating, address, email, 
-                telephone, paymentAccepted, currencyAccepted }) => {
+const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, description, petsAllowed,
+  parkingFacility, smokingAllowed, event, review, aggregateRating, address, email,
+  telephone, paymentAccepted, currenciesAccepted, amenityFeature }) => {
 
   const [hotelData, setHotelData] = useState([]);
   const [error, setError] = useState('');
-  const hotelName = 'Unirea Hotel & Spa';
+  const hotelName = 'Prestige Hotel';
 
-  const fetchInfoForHotel = async (hotelName) => {
+  const fetchInfoForHotel = async () => {
     try {
       const response = await fetch(
         "http://localhost:5173/api/hotelsinfo",
@@ -38,7 +53,7 @@ const Hotels = ({name, checkinTime, checkoutTime, openingHours, priceRange, desc
       const data = await response.json();
       console.log(data);
       if (data.success) {
-        setHotelData(data.hotelData);
+        setHotelData(data.info[0]);
       } else {
         setError(data.message);
       }
@@ -47,100 +62,176 @@ const Hotels = ({name, checkinTime, checkoutTime, openingHours, priceRange, desc
     }
   };
 
+  useEffect(() => {
+    if (hotelName) {
+      fetchInfoForHotel(hotelName);
+    }
+  }, []);
+
   if (error) {
     return <div className="error">{error}</div>;
   }
 
   return (
-  <div className='general-stucture'>      
+    <div className='general-stucture'>
       <div className="hotels">
         <header className="header">
-          <h1>{hotelData.name}</h1>
+          <h1>{hotelData?.name}</h1>
           <div className='subtitle'>
-          <div className="horizontal-line"></div> Hotel <div className="horizontal-line"></div>
+            <div className="horizontal-line"></div> Hotel <div className="horizontal-line"></div>
           </div>
           <div className="header-image">
-            <img src={PrincipalImage} alt="Unirea Hotel & Spa" />
-          <div className="header-info">
+            {hotelData?.name === 'Unirea Hotel & Spa' ? (
+              <img src={PrincipalImageUnirea} alt="Unirea Hotel & Spa" />
+            ) : (
+              <img src={PrincipalImagePrestige} alt="Prestige Hotel" />
+            )}
+
+            <div className="header-info">
               <div className="sectiuneInfo">
-              <p><div className="inBold">Check-in:</div> 14:00 PM</p>
-              <p><div className="inBold">Check-out:</div> 12:00 PM</p>
+                <p><span className="inBold">Check-in:</span> {hotelData?.checkinTime}PM</p>
+                <p><span className="inBold">Check-out:</span> {hotelData?.checkoutTime}PM</p>
               </div>
               <div className='vertical-line'></div>
               <div className="sectiuneInfo">
-              <p><div className="inBold">Opening hours:</div> 07:00 AM</p>
+                <p><span className="inBold">Opening hours:</span> {hotelData?.openingHours}</p>
               </div>
               <div className='vertical-line'></div>
               <div className="sectiuneInfo">
-              <p><div className="inBold">Price:</div> €€€€</p>
-           </div>
-           </div>
+                <p><span className="inBold">Price:</span>{hotelData?.priceRange}€</p>
+              </div>
+            </div>
           </div>
         </header>
-      
+
         <section className="about">
           <div className="titluSectiune">About</div>
           <div className="continut">
-          <div className="sectiuneText">
-            Unirea Hotel & Spa is located in Piata Unirii, in the center of Iași, a few steps from 
-            Alexandru Ioan Cuza University, and offers free access to an indoor pool, a hot tub 
-            and a fitness center. Copou Park, where Eminescu's lime tree is located, is a 10-minute walk away.
-          </div>
-          <div className="sectiuneImagine">
-          <img src={Principal2} alt="Unirea Hotel & Spa - about" />
-          </div>
+            <div className="sectiuneText">
+              {hotelData?.description}
+            </div>
+            <div className="sectiuneImagine">
+              <img src={Principal2Unirea} alt="Unirea Hotel & Spa - about" />
+            </div>
           </div>
         </section>
-      
+
         <section className="features">
-        <div className="titluSectiune">Features</div>
+          <div className="titluSectiune">Features</div>
           <div className="feature-images">
-            <img src={Feature1} alt="Feature 1" />
-            <img src={Feature2} alt="Feature 2" />
-            <img src={Feature3} alt="Feature 3" />
+            {hotelData?.name === 'Unirea Hotel & Spa' ? (
+              <img src={Feature1Unirea} alt="Unirea Hotel & Spa" />
+            ) : (
+              <img src={Feature1Prestige} alt="Prestige Hotel" />
+            )}
+            {hotelData?.name === 'Unirea Hotel & Spa' ? (
+              <img src={Feature2Unirea} alt="Unirea Hotel & Spa" />
+            ) : (
+              <img src={Feature2Prestige} alt="Prestige Hotel" />
+            )}
+            {hotelData?.name === 'Unirea Hotel & Spa' ? (
+              <img src={Feature3Unirea} alt="Unirea Hotel & Spa" />
+            ) : (
+              <img src={Feature3Prestige} alt="Prestige Hotel" />
+            )}
           </div>
           <div className="continut">
-          <div className="sectiuneText">
-            <div className="oneUnderAnother">
-            The elegant rooms at Unirea Hotel & Spa are equipped with a flat-screen TV with 
-            international channels, free access to WiFi, bathrobes and slippers are available.
+            <div className="sectiuneText">
+              <div className="oneUnderAnother">
+                {hotelData?.amenityFeature}
 
-            <a href="http://localhost:5173/Hotels">Click to see the hotel rooms 3D!</a>
-            <a href="http://localhost:5173/Hotels">Click to see attractions around!</a>
+                <a href="http://localhost:5173/Hotels">Click to see the hotel rooms 3D!</a>
+                <a href="http://localhost:5173/Hotels">Click to see attractions around!</a>
+              </div>
             </div>
-            </div>
-          <div className="featuresBox">
-            <div>No pets allowed</div>
-            <div>Parking lot available</div>
-            <div>Smoking is not allowed</div>
-            <div>Planning events</div>
+            <div className="featuresBox">
+              <div>
+                {hotelData?.petsAllowed ?
+                  (<>
+                    <img src={Pets} alt="image" className='smallerSize' />
+                    Pets allowed
+                  </>
+                  ) : (
+                    <>
+                      <img src={No_pets} alt="image" className='smallerSize' />
+                      No pets allowed
+                    </>
+                  )}
+              </div>
+              <div>
+                {hotelData?.parkingFacility ? (
+                  <>
+                    <img src={Parking} alt="parking allowed" className='smallerSize' />
+                    Parking lot available
+                  </>
+                ) : (
+                  <>
+                    <img src={No_parking} alt="no parking" className='smallerSize' />
+                    Parking lot not available
+                  </>
+                )}
+              </div>
+              <div>
+                {hotelData?.smokingAllowed ? (
+                  <>
+                  <img src={Smoking} alt="image" className='smallerSize' />
+                  Smoking is allowed
+                  </>
+                  )
+                  : (
+                    <>
+                    <img src={No_smoking} alt="image" className='smallerSize' />
+                    Smoking is not allowed
+                    </>
+                  )}
+              </div>
+              <div>
+              <>
+                <img src={event_allowed} alt="image" className='smallerSize' />
+                Events allowed
+              </>
+              </div>
             </div>
           </div>
         </section>
-      
+
         <section className="reviews">
-        <div className="upperSection">
-         <div className="titluSectiune">Reviews</div>
-         <div className="overallRating">Overall rating: 4.7 ★</div>
-         </div>
+          <div className="upperSection">
+            <div className="titluSectiune">Reviews</div>
+            <div className="overallRating">Overall rating: {hotelData?.aggregateRating} ★</div>
+          </div>
           <blockquote>
-            <div className="recenzie">Everything perfect! Very rich, diversified breakfast! Swimming pool with hot water and jacuzzi! Polite staff. Grade 10! Our expectations were exceeded! Free parking!</div>
+            <div className="recenzie">{hotelData?.review}</div>
           </blockquote>
         </section>
-      
+
         <section className="contact">
-          <img src={ContactImage} alt="imagine din interior"></img>
+          <img src={ContactImageUnirea} alt="imagine din interior"></img>
           <div className="contactBox">
-        <div className="titluSectiune">Contact Us</div>
-          <p>
-            Discover the pleasure of a perfect stay in a hotel located right in the heart of Iași.
-          </p>
-          <address>
-            Piata Unirii 5, Iași 700056<br />
-            <a href="mailto:rezervari@hotelunirea.ro">rezervari@hotelunirea.ro</a><br />
-            +40-232-205000<br />
-            Cash and card accepted
-          </address>
+            <div className="titluSectiune">Contact Us</div>
+            <p>
+              Discover the pleasure of a perfect stay in a hotel located right in the heart of Iași.
+            </p>
+
+            <address>
+              <div>
+            <img src={contact_location} alt="image" className='smallerSize' />
+              {hotelData?.address}<br />
+              </div>
+              <div>
+              <a href="mailto:">
+              <img src={contact_email} alt="image" className='smallerSize' />
+                {hotelData?.email}</a><br />
+                </div>
+                <div>
+                <img src={contact_telephone} alt="image" className='smallerSize' />
+              {hotelData?.telephone}<br />
+              </div>
+              <div>
+              <img src={contact_cash_or_card} alt="image" className='smallerSize' />
+              Currency accepted: {hotelData?.currenciesAccepted}
+              </div>
+            </address>
           </div>
         </section>
       </div>
@@ -149,3 +240,4 @@ const Hotels = ({name, checkinTime, checkoutTime, openingHours, priceRange, desc
 }
 
 export default Hotels;
+
