@@ -1,0 +1,42 @@
+.container-hotel-card {
+    display: flex;
+    width: 1200px;
+    text-align: left;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-left: 450px;
+}
+
+.image-hotel-container {
+    margin-right: 50px;
+}
+
+.image-hotel {
+    width: 450px;
+    height: 250px;
+}
+
+.hotel-card-name {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.hotel-card-description {
+    font-size: 1.2rem;
+}
+
+.hotel-to-attractions {
+    color: var(--font-color);
+    background-color: transparent;
+    border: 1px solid var(--font-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.hotel-to-attractions:hover {
+    color: #F5F5F5;
+    background-color: var(--font-color);
+}
+
+.hotel-arrow-button {
+  
+}

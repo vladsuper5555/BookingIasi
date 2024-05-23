@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "./styles/main-page-style.css";
+import { useNavigate } from "react-router-dom";
+import styles from "./styles/main-page-style.module.css";
 import photoIasi from "./assets/svg/photo-attractions-iasi.png";
 import "./styles/custom-variables.css";
+import HotelCard from "./components/HotelCard";
+
+import hotelData from "./utils/hotelData";
+import { Hotel } from "@mui/icons-material";
 
 const AttractionsPage = () => {
   const [hotelNames, setHotelNames] = useState([]);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
   const fetchAttractionsForHotel = async (hotelName) => {
     try {
       const response = await fetch(
@@ -62,30 +67,24 @@ const AttractionsPage = () => {
     fetchAndGenerateHotelButtons();
   }, []);
 
-  // Function to chunk array into smaller arrays
-  const chunkArray = (arr, size) => {
-    return Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
-      arr.slice(i * size, i * size + size)
-    );
-  };
-
   return (
-    <div className="main-body-attractions">
-      <div className="main-container-info-attractions">
-        <div className="main-info-hotels-attr">
-          <div className="header-container-attr">
-            <div className="line-attr"> </div>
-            <h3 className="header-title-attr">Iasi</h3>
-            <div className="line-attr"> </div>
+    <div className={styles["main-body-attractions"]}>
+      <div className={styles["main-container-info-attractions"]}>
+        <div className={styles["main-info-hotels-attr"]}>
+          <div className={styles["header-container-attr"]}>
+            <div className={styles["line-attr"]}></div>
+            <h3 className={styles["header-title-attr"]}>Iasi</h3>
+            <div className={styles["line-attr"]}></div>
           </div>
-          <div className="hotels-title-container">
-            <h1 className="hotels-title-attr">HOTELS</h1>
+          <div className={styles["hotels-title-container"]}>
+            <h1 className={styles["hotels-title-attr"]}>HOTELS</h1>
           </div>
-          <div className="description-hotel-attr">
+          <div className={styles["description-hotel-attr"]}>
             <p>
               Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
               commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-              penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+              penatibus et magnis dis parturient montes, nasc
+              ur ridiculus mus.
             </p>
           </div>
         </div>
@@ -93,26 +92,23 @@ const AttractionsPage = () => {
           <img
             src={photoIasi}
             alt="palace of culture iasi"
-            className="main-photo-attr"
+            className={styles["main-photo-attr"]}
           />
         </div>
       </div>
-      <div className="grid-container">
+      <div className={styles["grid-container"]}>
         {error && <p>{error}</p>}
         {hotelNames.length > 0 && (
-          <div className="grid">
-            {chunkArray(hotelNames, 4).map((row, rowIndex) => (
-              <div key={rowIndex} className="row">
-                {row.map((name, colIndex) => (
-                  <div key={colIndex} className="col">
-                    <button
-                      onClick={() => fetchAttractionsForHotel(name)}
-                      className="button-to-attractions"
-                    >
-                      {name}
-                    </button>
-                  </div>
-                ))}
+          <div className={styles["grid"]}>
+            {hotelNames.map((name, index) => (
+              <div key={index} className={styles["row"]}>
+                <div className={styles["col"]}>
+                  <HotelCard 
+                    hotelName={name}
+                    hotelDescription={hotelData[index].description}
+                    hotelPhoto={hotelData[index].image}
+                  />
+                </div>
               </div>
             ))}
           </div>
