@@ -4,41 +4,13 @@ import styles from "./styles/main-page-style.module.css";
 import photoIasi from "./assets/svg/photo-attractions-iasi.png";
 import "./styles/custom-variables.css";
 import HotelCard from "./components/HotelCard";
-
 import hotelData from "./utils/hotelData";
-import { Hotel } from "@mui/icons-material";
 
 const AttractionsPage = () => {
   const [hotelNames, setHotelNames] = useState([]);
   const [error, setError] = useState("");
+  const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
-
-  const fetchAttractionsForHotel = async (hotelName) => {
-    try {
-      const response = await fetch(
-        "http://localhost:5173/api/attractionshotel",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ hotelName }),
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Response was not ok");
-      }
-      const data = await response.json();
-      console.log(data);
-      if (data.success) {
-        navigate(`/attractions/${hotelName}`);
-      } else {
-        setError(data.message);
-      }
-    } catch (error) {
-      setError("An error occurred. Please try again later");
-    }
-  };
 
   const fetchAndGenerateHotelButtons = async () => {
     try {
@@ -67,6 +39,41 @@ const AttractionsPage = () => {
     fetchAndGenerateHotelButtons();
   }, []);
 
+  const handleSearchInputChange = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  const filteredHotelNames = hotelNames.filter((name) =>
+    name.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
+  const handleHotelClick = async (hotelName) => {
+    try {
+      const response = await fetch(
+        "http://localhost:5173/api/attractionshotel",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ hotelName }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Response was not ok");
+      }
+      const data = await response.json();
+      console.log(data);
+      if (data.success) {
+        navigate(`/attractions/${hotelName}`);
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      setError("An error occurred. Please try again later");
+    }
+  };
+
   return (
     <div className={styles["main-body-attractions"]}>
       <div className={styles["main-container-info-attractions"]}>
@@ -81,10 +88,9 @@ const AttractionsPage = () => {
           </div>
           <div className={styles["description-hotel-attr"]}>
             <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-              commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-              penatibus et magnis dis parturient montes, nasc
-              ur ridiculus mus.
+              Explore the enchanting city of Iasi, Romania, where history meets
+              modernity. Discover its rich cultural heritage, stunning
+              architecture, and vibrant atmosphere.
             </p>
           </div>
         </div>
@@ -96,21 +102,46 @@ const AttractionsPage = () => {
           />
         </div>
       </div>
+      <div className={styles["container-subtitle-hotel"]}>
+        <div>
+          <h2 className={styles["subtitle-hotel"]}>All hotels</h2>
+        </div>
+        <div className={styles["search-bar-container"]}>
+          <input
+            type="text"
+            value={searchInput}
+            onChange={handleSearchInputChange}
+            placeholder=" 🔍 Search by hotel name"
+            className={styles["search-input"]}
+          />
+        </div>
+      </div>
       <div className={styles["grid-container"]}>
         {error && <p>{error}</p>}
-        {hotelNames.length > 0 && (
+        {filteredHotelNames.length > 0 && (
           <div className={styles["grid"]}>
-            {hotelNames.map((name, index) => (
-              <div key={index} className={styles["row"]}>
-                <div className={styles["col"]}>
-                  <HotelCard 
-                    hotelName={name}
-                    hotelDescription={hotelData[index].description}
-                    hotelPhoto={hotelData[index].image}
-                  />
+            {filteredHotelNames.map((name, index) => {
+              const filteredHotel = hotelData.find(
+                (hotel) => hotel.name === name
+              );
+              return (
+                <div
+                  key={index}
+                  className={styles["row"]}
+                  onClick={() => handleHotelClick(name)}
+                >
+                  <div className={styles["col"]}>
+                    <HotelCard
+                      hotelName={name}
+                      hotelDescription={
+                        filteredHotel ? filteredHotel.description : ""
+                      }
+                      hotelPhoto={filteredHotel ? filteredHotel.image : ""}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
