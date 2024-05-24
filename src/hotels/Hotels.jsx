@@ -78,7 +78,9 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
         <header className="header">
           <h1>{hotelData?.name}</h1>
           <div className='subtitle'>
-            <div className="horizontal-line"></div> Hotel <div className="horizontal-line"></div>
+             <div className="horizontal-line"></div>
+             <div className="subtitle-text">Hotel</div>
+             <div className="horizontal-line"></div>
           </div>
           <div className="header-image">
             {hotelData?.name === 'Unirea Hotel & Spa' ? (
@@ -195,7 +197,7 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
           </div>
         </section>
 
-        <section className="reviews">
+        <section id="section_Review" className="reviews">
           <div className="upperSection">
             <div className="titluSectiune">Reviews</div>
             <div className="overallRating">Overall rating: {hotelData?.aggregateRating} ★</div>
@@ -206,38 +208,36 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
         </section>
 
         <section className="contact">
-          <img src={ContactImageUnirea} alt="imagine din interior"></img>
-          <div className="contactBox">
-            <div className="titluSectiune">Contact Us</div>
-            <p>
-              Discover the pleasure of a perfect stay in a hotel located right in the heart of Iași.
-            </p>
+  <div className="contact-content">
+    <img src={ContactImageUnirea} alt="imagine din interior" className="contact-image" />
+    <div className="contactBox">
+      <div className="titluSectiune">Contact Us</div>
+      <p>
+        Discover the pleasure of a perfect stay in a hotel located right in the heart of Iași.
+      </p>
 
-            <address>
-              <div>
-            <img src={contact_location} alt="image" className='smallerSize' />
-              {hotelData?.address}<br />
-              </div>
-              <div>
-              <a href="mailto:">
-              <img src={contact_email} alt="image" className='smallerSize' />
-                {hotelData?.email}</a><br />
-                </div>
-                <div>
-                <img src={contact_telephone} alt="image" className='smallerSize' />
-              {hotelData?.telephone}<br />
-              </div>
-              <div>
-              <img src={contact_cash_or_card} alt="image" className='smallerSize' />
-              Currency accepted: {hotelData?.currenciesAccepted}
-              </div>
-            </address>
-          </div>
-        </section>
+      <address className="addressBox">
+        <div>
+          <img src={contact_location} alt="image" className='smallerSize' />{hotelData?.address}
+        </div>
+        <div>
+          <img src={contact_email} alt="image" className='smallerSize' />{hotelData?.email}
+        </div>
+        <div>
+          <img src={contact_telephone} alt="image" className='smallerSize' />{hotelData?.telephone}
+        </div>
+        <div>
+          <img src={contact_cash_or_card} alt="image" className='smallerSize' />Currency accepted: {hotelData?.currenciesAccepted}
+        </div>
+      </address>
+    </div>
+  </div>
+</section>
+
+
       </div>
     </div>
   );
 }
 
 export default Hotels;
-

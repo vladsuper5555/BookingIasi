@@ -1,238 +1,392 @@
-general-structure{
-    overflow-x: hidden;
-    padding: 0;
-    margin: 0;
-    width: 100vw;
-    height: auto;
-    background-color: #F5F5F5;
-    color: var(--font-color);
-    font-family: 'Montserrat', sans-serif;
-    }
+:root {
+  --font-color: #000;
+  --background-color: #f5f5f5;
+}
 
-    .smallerSize{
-      width: 20px;
-    }
-    
-    .hotels {
-        font-family: 'Montserrat', sans-serif;
-        margin: 0;
-        padding: 0;
-      }
-      .titluSectiune{
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 900; /* Bold weight */
-        font-size: 5em;
-      }
-      .continut{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
-      .sectiuneText{
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400; /* Bold weight */
-        font-size: 2.5em;
-      }
-      .header {
-        text-align: center;
-        background: #f5f5f5;
-        padding: 50px;
-      }
-      .header h1{
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 900; /* Bold weight */
-        font-size: 8em; /* Adjust the size as needed */
-      }
-      
-      .header-image { /*details from the main picture*/
-        position: relative;
-        display: inline-block;
-        width: 70%;
-      }
-      
-      .header-image img {
-        width: 100%;
-        border-radius: 15px;
-      }
-      
-      .header-info {
-        position: absolute;
-        text-size-adjust: 50%;
-        bottom: -5px;
-        left: 10px;
-        right: 10px;
-        background: white;
-        color: black;
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        padding: 10px;
-        border-radius: 15px;
-        display: flex;
-        align-items: center;
-      }
-      
-      .sectiuneInfo{
-        align-items: center;
-        -ms-flex-align: center;
-      }
-      .inBold{
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 800; 
-        font-size: 2em;
-      }
-      
-      .sectiuneText a{
-          font-family: 'Montserrat', sans-serif;
-          font-weight: 400; 
-          font-size: 0.5em;
-          color: black;
-          padding: 3%;
-          text-decoration: underline; /* Underline the text */
-      
-      }
-      .overallRating{
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 600; /* Bold weight */
-        font-size: 3em;
-        padding: 5%;
-      }
-      .upperSection{
-        display: flex;
-        align-items: center;
-      }
-      .recenzie{
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400; /* Bold weight */
-        font-size: 2em;
-        padding: 2%;
-      }
+.general-structure {
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: auto;
+  background-color: var(--background-color);
+  color: var(--font-color);
+  font-family: 'Montserrat', sans-serif;
+}
 
-      .oneUnderAnother{
-        display: flex;
-        flex-direction: column;
-      }
+.smallerSize {
+  width: 20px;
+}
 
-      .vertical-line {
-        height: 100px; 
-        border-left: 1px solid black; 
-        margin: 0 auto; 
-    }
+.hotels {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
-    .subtitle{
-      display: flex;
-      align-items: center;
-      max-width: 200px;
-      margin-left: 20%;
-    }
+.titluSectiune {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900; /* Bold weight */
+  font-size: 2.5em; /* Adjusted for better scaling */
+  margin-bottom: 20px;
+}
 
-    .horizontal-line {
-      width: 50px; 
-      border-top: 1px solid black; 
-      margin: 0 auto; 
+.continut {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.sectiuneText {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400; /* Regular weight */
+  font-size: 1.25em; /* Adjusted for better scaling */
+  align-self: center;
+}
+
+.header {
+  text-align: center;
+  background: var(--background-color);
+  padding: 20px;
+}
+
+.header h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900; /* Bold weight */
+  font-size: 5em; /* Adjusted for better scaling */
+}
+
+.header-image {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.header-image img {
+  width: 100%;
+  border-radius: 15px;
+}
+
+.header-info {
+  position: absolute;
+  text-size-adjust: 50%;
+  bottom: -5px;
+  left: 10px;
+  right: 10px;
+  background: white;
+  color: black;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  /*flex-direction: column;
+  align-items: flex-start;*/
+}
+
+.sectiuneInfo {
+  align-items: center;
+  -ms-flex-align:center;
+}
+
+.inBold {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800; 
+  font-size: 1.5em; /* Adjusted for better scaling */
+}
+
+.sectiuneText a {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400; 
+  font-size: 0.875em; /* Adjusted for better scaling */
+  color: black;
+  padding: 3%;
+  text-decoration: underline;
+}
+
+.overallRating {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600; /* Bold weight */
+  font-size: 1.5em; /* Adjusted for better scaling */
+  padding: 5%;
+}
+
+.upperSection {
+  display: flex;
+  align-items: center;
+}
+
+.recenzie {
+  text-align: center; /* Aliniază textul pe centru */
+  font-family: 'Montserrat', sans-serif; /* Utilizează fontul 'Montserrat' */
+  font-weight: 400; /* Greutatea normală a fontului */
+  font-size: 1em; /* Dimensiunea normală a fontului */
+  padding: 2%; /* Adaugă un spațiu uniform în jurul textului */
+}
+
+
+.oneUnderAnother {
+  display: flex;
+  flex-direction: column;
+}
+
+.vertical-line {
+  height: 100px; 
+  border-left: 1px solid black; 
+  margin: 0 auto; 
+}
+
+.subtitle {
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  margin: 20px 0;
+}
+
+.horizontal-line {
+  width: 100%;
+  height: 1px;
+  background-color: #000; /* Poți schimba culoarea după cum dorești */
+  margin: 0 10px; /* Spațiu între linie și text */
+}
+
+.subtitle-text {
+  font-size: 12px; /* Dimensiunea textului mic */
+  white-space: nowrap; /* Previne textul să fie împărțit pe mai multe linii */
+  padding: 0 10px; 
+  justify-content: flex-start;/* Spațiu între text și linii */
+}
+
+
+
+
+.featuresBox {
+  background-color: white;
+  color: black;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400; 
+  font-size: 1em; /* Adjusted for better scaling */
+}
+
+.contactBox {
+  background-color: #f0f0f0;
+  color: black;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400; 
+  font-size: 1em; /* Adjusted for better scaling */
+}
+
+.contactBox p, .contactBox address {
+  font-size: 1em;
+  box-shadow: none;
+}
+
+.sectiuneImagine img {
+  width: 100%;
+  border-radius: 15px;
+  height: auto;
+}
+
+.about, .features, .reviews, .contact {
+  padding: 20px;
+  text-align: center;
+}
+
+.about img, .feature-images img {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 10px;
+}
+
+.feature-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.feature-images img {
+  width: 30%;
+  margin: 10px 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  margin: 10px 0;
+}
+
+blockquote {
+  font-style: italic;
+  margin: 20px;
+  padding: 10px;
+  border-left: 5px solid #ccc;
+}
+
+address {
+  font-style: normal;
+}
+
+.contact {
+  padding: 40px 20px;
+  color: black;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  position: relative; /* Make the contact section relative */
+}
+
+.contact-content {
+  position: relative; /* This ensures the absolute positioning of the contactBox is relative to this container */
+}
+
+.contact-image {
+  width: 100%;
+  border-radius: 15px;
+}
+
+.contactBox {
+  position: absolute; /* Position the contact box absolutely */
+  top: 20px; /* Adjust as needed */
+  right: 20px; /* Adjust as needed */
+  background-color: #f0f0f0;
+  color: black;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 20px;
+  max-width: 300px; /* Adjust width as needed */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 1em;
+  z-index: 10; /* Ensure the contact box is above the image */
+}
+
+.contactBox p, .contactBox address {
+  font-size: 1em;
+  box-shadow: none;
+}
+
+h1, h2, p, li {
+  color: black;
+}
+
+/* Media Queries for Responsive Design */
+
+@media (max-width: 1200px) {
+  .header h1 {
+    font-size: 2.5em;
   }
 
-  .featuresBox{
-        text-size-adjust: 50%;
-        background-color: white;
-        color: black;
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        padding: 5px;
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        width: 80%;
-        height: 60%;
-        margin: 50px;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400; 
-        font-size: 2em;   
-  }
-
-  .contactBox{
-    text-size-adjust: 50%;
-    background-color: f0f0f0;
-    position:absolute;
-    color: black;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    padding: 5px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 40%;
-    height: 80%;
-    margin: 50px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400; 
-    margin-left: 50%; 
-  }
-
-  .contactBox p,.address{
+  .titluSectiune {
     font-size: 2em;
-    box-shadow: none;
   }
 
-  .sectiuneImagine img{
-    width: 50%;
-    border-radius: 15px;
-    height: 100%;
-    margin-right: -10px;
+  .sectiuneText {
+    font-size: 1em;
   }
-      
-      .about, .features, .reviews, .contact {
-        padding: 20px;
-        text-align: center;
-      }
-      
-      .about img, .feature-images img {
-        width: 100%;
-        max-width: 600px;
-        margin-top: 10px;
-      }
-      
-      .feature-images {
-        display: flex;
-        flex-wrap: wrap;
-        margin-left: 10%;
-        margin-right: 10%;;
-      }
-      
-      .feature-images img {
-        width: 30%;
-        margin: 10px 0;
-      }
-      
-      ul {
-        list-style-type: none;
-        padding: 0;
-      }
-      
-      ul li {
-        margin: 10px 0;
-      }
-      
-      blockquote {
-        font-style: italic;
-        margin: 20px;
-        padding: 10px;
-        border-left: 5px solid #ccc;
-      }
-      
-      address {
-        font-style: normal;
-      }
-      
-      .contact {
-        background-image: url('path-to-contact-background.jpg');
-        background-size: cover;
-        background-position: center;
-        color: black;
-        padding: 40px 20px;
-      }
 
-      .contact img{
-        width: 100%;
-      }
-    
-     h1, h2 , p, li {
-        color: black;
-    }
+  .overallRating {
+    font-size: 1.25em;
+  }
+}
+
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 2em;
+  }
+
+  .titluSectiune {
+    font-size: 1.75em;
+  }
+
+  .sectiuneText {
+    font-size: 0.875em;
+  }
+
+  .overallRating {
+    font-size: 1em;
+  }
+
+  .continut {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .featuresBox, .contactBox {
+    width: 100%;
+  }
+}
+
+.addressBox {
+  /*background-color: white;*/
+  color: black;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400; 
+  font-size: 1em; /* Adjusted for better scaling */
+}
+
+.addressBox div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.addressBox div img {
+  width: 1em; /* Setează o lățime fixă de 1 em */
+  height: 1em; /* Asigură ca înălțimea să fie aceeași cu lățimea pentru a face imaginea pătrată */
+  margin-right: 0.5em; /* Adaugă un spațiu între imagine și text */
+}
+
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.5em;
+  }
+
+  .titluSectiune {
+    font-size: 1.5em;
+  }
+
+  .sectiuneText {
+    font-size: 0.75em;
+  }
+
+  .overallRating {
+    font-size: 0.875em;
+  }
+
+  .featuresBox, .contactBox {
+    font-size: 0.75em;
+  }
+
+  .sectiuneImagine img {
+    width: 100%;
+  }
+}
