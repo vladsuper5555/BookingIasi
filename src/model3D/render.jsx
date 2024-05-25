@@ -89,6 +89,7 @@ const MainPage = ({ url }) => {
                 sceneId="Start"
                 config={panoConfig.config}
                 onScenechange={handleViewerLoad}
+                style={{ width: '60vw', height: '40vw' , borderRadius: '20px'}}
             />
         </div>
     );
