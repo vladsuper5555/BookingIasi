@@ -50,7 +50,7 @@ const HotelCard = ({ hotelName, hotelDescription, hotelPhoto }) => {
         <div>
           <button onClick={() => fetchAttractionsForHotel(hotelName)}
           className={hotelCardStyle["hotel-to-attractions"]}>
-            Details <span className={hotelCardStyle["hotel-arrow-button"]}><img src={arrowFor} alt="arrow" /></span>
+            Details <span><img src={arrowFor} alt="arrow" className={hotelCardStyle["hotel-arrow-button"]}/></span>
           </button>
         </div>
       </div>

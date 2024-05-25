@@ -1,14 +1,18 @@
 .category-card-item {
     display: flex;
     width: 30rem;
+    margin-left: 100px;
     justify-content: space-between;
     cursor: pointer;
 }
 
-
 .main-container-category {
     margin-top: 50px;
+    margin-right: 200px;
     overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .attractions-list {

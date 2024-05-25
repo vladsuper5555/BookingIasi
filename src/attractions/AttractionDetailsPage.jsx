@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import CategoryCard from "./components/CategoryCard";
-import MapComponent from "../pointsOfInterest/mapComponent"; 
+import MapComponent from "../pointsOfInterest/mapComponent";
+import attractionsStyle from "./styles/attraction-detail-page.module.css";
 
 const AttractionDetailsPage = () => {
   const [attractions, setAttractions] = useState([]);
@@ -9,7 +10,7 @@ const AttractionDetailsPage = () => {
   const [error, setError] = useState("");
   const { hotelName } = useParams();
   const [selectedAttraction, setSelectedAttraction] = useState(null);
-  const [maxDistance, setMaxDistance] = useState(300); // Default to 300 meters
+  const [maxDistance, setMaxDistance] = useState(7000); // Default to 300 meters
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -57,7 +58,9 @@ const AttractionDetailsPage = () => {
   }, [hotelName]);
 
   useEffect(() => {
-    const filtered = attractions.filter(attraction => attraction.distance <= maxDistance);
+    const filtered = attractions.filter(
+      (attraction) => attraction.distance <= maxDistance
+    );
     setFilteredAttractions(filtered);
   }, [maxDistance, attractions]);
 
@@ -86,19 +89,38 @@ const AttractionDetailsPage = () => {
 
   return (
     <div className="main-body-attractions">
-      <h3 className="attr-title-page">Attractions for {hotelName}</h3>
-      {error && <p>{error}</p>}
-      <div className="distance-filter-container">
-        <label htmlFor="distanceFilter">Show attractions within (meters):</label>
-        <input
-          type="input"
-          id="distanceFilter"
-          value={maxDistance}
-          onChange={handleDistanceChange}
-          min="0"
-        />
+      <div className={attractionsStyle["title-container"]}>
+        <h3 className={attractionsStyle["attr-title-page"]}>
+          About {hotelName}
+        </h3>
       </div>
-      <div className="grid-layout">
+      <div ref={mapRef}>
+        <MapComponent query={selectedAttraction || hotelName} />
+      </div>
+      <div className={attractionsStyle["subtitle-container"]}>
+        <div>
+          <h3 className={attractionsStyle["attr-subtitle-page"]}>
+            About {hotelName}
+          </h3>
+        </div>
+        <div>
+          {error && <p>{error}</p>}
+          <div className="distance-filter-container">
+            <label htmlFor="distanceFilter" className={attractionsStyle["label-search"]}>
+              Show attractions within (meters):
+            </label>
+            <input
+              type="input"
+              id="distanceFilter"
+              value={maxDistance}
+              onChange={handleDistanceChange}
+              min="0"
+              className={attractionsStyle["input-search-distance"]}
+            />
+          </div>
+        </div>
+      </div>
+      <div className={attractionsStyle["grid-layout"]}>
         {Object.entries(groupAttractionsByCategory(filteredAttractions)).map(
           ([category, attractions]) => (
             <CategoryCard
@@ -110,8 +132,10 @@ const AttractionDetailsPage = () => {
           )
         )}
       </div>
-      <div ref={mapRef}>
-        <MapComponent query={selectedAttraction || hotelName} />
+      <div>
+        <div className={attractionsStyle["tracks-container-title"]}>
+          <h1 className={attractionsStyle["tracks-title"]}>Tracks</h1> {/* TO DO  */}
+        </div>
       </div>
     </div>
   );

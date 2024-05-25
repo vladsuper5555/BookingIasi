@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/attractions-card-style.css";
+import styles from "../styles/attractions-card-style.module.css";
 
 const CategoryCard = ({ category, attractions, onAttractionClick }) => {
   const [activeDescription, setActiveDescription] = useState(null);
@@ -14,37 +14,36 @@ const CategoryCard = ({ category, attractions, onAttractionClick }) => {
   };
 
   return (
-    <div className="main-container-category">
-      <div className="category-header">
+    <div className={styles["main-container-category"]}>
+      <div className={styles["category-header"]}>
         <h2>{category}</h2>
       </div>
-      <ul className="attractions-list">
+      <div className={styles["attractions-list"]}>
         {attractions.map((attraction, index) => (
-          <li key={index}>
-            <div className="category-card-item">
+          <div key={index}>
+            <div className={styles["category-card-item"]}>
               <p onClick={() => handleTextClick(attraction.description, attraction.name)}>
                 {attraction.name}
               </p>
-              <p className="attraction-distance">{attraction.distance} m</p>
+              <p className={styles["attraction-distance"]}>{attraction.distance} m</p>
             </div>
             {activeDescription === attraction.description && (
-              <div className="description">
-                <hr className="popup-line" />
+              <div className={styles["description"]}>
+                <hr className={styles["popup-line"]} />
                 <p>
                   <strong>{attraction.description}</strong>
                 </p>
-                {/* Add the link if available */}
                 {attraction.link && (
                   <a href={attraction.link} target="_blank" rel="noopener noreferrer">
                     More Info
                   </a>
                 )}
-                <hr className="popup-line" />
+                <hr className={styles["popup-line"]} />
               </div>
             )}
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

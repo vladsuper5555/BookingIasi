@@ -3,17 +3,33 @@
   --background-color: #f5f5f5;
 }
 
-.general-structure {
+general-structure{
   overflow-x: hidden;
   padding: 0;
   margin: 0;
-  width: 100%;
+  width: 100vw;
   height: auto;
-  background-color: var(--background-color);
+  background-color: #F5F5F5;
   color: var(--font-color);
   font-family: 'Montserrat', sans-serif;
+  }
+
+.navbar {
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  overflow: hidden;
 }
 
+.navbar a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
 .smallerSize {
   width: 20px;
 }
@@ -30,6 +46,16 @@
   font-size: 2.5em; /* Adjusted for better scaling */
   margin-bottom: 20px;
 }
+.titluSectiune1 {
+  display: grid;
+  grid-template-columns: 1fr auto; /* Adjusts column sizing */
+  justify-content: end;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900; /* Bold weight */
+  font-size: 2.5em; /* Adjusted for better scaling */
+  margin-bottom: 20px;
+}
+
 
 .continut {
   display: grid;
@@ -40,7 +66,7 @@
 .sectiuneText {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400; /* Regular weight */
-  font-size: 1.25em; /* Adjusted for better scaling */
+  font-size: 1.5em; /* Adjusted for better scaling */
   align-self: center;
 }
 
@@ -63,16 +89,16 @@
 }
 
 .header-image img {
-  width: 100%;
+  width: 90%;
   border-radius: 15px;
 }
 
 .header-info {
   position: absolute;
   text-size-adjust: 50%;
-  bottom: -5px;
-  left: 10px;
-  right: 10px;
+  bottom: -20px;
+  left: 5%;
+  right: 5%;
   background: white;
   color: black;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
@@ -87,6 +113,8 @@
 .sectiuneInfo {
   align-items: center;
   -ms-flex-align:center;
+  margin-left: 7%;
+  margin-right: 7%;
 }
 
 .inBold {
@@ -120,7 +148,7 @@
   text-align: center; /* Aliniază textul pe centru */
   font-family: 'Montserrat', sans-serif; /* Utilizează fontul 'Montserrat' */
   font-weight: 400; /* Greutatea normală a fontului */
-  font-size: 1em; /* Dimensiunea normală a fontului */
+  font-size: 1.5em; /* Dimensiunea normală a fontului */
   padding: 2%; /* Adaugă un spațiu uniform în jurul textului */
 }
 
@@ -160,21 +188,25 @@
 
 
 
-.featuresBox {
+.featuresBox{
+  text-size-adjust: 50%;
   background-color: white;
   color: black;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  padding: 10px;
+  padding: 5px;
   border-radius: 20px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  width: 100%;
-  margin: 20px 0;
+  flex-direction: column;
+  width: 80%;
+  height: 60%;
+  margin: 50px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400; 
-  font-size: 1em; /* Adjusted for better scaling */
+  font-size: 1.5em;   
 }
+
+
 
 .contactBox {
   background-color: #f0f0f0;
@@ -291,50 +323,84 @@ h1, h2, p, li {
 
 /* Media Queries for Responsive Design */
 
-@media (max-width: 1200px) {
-  .header h1 {
-    font-size: 2.5em;
+@media (max-width: 1024px) {
+  .contactBox {
+      width: 45%; /* Slightly larger width for smaller screens */
+      padding: 15px; /* Adjust padding */
   }
 
-  .titluSectiune {
-    font-size: 2em;
+  .contactBox .titluSectiune {
+      font-size: 1.1rem; /* Adjust font size for medium screens */
   }
 
-  .sectiuneText {
-    font-size: 1em;
-  }
-
-  .overallRating {
-    font-size: 1.25em;
+  .contactBox p, .contactBox address {
+      font-size: 0.95rem; /* Adjust font size for medium screens */
   }
 }
 
 @media (max-width: 768px) {
-  .header h1 {
-    font-size: 2em;
+  .header-info {
+    position: absolute;
+    text-size-adjust: 50%;
+    bottom: -20%;
+    left: 1%;
+    right: 1%;
+    background: white;
+    color: black;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+  }
+  .continut{
+    display: flex;
+    flex-direction: column;
+  }
+  .contactBox {
+      width: 45%; /* Slightly larger width for smaller screens */
+      padding: 15px; /* Adjust padding */
   }
 
-  .titluSectiune {
-    font-size: 1.75em;
+  .contactBox .titluSectiune {
+      font-size: 1.2rem; /* Smaller font size for the title */
   }
 
-  .sectiuneText {
-    font-size: 0.875em;
-  }
-
-  .overallRating {
-    font-size: 1em;
-  }
-
-  .continut {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  .featuresBox, .contactBox {
-    width: 100%;
+  .contactBox p, .contactBox address {
+      font-size: 0.7rem; /* Adjust font size for smaller screens */
   }
 }
+
+@media (max-width: 480px) {
+  .contactBox {
+      width: 50%; /* Full width for very small screens */
+      padding: 10px; /* Adjust padding */
+  }
+
+  .contactBox .titluSectiune {
+      font-size: 1rem; /* Smaller font size for the title */
+  }
+
+  .contactBox p, .contactBox address {
+      font-size: 0.6rem; /* Further adjust font size */
+  }
+}
+
+@media (max-width: 320px) {
+  .contactBox {
+      width: 50%; /* Full width for very small screens */
+      padding: 8px; /* Adjust padding */
+  }
+
+  .contactBox .titluSectiune {
+      font-size: 0.9rem; /* Smaller font size for the title */
+  }
+
+  .contactBox p, .contactBox address {
+      font-size: 0.5rem; /* Further adjust font size */
+  }
+}
+
 
 .addressBox {
   /*background-color: white;*/
@@ -362,31 +428,4 @@ h1, h2, p, li {
   width: 1em; /* Setează o lățime fixă de 1 em */
   height: 1em; /* Asigură ca înălțimea să fie aceeași cu lățimea pentru a face imaginea pătrată */
   margin-right: 0.5em; /* Adaugă un spațiu între imagine și text */
-}
-
-
-@media (max-width: 480px) {
-  .header h1 {
-    font-size: 1.5em;
-  }
-
-  .titluSectiune {
-    font-size: 1.5em;
-  }
-
-  .sectiuneText {
-    font-size: 0.75em;
-  }
-
-  .overallRating {
-    font-size: 0.875em;
-  }
-
-  .featuresBox, .contactBox {
-    font-size: 0.75em;
-  }
-
-  .sectiuneImagine img {
-    width: 100%;
-  }
 }

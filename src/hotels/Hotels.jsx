@@ -7,6 +7,7 @@ import Mesaj from './Mesaj';
 import PrincipalImageUnirea from "./images/hotels/UnireaHotelSpa/principal.jpg";
 import PrincipalImagePrestige from "./images/hotels/ApartamentHotelPrestige/principal.jpg";
 import Principal2Unirea from "./images/hotels/UnireaHotelSpa/principal2.jpg";
+import Principal2Prestige from "./images/hotels/ApartamentHotelPrestige/principal2.jpg"
 import ContactImageUnirea from "./images/hotels/UnireaHotelSpa/iasi.jpg";
 import Feature1Unirea from "./images/hotels/UnireaHotelSpa/event rooms/restaurant1.jpg";
 import Feature2Unirea from "./images/hotels/UnireaHotelSpa/pool or spa/pool.jpg";
@@ -73,7 +74,13 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
   }
 
   return (
-    <div className='general-stucture'>
+    <div className='general-stucture'>   
+      <nav className="navbar">
+        <a href="#section_About">About</a>
+        <a href="#section_Features">Features</a>
+        <a href="#section_Review">Reviews</a>
+        <a href="#section_Contact">Contact</a>
+      </nav>   
       <div className="hotels">
         <header className="header">
           <h1>{hotelData?.name}</h1>
@@ -100,25 +107,40 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
               </div>
               <div className='vertical-line'></div>
               <div className="sectiuneInfo">
-                <p><span className="inBold">Price:</span>{hotelData?.priceRange}€</p>
+                <p><span className="inBold">Price:  </span>{hotelData?.priceRange}€      </p>
               </div>
             </div>
           </div>
         </header>
 
-        <section className="about">
-          <div className="titluSectiune">About</div>
+        <section id="section_About" className="about">
+        <div className='subtitle'>
+             <div className="horizontal-line"></div>
+             <div className="subtitle-text">     </div>
+             <div className="horizontal-line"></div>
+          </div>
+          <div className="titluSectiune1">About</div>
           <div className="continut">
+            
             <div className="sectiuneText">
               {hotelData?.description}
             </div>
             <div className="sectiuneImagine">
-              <img src={Principal2Unirea} alt="Unirea Hotel & Spa - about" />
+            {hotelData?.name === 'Unirea Hotel & Spa' ? (
+              <img src={Principal2Unirea} alt="Unirea Hotel & Spa" />
+            ) : (
+              <img src={Principal2Prestige} alt="Prestige Hotel" />
+            )}
             </div>
           </div>
         </section>
 
-        <section className="features">
+        <section id="section_Features" className="features">
+        <div className='subtitle'>
+             <div className="horizontal-line"></div>
+             <div className="subtitle-text">    </div>
+             <div className="horizontal-line"></div>
+          </div>
           <div className="titluSectiune">Features</div>
           <div className="feature-images">
             {hotelData?.name === 'Unirea Hotel & Spa' ? (
@@ -198,6 +220,11 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
         </section>
 
         <section id="section_Review" className="reviews">
+        <div className='subtitle'>
+             <div className="horizontal-line"></div>
+             <div className="subtitle-text">     </div>
+             <div className="horizontal-line"></div>
+          </div>
           <div className="upperSection">
             <div className="titluSectiune">Reviews</div>
             <div className="overallRating">Overall rating: {hotelData?.aggregateRating} ★</div>
@@ -207,7 +234,12 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
           </blockquote>
         </section>
 
-        <section className="contact">
+        <section id="section_Contact" className="contact">
+        <div className='subtitle'>
+             <div className="horizontal-line"></div>
+             <div className="subtitle-text">     </div>
+             <div className="horizontal-line"></div>
+          </div>
   <div className="contact-content">
     <img src={ContactImageUnirea} alt="imagine din interior" className="contact-image" />
     <div className="contactBox">
