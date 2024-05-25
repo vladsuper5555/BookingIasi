@@ -34,7 +34,7 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
 
   const [hotelData, setHotelData] = useState([]);
   const [error, setError] = useState('');
-  const hotelName = 'Unirea Hotel & Spa';
+  const hotelName = 'Prestige Hotel';
 
   const fetchInfoForHotel = async () => {
     try {

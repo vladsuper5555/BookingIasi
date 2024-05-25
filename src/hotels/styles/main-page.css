@@ -113,8 +113,8 @@ general-structure{
 .sectiuneInfo {
   align-items: center;
   -ms-flex-align:center;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-left: 7%;
+  margin-right: 7%;
 }
 
 .inBold {
@@ -339,6 +339,24 @@ h1, h2, p, li {
 }
 
 @media (max-width: 768px) {
+  .header-info {
+    position: absolute;
+    text-size-adjust: 50%;
+    bottom: -20%;
+    left: 1%;
+    right: 1%;
+    background: white;
+    color: black;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+  }
+  .continut{
+    display: flex;
+    flex-direction: column;
+  }
   .contactBox {
       width: 45%; /* Slightly larger width for smaller screens */
       padding: 15px; /* Adjust padding */
