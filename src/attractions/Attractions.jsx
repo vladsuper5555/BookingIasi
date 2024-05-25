@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./styles/main-page-style.module.css";
 import photoIasi from "./assets/svg/photo-attractions-iasi.png";
 import "./styles/custom-variables.css";
@@ -11,6 +11,8 @@ const AttractionsPage = () => {
   const [error, setError] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const isNavigating = useRef(false); 
 
   const fetchAndGenerateHotelButtons = async () => {
     try {
@@ -47,30 +49,36 @@ const AttractionsPage = () => {
     name.toLowerCase().includes(searchInput.toLowerCase())
   );
 
-  const handleHotelClick = async (hotelName) => {
+  const handleButtonsHotelClick = async (hotelName) => {
+    if (isNavigating.current) return; 
+    isNavigating.current = true;
+
     try {
-      const response = await fetch(
-        "http://localhost:5173/api/attractionshotel",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ hotelName }),
-        }
-      );
+      const response = await fetch("http://localhost:5173/api/attractionshotel", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ hotelName }),
+      });
       if (!response.ok) {
         throw new Error("Response was not ok");
       }
       const data = await response.json();
       console.log(data);
       if (data.success) {
-        navigate(`/attractions/${hotelName}`);
+        if (hotelName === "Hotel Unirea" || hotelName === "Apartament Hotel Prestige") {
+          navigate(`/hotels`, { replace: true });
+        } else {
+          navigate(`/attractions/${hotelName}`, { replace: true });
+        }
       } else {
         setError(data.message);
       }
     } catch (error) {
       setError("An error occurred. Please try again later");
+    } finally {
+      isNavigating.current = false; 
     }
   };
 
@@ -128,7 +136,7 @@ const AttractionsPage = () => {
                 <div
                   key={index}
                   className={styles["row"]}
-                  onClick={() => handleHotelClick(name)}
+                  onClick={() => handleButtonsHotelClick(name)}
                 >
                   <div className={styles["col"]}>
                     <HotelCard

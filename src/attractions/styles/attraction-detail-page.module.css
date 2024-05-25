@@ -1,0 +1,56 @@
+.title-container {
+    display: flex;
+    font-size: 2.5rem;
+    margin-left: 100px;
+}
+
+.attr-title-page {
+    font-weight: bold;
+}
+
+.subtitle-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.attr-subtitle-page {
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.label-search {
+    font-size: 1.5rem;
+    background-color: var(--font-color);
+    color: var(--background-color);
+    padding: 10px 50px;
+    border: 1px solid transparent;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.input-search-distance {
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    background-color: #D9D9D9;
+    border: 1px solid transparent;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-left: 100px;
+}
+
+.tracks-container-title {
+    display: flex;
+    margin-left: 100px;
+}
+
+.tracks-title {
+    font-size: 2.2rem;
+    font-weight: bolder;
+}
