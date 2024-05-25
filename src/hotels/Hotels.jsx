@@ -7,7 +7,7 @@ import Mesaj from './Mesaj';
 import PrincipalImageUnirea from "./images/hotels/UnireaHotelSpa/principal.jpg";
 import PrincipalImagePrestige from "./images/hotels/ApartamentHotelPrestige/principal.jpg";
 import Principal2Unirea from "./images/hotels/UnireaHotelSpa/principal2.jpg";
-import Principal2Prestige from "./images/hotels/ApartamentHotelPrestige/principal2.jpg"
+import Principal2Prestige from "./images/hotels/ApartamentHotelPrestige/principal.jpg"
 import ContactImageUnirea from "./images/hotels/UnireaHotelSpa/iasi.jpg";
 import Feature1Unirea from "./images/hotels/UnireaHotelSpa/event rooms/restaurant1.jpg";
 import Feature2Unirea from "./images/hotels/UnireaHotelSpa/pool or spa/pool.jpg";
@@ -27,14 +27,14 @@ import contact_email from "./images/Icons/contact/email.svg";
 import contact_location from "./images/Icons/contact/location.svg";
 import contact_telephone from "./images/Icons/contact/telephone.svg";
 import "./styles/main-page.css";
-
 const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, description, petsAllowed,
   parkingFacility, smokingAllowed, event, review, aggregateRating, address, email,
   telephone, paymentAccepted, currenciesAccepted, amenityFeature }) => {
 
   const [hotelData, setHotelData] = useState([]);
   const [error, setError] = useState('');
-  const hotelName = 'Prestige Hotel';
+  
+  const hotelName = 'Unirea Hotel & Spa';
 
   const fetchInfoForHotel = async () => {
     try {
@@ -62,17 +62,14 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
       setError("An error occurred. Please try again later");
     }
   };
-
   useEffect(() => {
     if (hotelName) {
       fetchInfoForHotel(hotelName);
     }
   }, []);
-
   if (error) {
     return <div className="error">{error}</div>;
   }
-
   return (
     <div className='general-stucture'>   
       <nav className="navbar">
@@ -95,7 +92,6 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
             ) : (
               <img src={PrincipalImagePrestige} alt="Prestige Hotel" />
             )}
-
             <div className="header-info">
               <div className="sectiuneInfo">
                 <p><span className="inBold">Check-in:</span> {hotelData?.checkinTime}PM</p>
@@ -112,7 +108,6 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
             </div>
           </div>
         </header>
-
         <section id="section_About" className="about">
         <div className='subtitle'>
              <div className="horizontal-line"></div>
@@ -134,7 +129,6 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
             </div>
           </div>
         </section>
-
         <section id="section_Features" className="features">
         <div className='subtitle'>
              <div className="horizontal-line"></div>
@@ -163,7 +157,6 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
             <div className="sectiuneText">
               <div className="oneUnderAnother">
                 {hotelData?.amenityFeature}
-
                 <a href="http://localhost:5173/Hotels">Click to see the hotel rooms 3D!</a>
                 <a href="http://localhost:5173/Hotels">Click to see attractions around!</a>
               </div>
@@ -218,7 +211,6 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
             </div>
           </div>
         </section>
-
         <section id="section_Review" className="reviews">
         <div className='subtitle'>
              <div className="horizontal-line"></div>
@@ -233,21 +225,18 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
             <div className="recenzie">{hotelData?.review}</div>
           </blockquote>
         </section>
-
+        
         <section id="section_Contact" className="contact">
-        <div className='subtitle'>
-             <div className="horizontal-line"></div>
-             <div className="subtitle-text">     </div>
-             <div className="horizontal-line"></div>
-          </div>
-  <div className="contact-content">
+  <div className='subtitle'>
+    <div className="horizontal-line"></div>
+    <div className="subtitle-text"></div>
+    <div className="horizontal-line"></div>
+  </div>
+  <div className="contact-image-container">
     <img src={ContactImageUnirea} alt="imagine din interior" className="contact-image" />
     <div className="contactBox">
       <div className="titluSectiune">Contact Us</div>
-      <p>
-        Discover the pleasure of a perfect stay in a hotel located right in the heart of Iași.
-      </p>
-
+      <p>Discover the pleasure of a perfect stay in a hotel located right in the heart of Iași.</p>
       <address className="addressBox">
         <div>
           <img src={contact_location} alt="image" className='smallerSize' />{hotelData?.address}
@@ -267,9 +256,9 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
 </section>
 
 
+
       </div>
     </div>
   );
 }
-
 export default Hotels;
