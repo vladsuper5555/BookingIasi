@@ -1,4 +1,7 @@
 import { runQueryOnDatabaseAndFetchEntireResult } from '../../models/database.model.js';
+import axios from 'axios';
+
+const GOOGLE_API_KEY = 'AIzaSyCvfa8irF4pMptGASnnw5J-TjkdlyliGuU';
 
 async function getHotelsNamesFromDatabase(req, res) {
     try {
@@ -10,14 +13,11 @@ async function getHotelsNamesFromDatabase(req, res) {
     } catch (error) {
         console.error('Error on hotel names: ', error);
         res.status(500).send({ success: false, message: 'Server error' });
-        res.end();
     }
-
     res.end();
 }
 
 async function getAttractionsForHotel(req, res) {
-
     const hotelName = req.body.hotelName;
     try {
         const sqlQuery = 
@@ -29,15 +29,53 @@ async function getAttractionsForHotel(req, res) {
                 WHERE Nume_hotel = '${hotelName}'
             )`;
         
-            const attractions = await runQueryOnDatabaseAndFetchEntireResult(sqlQuery);
-            res.status(200).json({ success: true, attractions });
+        const attractions = await runQueryOnDatabaseAndFetchEntireResult(sqlQuery);
+        res.status(200).json({ success: true, attractions });
     } catch (error) {
         console.error('Error fetching attractions for hotel: ', error);
         res.status(500).json({ success: false, message: 'Server error' });
-        res.end();
     }
-
     res.end();
 }
 
-export { getHotelsNamesFromDatabase, getAttractionsForHotel }
+async function getAttractionsAndHotelCoordinates(req, res) {
+    const hotelName = req.body.hotelName;
+    try {
+        const sqlQuery = `
+            SELECT Atractii_turistice.Nume_atractie, Atractii_turistice.Distanta_de_la_hotel, Atractii_turistice.Categorie, Atractii_turistice.Descriere, Hoteluri.ADRESA_COORDONATE 
+            FROM Atractii_turistice
+            JOIN Hoteluri ON Atractii_turistice.ID_hotel = Hoteluri.ID_hotel
+            WHERE Hoteluri.Nume_hotel = '${hotelName}'
+        `;
+
+        const attractions = await runQueryOnDatabaseAndFetchEntireResult(sqlQuery);
+        res.status(200).json({ success: true, attractions });
+    } catch (error) {
+        console.error('Error fetching attractions and hotel coordinates: ', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+    res.end();
+}
+
+
+async function getAttractionsWithDirections(req, res) {
+    const { hotelName, difficulty, trails } = req.body;
+    try {
+        const origin = `${hotelName},Iasi`;
+        const waypoints = trails[difficulty].map(name => `${name},Iasi`).join('|');
+        const destination = origin;
+
+        const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&waypoints=optimize:true|${waypoints}&key=${GOOGLE_API_KEY}`;
+
+        const response = await axios.get(url);
+        const directions = response.data;
+
+        res.status(200).json({ success: true, directions });
+    } catch (error) {
+        console.error('Error fetching attractions with directions: ', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+}
+
+
+export { getHotelsNamesFromDatabase, getAttractionsForHotel, getAttractionsWithDirections, getAttractionsAndHotelCoordinates };

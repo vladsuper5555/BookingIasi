@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styles from "../styles/attractions-card-style.module.css";
+import { useParams } from "react-router-dom";
 
-const CategoryCard = ({ category, attractions, onAttractionClick }) => {
+const CategoryCard = ({ category, attractions, onAttractionClick}) => {
   const [activeDescription, setActiveDescription] = useState(null);
-
+  const { hotelName } = useParams();
   const handleTextClick = (description, name) => {
     if (activeDescription === description) {
       setActiveDescription(null);
@@ -38,6 +39,15 @@ const CategoryCard = ({ category, attractions, onAttractionClick }) => {
                     More Info
                   </a>
                 )}
+                <p>
+                  <a
+                    href={`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(hotelName)}&destination=${encodeURIComponent(attraction.name)}&travelmode=walking`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View Walking Directions to {attraction.name}
+                  </a>
+                </p>
                 <hr className={styles["popup-line"]} />
               </div>
             )}
@@ -46,6 +56,7 @@ const CategoryCard = ({ category, attractions, onAttractionClick }) => {
       </div>
     </div>
   );
+  
 };
 
 export default CategoryCard;
