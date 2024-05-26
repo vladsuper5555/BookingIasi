@@ -52,7 +52,7 @@ function UserProf() {
             setFirstName(userData.givenName);
             setLastName(userData.familyName);
             setEmail(userData.email);
-            setBirthDate(userData.birthDate);
+            setBirthDate(formatDate(userData.birthDate));
             setHeight(userData.height.toString());
             setWeight(userData.weight.toString());
             setGender(userData.gender);
@@ -105,6 +105,12 @@ function UserProf() {
     setEditingProfile(true);
   };
 
+  function formatDate(isoString) {
+    const date = new Date(isoString);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString(undefined, options);
+  }
+
   const handleSaveProfile = async (event) => {
     event.preventDefault();
     
@@ -135,7 +141,7 @@ function UserProf() {
         console.error('Failed to save profile data.');
       }
     } catch (error) {
-      console.error('Error while saving profile data:', error);
+      console.error('Error while saving  data:', error);
     }
   };
   
