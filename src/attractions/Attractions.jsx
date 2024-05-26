@@ -70,9 +70,9 @@ const AttractionsPage = () => {
       console.log(data);
       if (data.success) {
         if (hotelName === "Hotel Unirea" || hotelName === "Apartament Hotel Prestige") {
-          navigate(`/hotels`, { replace: true });
+          navigate(`/hotels`);
         } else {
-          navigate(`/attractions/${hotelName}`, { replace: true });
+          navigate(`/attractions/${hotelName}`);
         }
       } else {
         setError(data.message);
