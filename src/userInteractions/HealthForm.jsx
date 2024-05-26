@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Checkbox, FormControlLabel, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-
+import { useNavigate} from 'react-router-dom';
 function HealthForm() {
   const [birthDate, setBirthDate] = useState('');
   const [height, setHeight] = useState('');
@@ -12,7 +12,8 @@ function HealthForm() {
   const [sportsPracticed, setSportsPracticed] = useState([]); 
   const [sportsFrequency, setSportsFrequency] = useState({}); 
   const [sportsIntensity, setSportsIntensity] = useState({}); 
-
+  const navigate = useNavigate();
+  
   const commonStyles = {
     fontFamily: 'Montserrat, sans-serif',
     color: '#18181A'
@@ -86,6 +87,7 @@ function HealthForm() {
       
       if (response.ok) {
         console.log('Health data saved successfully.');
+        navigate('/userProf');
       } else {
         console.error('Failed to save health data.');
       }
