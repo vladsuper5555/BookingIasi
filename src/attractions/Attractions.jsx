@@ -5,6 +5,7 @@ import photoIasi from "./assets/svg/photo-attractions-iasi.png";
 import "./styles/custom-variables.css";
 import HotelCard from "./components/HotelCard";
 import hotelData from "./utils/hotelData";
+import personProfile from "./assets/svg/person-profile.svg";
 
 const AttractionsPage = () => {
   const [hotelNames, setHotelNames] = useState([]);
@@ -13,6 +14,7 @@ const AttractionsPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isNavigating = useRef(false); 
+  const isNavigatingProfile = useRef(false);
 
   const fetchAndGenerateHotelButtons = async () => {
     try {
@@ -82,8 +84,26 @@ const AttractionsPage = () => {
     }
   };
 
+  const handleProfileButton = async() => {
+    if (isNavigatingProfile.current) return;
+    isNavigatingProfile.current = true;
+
+    try {
+      navigate(`/userProf`, {replace: true});
+    } catch (error) {
+      setError("An error occured. Please try again later")
+    } finally {
+      isNavigatingProfile.current = false; 
+    }
+  };
+
   return (
     <div className={styles["main-body-attractions"]}>
+      {error && <p>{error}</p>}
+      <div className={styles["person-profile-container"]} onClick={() => handleProfileButton()}>
+        <div><img src={personProfile} alt="person icon"/></div>
+        <div><h2>Profile</h2></div>
+      </div>
       <div className={styles["main-container-info-attractions"]}>
         <div className={styles["main-info-hotels-attr"]}>
           <div className={styles["header-container-attr"]}>

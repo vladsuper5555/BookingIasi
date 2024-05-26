@@ -163,6 +163,15 @@
     cursor: pointer;
 }
 
+.person-profile-container {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    margin-left: 50px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;

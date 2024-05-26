@@ -153,8 +153,8 @@ const AttractionDetailsPage = () => {
     )}&waypoints=${encodeURIComponent(trail.replace(/ -> /g, '|'))}&travelmode=walking`;
 
     return (
-        <div key={difficulty}>
-          <h2>{difficulty.charAt(0).toUpperCase() + difficulty.slice(1)} Trail</h2>
+        <div key={difficulty} className={attractionsStyle["trail-category"]}>
+          <h2 className={attractionsStyle["trail-category-title"]}>{difficulty.charAt(0).toUpperCase() + difficulty.slice(1)} Trail</h2>
           {/* <p>Original order: {originalTrail}</p> */}
           <p>{optimizedTrail}</p>
         {/*  <button>*/}
@@ -162,8 +162,8 @@ const AttractionDetailsPage = () => {
         {/*  See Original Trail on Maps*/}
         {/*</a> *!/*/}
         {/*  </button>*/}
-          <button>
-            <a href={googleMapsUrl(optimizedTrail)} target="_blank" rel="noopener noreferrer">
+          <button className={attractionsStyle["button-to-maps"]}>
+            <a className={attractionsStyle["link-to-maps"]} href={googleMapsUrl(optimizedTrail)} target="_blank" rel="noopener noreferrer">
               View on Maps
             </a>
           </button>
@@ -206,7 +206,7 @@ const AttractionDetailsPage = () => {
         <div className={attractionsStyle["subtitle-container"]}>
           <div>
             <h3 className={attractionsStyle["attr-subtitle-page"]}>
-              About {hotelName}
+              Attractions for {hotelName}
             </h3>
           </div>
           <div>
@@ -241,7 +241,13 @@ const AttractionDetailsPage = () => {
               )
           )}
         </div>
-        <div>
+        <div className={attractionsStyle["trails-container"]}>
+          <div className={attractionsStyle["tracks-container-title"]}>
+            <h2 className={attractionsStyle["tracks-title"]}>Tracks for {hotelName}</h2>
+          </div>
+          <div className={attractionsStyle["tracks-container-subtitle"]}>
+            <h3 className={attractionsStyle["tracks-subtitle"]}>Tracks by difficulty</h3>
+          </div>
           {["hard", "medium", "easy"].map((difficulty) => renderTrail(difficulty))}
         </div>
       </div>
