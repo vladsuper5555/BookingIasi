@@ -1,6 +1,42 @@
 import { runQueryOnDatabaseAndFetchEntireResult } from '../../models/database.model.js';
 import crypto from 'crypto';
 
+async function editLoggedUserInfo(req, res){
+    const {firstNameTemp, lastNameTemp, emailTemp } = req.body;
+    const sqlUpdateQuery = `UPDATE users SET
+        email = "${emailTemp}", givenName = "${firstNameTemp}", familyName = "${lastNameTemp}" WHERE username = "${req.cookies.username}"`;
+    
+        try {
+            await runQueryOnDatabaseAndFetchEntireResult(sqlUpdateQuery);
+            res.send({ success: true, message: 'Profile data updated successfully' });
+        } catch (error) {
+            console.error('Failed to update profile data:', error);
+            res.status(500).send({ success: false, message: 'Failed to update profile data' });
+        }
+}
+async function getUserInfo(req, res){
+    //get the info for the user in the cookie and send it in a json via res
+    let sqlQuery = `SELECT * FROM users WHERE username = "${req.cookies.username}" AND password = "${req.cookies.pass}"`;
+    
+    //take the data and put it in a json and send it with res
+    try {
+        let results = await runQueryOnDatabaseAndFetchEntireResult(sqlQuery);
+        
+        if (results.length === 0) {
+          return res.status(404).json({ error: 'User not found' });
+        }
+    
+        const userData = results.map(user => {
+          const { password, ...userWithoutPassword } = user;
+          return userWithoutPassword;
+        });
+    
+        return res.json(userData);
+      } catch (error) {
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+
+}
 async function logout(req, res){
     if (req.cookies && req.cookies.pass && req.cookies.username) {
         res.clearCookie('username', {
@@ -19,7 +55,6 @@ async function logout(req, res){
         return res.status(401).send({ success: false, message: 'User is not authenticated' });
     }
 }
-
 async function checkCookie(req, res){
     console.log("check cookie function");
     if (req.cookies && req.cookies.pass && req.cookies.username) {
@@ -34,7 +69,6 @@ async function checkCookie(req, res){
         return res.status(401).send({ success: false, message: 'User is not authenticated' });
     }
 }
-
 async function checkCredentialsAgainstDatabase(req, res){
     
     const { username, password } = req.body;
@@ -83,7 +117,6 @@ async function checkCredentialsAgainstDatabase(req, res){
     }
     res.end();
 }
-
 async function addCredentialsToDatabase(req, res){
     const { givenName, familyName, username, email, password } = req.body;
 
@@ -157,8 +190,6 @@ async function addCredentialsToDatabase(req, res){
 
       res.end();
 }
-
-//poate o folosesc si la editare profil 
 async function saveHealthData(req, res) {
     
     const username = req.cookies.username;
@@ -192,5 +223,7 @@ export {
     addCredentialsToDatabase,
     checkCookie,
     saveHealthData,
-    logout
+    logout,
+    getUserInfo,
+    editLoggedUserInfo
 }

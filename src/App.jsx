@@ -32,6 +32,8 @@ function App() {
         <Route path='/check-auth' />
         <Route path='/logout' />
         <Route path='/saveHealthForm' />
+        <Route path='/get-logged-user-info' />
+        <Route path='/update-logged-user-info' />
         <Route path="/attractions" element={<AttractionsPage />} />
         <Route
           path="/attractions/:hotelName"
