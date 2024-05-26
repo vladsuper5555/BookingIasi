@@ -191,24 +191,38 @@ async function addCredentialsToDatabase(req, res){
       res.end();
 }
 async function saveHealthData(req, res) {
-    
     const username = req.cookies.username;
 
     const {
         birthDate, height, weight, gender, needsSpecialAssistance, activityIndex
     } = req.body;
 
-  
     if (!username) {
         return res.status(401).send({ success: false, message: 'User is not authenticated' });
     }
 
-    const sqlUpdateQuery = `UPDATE users SET
-        birthDate = "${birthDate}", height = "${height}", weight = "${weight}", gender = "${gender}", needsSpecialAssistance = "${needsSpecialAssistance == true ? 1 : 0}",
-        activityIndex = ${activityIndex}
-        WHERE username = "${username}"`;
-
+    const sqlSelectQuery = `SELECT birthDate, height, weight, gender, needsSpecialAssistance, activityIndex FROM users WHERE username = "${username}"`;
+    
     try {
+        const results = await runQueryOnDatabaseAndFetchEntireResult(sqlSelectQuery);
+        if (results.length === 0) {
+            return res.status(404).send({ success: false, message: 'User not found' });
+        }
+
+        const currentData = results[0];
+
+        const updatedBirthDate = birthDate || currentData.birthDate;
+        const updatedHeight = height || currentData.height;
+        const updatedWeight = weight || currentData.weight;
+        const updatedGender = gender || currentData.gender;
+        const updatedNeedsSpecialAssistance = needsSpecialAssistance !== undefined ? (needsSpecialAssistance == true ? 1 : 0) : currentData.needsSpecialAssistance;
+        const updatedActivityIndex = activityIndex !== 0 ? activityIndex : currentData.activityIndex;
+
+        const sqlUpdateQuery = `UPDATE users SET
+            birthDate = "${updatedBirthDate}", height = "${updatedHeight}", weight = "${updatedWeight}", gender = "${updatedGender}", needsSpecialAssistance = ${updatedNeedsSpecialAssistance},
+            activityIndex = ${updatedActivityIndex}
+            WHERE username = "${username}"`;
+
         await runQueryOnDatabaseAndFetchEntireResult(sqlUpdateQuery);
         res.send({ success: true, message: 'Health data updated successfully' });
     } catch (error) {
