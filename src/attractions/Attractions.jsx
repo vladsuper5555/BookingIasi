@@ -6,16 +6,16 @@ import "./styles/custom-variables.css";
 import HotelCard from "./components/HotelCard";
 import hotelData from "./utils/hotelData";
 import personProfile from "./assets/svg/person-profile.svg";
+import ScrollToTop from "./utils/hooks/ScrollToTop";
 
 const AttractionsPage = () => {
   const [hotelNames, setHotelNames] = useState([]);
   const [error, setError] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
-  const location = useLocation();
   const isNavigating = useRef(false); 
   const isNavigatingProfile = useRef(false);
-
+  
   const fetchAndGenerateHotelButtons = async () => {
     try {
       const response = await fetch("http://localhost:5173/api/attractions", {
@@ -99,6 +99,7 @@ const AttractionsPage = () => {
 
   return (
     <div className={styles["main-body-attractions"]}>
+      <ScrollToTop />
       {error && <p>{error}</p>}
       <div className={styles["person-profile-container"]} onClick={() => handleProfileButton()}>
         <div><img src={personProfile} alt="person icon"/></div>

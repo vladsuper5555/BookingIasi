@@ -4,6 +4,7 @@ import CategoryCard from "./components/CategoryCard";
 import MapComponent from "../pointsOfInterest/mapComponent";
 import axios from "axios";
 import attractionsStyle from "./styles/attraction-detail-page.module.css";
+import ScrollToTop from "./utils/hooks/ScrollToTop";
 
 const AttractionDetailsPage = () => {
   const [attractions, setAttractions] = useState([]);
@@ -195,6 +196,7 @@ const AttractionDetailsPage = () => {
 
   return (
       <div className="main-body-attractions">
+        <ScrollToTop />
         <div className={attractionsStyle["title-container"]}>
           <h3 className={attractionsStyle["attr-title-page"]}>
             About {hotelName}
