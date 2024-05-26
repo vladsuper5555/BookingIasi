@@ -18,7 +18,7 @@ const AttractionsPage = () => {
   
   const fetchAndGenerateHotelButtons = async () => {
     try {
-      const response = await fetch("http://localhost:5173/api/attractions", {
+      const response = await fetch("/api/attractions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +56,7 @@ const AttractionsPage = () => {
     isNavigating.current = true;
 
     try {
-      const response = await fetch("http://localhost:5173/api/attractionshotel", {
+      const response = await fetch("/api/attractionshotel", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

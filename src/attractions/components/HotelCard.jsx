@@ -12,7 +12,7 @@ const HotelCard = ({ hotelName, hotelDescription, hotelPhoto }) => {
   const fetchAttractionsForHotel = async (hotelName) => {
     try {
       const response = await fetch(
-        "http://localhost:5173/api/attractionshotel",
+        "/api/attractionshotel",
         {
           method: "POST",
           headers: {

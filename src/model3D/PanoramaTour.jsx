@@ -8,7 +8,7 @@ import SpaOutlinedIcon from '@mui/icons-material/SpaOutlined';
 import MeetingRoomOutlinedIcon from '@mui/icons-material/MeetingRoomOutlined';
 
 const ModelPage = () => {
-  const [url, setUrl] = useState('http://localhost:5173/api/panoramas/?hotel=Unirea&appType=Apartments&appId=Apartment1');
+  const [url, setUrl] = useState('/api/panoramas/?hotel=Unirea&appType=Apartments&appId=Apartment1');
   return (
     <div className={styles.content}>
 

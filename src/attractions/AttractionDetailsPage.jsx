@@ -31,7 +31,7 @@ const AttractionDetailsPage = () => {
     const fetchAttractionsForHotel = async () => {
       try {
         const response = await fetch(
-            "http://localhost:5173/api/attractionshotel",
+            "/api/attractionshotel",
             {
               method: "POST",
               headers: {
@@ -105,7 +105,7 @@ const AttractionDetailsPage = () => {
   const fetchTrailData = async (difficulty) => {
     try {
       const response = await axios.post(
-          "http://localhost:5173/api/attractionshotelwithdirections",
+          "/api/attractionshotelwithdirections",
           {
             hotelName,
             difficulty,

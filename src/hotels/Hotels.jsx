@@ -39,7 +39,7 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
   const fetchInfoForHotel = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5173/api/hotelsinfo",
+        "/api/hotelsinfo",
         {
           method: "POST",
           headers: {
@@ -157,8 +157,8 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
             <div className="sectiuneText">
               <div className="oneUnderAnother">
                 {hotelData?.amenityFeature}
-                <a href="http://localhost:5173/Hotels">Click to see the hotel rooms 3D!</a>
-                <a href="http://localhost:5173/Hotels">Click to see attractions around!</a>
+                <a href="/Hotels">Click to see the hotel rooms 3D!</a>
+                <a href="/Hotels">Click to see attractions around!</a>
               </div>
             </div>
             <div className="featuresBox">

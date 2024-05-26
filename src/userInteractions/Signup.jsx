@@ -12,7 +12,7 @@ function Signup() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch('http://localhost:5173/api/check-auth', {
+        const response = await fetch('/api/check-auth', {
           method: "GET",
           credentials: "include",
         });
@@ -38,7 +38,7 @@ function Signup() {
     const password = formData.get('password');
     
     try {
-      const response = await fetch('http://localhost:5173/api/signup', {
+      const response = await fetch('/api/signup', {
                 method: "POST",
                 body: JSON.stringify({givenName, familyName, username, email, password}), 
                 headers: {

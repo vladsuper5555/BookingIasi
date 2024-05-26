@@ -32,13 +32,13 @@ function UserProf() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch('http://localhost:5173/api/check-auth', {
+        const response = await fetch('/api/check-auth', {
           method: "GET",
           credentials: "include",
         });
 
         if (response.ok) {
-          const userResponse = await fetch('http://localhost:5173/api/get-logged-user-info', {
+          const userResponse = await fetch('/api/get-logged-user-info', {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -76,7 +76,7 @@ function UserProf() {
     event.preventDefault();
     
     try {
-      const response = await fetch('http://localhost:5173/api/logout', {
+      const response = await fetch('/api/logout', {
                 method: "GET",
                 credentials: "include"
             });
@@ -122,7 +122,7 @@ function UserProf() {
 
     //in momentul in care da click pe save, se salveaza si in baza de date alea
     try {
-      const response = await fetch('http://localhost:5173/api/update-logged-user-info', {
+      const response = await fetch('/api/update-logged-user-info', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

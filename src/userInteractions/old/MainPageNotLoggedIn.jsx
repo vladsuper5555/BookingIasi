@@ -10,7 +10,7 @@ function MainPage() {
 
   async function aflaGrupa () {
     const res = await new Promise((res) => {
-      fetch('http://localhost:5173/api/cegrupasuntem', {
+      fetch('/api/cegrupasuntem', {
         method: "POST",
         body: ""
       }).then(async (response) => {
