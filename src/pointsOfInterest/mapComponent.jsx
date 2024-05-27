@@ -1,3 +1,4 @@
+import { LanOutlined, Language } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 
 const apiKey = "AIzaSyB66hTrBl9RqFQsBqzwbCcBtVECWaqHrkE";
@@ -5,7 +6,7 @@ const apiKey = "AIzaSyB66hTrBl9RqFQsBqzwbCcBtVECWaqHrkE";
 const loadScript = (url) => {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
-    script.src = url;
+    script.src = `${url}&language=en`; // Add language parameter to the URL
     script.async = true;
     script.onload = () => resolve();
     script.onerror = () => reject();
@@ -22,12 +23,14 @@ function MapComponent({ query }) {
       }
 
       const map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 20
+        zoom: 20,
+        language: 'en'
       });
 
       const placesService = new google.maps.places.PlacesService(map);
 
       const request = {
+        language: 'en',
         query: query,
         // fields: ['name', 'geometry']
       };
@@ -38,6 +41,7 @@ function MapComponent({ query }) {
           map.setCenter(firstPlace.geometry.location);
 
           const requestNearby = {
+            language: 'en',
             location: firstPlace.geometry.location,
             radius: '1500'
           };
