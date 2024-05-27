@@ -1,7 +1,7 @@
 // MainPage.jsx
 import React from 'react';
-import { Link, redirect, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react'
+import { Link, redirect, useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react'
 import Button from '@mui/material/Button';
 import Mesaj from './Mesaj';
 import PrincipalImageUnirea from "./images/hotels/UnireaHotelSpa/principal.jpg";
@@ -34,6 +34,9 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
   const [hotelData, setHotelData] = useState([]);
   const [error, setError] = useState('');
   const { hotelId } = useParams();
+  const navigate = useNavigate();
+  const isNavigating = useRef(false); 
+  const isNavigatingPanoramas = useRef(false);
   
   const hotelName = hotelId;
 
@@ -72,6 +75,63 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
   if (error) {
     return <div className="error">{error}</div>;
   }
+
+  const handleSeeAttractionsClick = async (hotelName) => {
+    if (isNavigating.current) return; 
+    isNavigating.current = true;
+
+    try {
+      const response = await fetch("/api/attractionshotel", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ hotelName }),
+      });
+      if (!response.ok) {
+        throw new Error("Response was not ok");
+      }
+      const data = await response.json();
+      console.log(data);
+      if (data.success) {
+          navigate(`/attractions/${hotelName}`);
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      setError("An error occurred. Please try again later");
+    } finally {
+      isNavigating.current = false; 
+    }
+  };
+  const handleSeePanoramasClick = async (hotelName) => {
+    if (isNavigating.current) return; 
+    isNavigating.current = true;
+
+    try {
+      const response = await fetch("/api/attractionshotel", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ hotelName }),
+      });
+      if (!response.ok) {
+        throw new Error("Response was not ok");
+      }
+      const data = await response.json();
+      console.log(data);
+      if (data.success) {
+          navigate(`/attractions/${hotelName}`); //de schimbat cu adresa generala de la panorama view
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      setError("An error occurred. Please try again later");
+    } finally {
+      isNavigating.current = false; 
+    }
+  };
   return (
     <div className='general-stucture'>   
       <nav className="navbar">
@@ -159,8 +219,28 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
             <div className="sectiuneText">
               <div className="oneUnderAnother">
                 {hotelData?.amenityFeature}
-                <a href="/Hotels">Click to see the hotel rooms 3D!</a>
-                <a href="/Hotels">Click to see attractions around!</a>
+                <div 
+                  className = "linksDistance"
+                  onClick={() => handleSeePanoramasClick(hotelName)}
+                >
+                  <div>
+                    <a>
+                    Click to see the virtual tour!
+                    </a>
+                  </div>
+                </div>
+                
+                <div 
+                   className = "linksDistance"
+                  onClick={() => handleSeeAttractionsClick(hotelName)}
+                >
+                  <div>
+                    <a>
+                    Click to see attraction around!
+                    </a>
+                  </div>
+                </div>
+            
               </div>
             </div>
             <div className="featuresBox">

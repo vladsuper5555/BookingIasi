@@ -102,6 +102,9 @@ general-structure{
   margin-left: 7%;
   margin-right: 7%;
 }
+.linksDistance{
+  padding: 3%;
+}
 
 .inBold {
   font-family: 'Montserrat', sans-serif;
