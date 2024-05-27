@@ -21,6 +21,7 @@ const MainPage = ({ url }) => {
 
         } catch (error) {
             console.error("Failed to fetch panorama config:", error);
+            alert("Image does not exist!");
         }
     };
 

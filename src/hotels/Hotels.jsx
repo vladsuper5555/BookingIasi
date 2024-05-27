@@ -77,7 +77,7 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
     if (hotelName) {
       fetchInfoForHotel(hotelName);
     }
-  }, hotelName);
+  }, []);
 
   if (error) {
     return <div className="error">{error}</div>;
@@ -116,23 +116,24 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
     isNavigating.current = true;
 
     try {
-      const response = await fetch("/api/attractionshotel", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ hotelName }),
-      });
-      if (!response.ok) {
-        throw new Error("Response was not ok");
-      }
-      const data = await response.json();
-      console.log(data);
-      if (data.success) {
-          navigate(`/attractions/${hotelName}`); //de schimbat cu adresa generala de la panorama view
-      } else {
-        setError(data.message);
-      }
+      // const response = await fetch("", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ hotelName }),
+      // });
+
+      // if (!response.ok) {
+      //   throw new Error("Response was not ok");
+      // }
+      // const data = await response.json();
+      // console.log(data);
+      // if (data.success) {
+          navigate(`/panoramas?hotel=${hotelName}`); //de schimbat cu adresa generala de la panorama view
+    //   } else {
+    //     setError(data.message);
+    //   }
     } catch (error) {
       setError("An error occurred. Please try again later");
     } finally {

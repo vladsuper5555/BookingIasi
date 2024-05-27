@@ -1,4 +1,6 @@
+import { useSearchParams } from 'react-router-dom';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PanoramaTour from './render';
 import styles from './PanoramaTour.module.css'; // Import the CSS file
 import { Button, Card, CardContent, Typography } from '@mui/material';
@@ -8,12 +10,20 @@ import SpaOutlinedIcon from '@mui/icons-material/SpaOutlined';
 import MeetingRoomOutlinedIcon from '@mui/icons-material/MeetingRoomOutlined';
 
 const ModelPage = () => {
-  const [url, setUrl] = useState('/api/panoramas/?hotel=Unirea&appType=Apartments&appId=Apartment1');
+  const [searchParams] = useSearchParams();
+  const queryParamValue = searchParams.get('hotel');
+  const firstWord = queryParamValue.split(' ')[0];
+  const [url, setUrl] = useState(`/api/panoramas/?hotel=${firstWord}&appType=Apartments&appId=Apartment1`);
+  console.log(firstWord);
+
+  const navigate = useNavigate();
+  const goBack = () => { navigate(-1); };
+
   return (
     <div className={styles.content}>
 
       <div className={styles.leftArrow}>
-        <WestIcon />
+        <WestIcon onClick = {() => goBack()}/>
       </div>
 
       <div className={styles.panoramaContent}>
@@ -40,7 +50,7 @@ const ModelPage = () => {
                   }
                 }}
                 onClick={() =>
-                  setUrl('http://localhost:5173/api/panoramas/?hotel=Unirea&appType=Apartments&appId=Apartment1')
+                  setUrl(`http://localhost:5173/api/panoramas/?hotel=${firstWord}&appType=Apartments&appId=Apartment1`)
                 }
                 endIcon={<BedOutlinedIcon />}
               >
@@ -50,7 +60,7 @@ const ModelPage = () => {
               <Button
                 sx={{ mb: 2, backgroundColor: '#18181A', color: '#fff', border: '1px solid #fff', borderRadius: '0.5rem', padding: '10px', fontSize: '1rem', textTransform: 'none' }}
                 onClick={() =>
-                  setUrl('http://localhost:5173/api/panoramas/?hotel=Unirea&appType=Pool&appId=Apartment1')
+                  setUrl(`http://localhost:5173/api/panoramas/?hotel=${firstWord}&appType=Pool&appId=Apartment1`)
                 }
                 endIcon={<SpaOutlinedIcon />}
               >
@@ -66,7 +76,7 @@ const ModelPage = () => {
                   }
                 }}
                 onClick={() =>
-                  setUrl('http://localhost:5173/api/panoramas/?hotel=Unirea&appType=ConferenceRoom&appId=Apartment1')
+                  setUrl(`http://localhost:5173/api/panoramas/?hotel=${firstWord}&appType=ConferenceRoom&appId=Apartment1`)
                 }
                 endIcon={<MeetingRoomOutlinedIcon />}
               >
