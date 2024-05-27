@@ -4,6 +4,7 @@ import CategoryCard from "./components/CategoryCard";
 import MapComponent from "../pointsOfInterest/mapComponent";
 import axios from "axios";
 import attractionsStyle from "./styles/attraction-detail-page.module.css";
+import ScrollToTop from "./utils/hooks/ScrollToTop";
 
 const AttractionDetailsPage = () => {
   const [attractions, setAttractions] = useState([]);
@@ -30,7 +31,7 @@ const AttractionDetailsPage = () => {
     const fetchAttractionsForHotel = async () => {
       try {
         const response = await fetch(
-            "http://localhost:5173/api/attractionshotel",
+            "/api/attractionshotel",
             {
               method: "POST",
               headers: {
@@ -104,7 +105,7 @@ const AttractionDetailsPage = () => {
   const fetchTrailData = async (difficulty) => {
     try {
       const response = await axios.post(
-          "http://localhost:5173/api/attractionshotelwithdirections",
+          "/api/attractionshotelwithdirections",
           {
             hotelName,
             difficulty,
@@ -153,8 +154,8 @@ const AttractionDetailsPage = () => {
     )}&waypoints=${encodeURIComponent(trail.replace(/ -> /g, '|'))}&travelmode=walking`;
 
     return (
-        <div key={difficulty}>
-          <h2>{difficulty.charAt(0).toUpperCase() + difficulty.slice(1)} Trail</h2>
+        <div key={difficulty} className={attractionsStyle["trail-category"]}>
+          <h2 className={attractionsStyle["trail-category-title"]}>{difficulty.charAt(0).toUpperCase() + difficulty.slice(1)} Trail</h2>
           {/* <p>Original order: {originalTrail}</p> */}
           <p>{optimizedTrail}</p>
         {/*  <button>*/}
@@ -162,8 +163,8 @@ const AttractionDetailsPage = () => {
         {/*  See Original Trail on Maps*/}
         {/*</a> *!/*/}
         {/*  </button>*/}
-          <button>
-            <a href={googleMapsUrl(optimizedTrail)} target="_blank" rel="noopener noreferrer">
+          <button className={attractionsStyle["button-to-maps"]}>
+            <a className={attractionsStyle["link-to-maps"]} href={googleMapsUrl(optimizedTrail)} target="_blank" rel="noopener noreferrer">
               View on Maps
             </a>
           </button>
@@ -195,6 +196,7 @@ const AttractionDetailsPage = () => {
 
   return (
       <div className="main-body-attractions">
+        <ScrollToTop />
         <div className={attractionsStyle["title-container"]}>
           <h3 className={attractionsStyle["attr-title-page"]}>
             About {hotelName}
@@ -206,7 +208,7 @@ const AttractionDetailsPage = () => {
         <div className={attractionsStyle["subtitle-container"]}>
           <div>
             <h3 className={attractionsStyle["attr-subtitle-page"]}>
-              About {hotelName}
+              Attractions for {hotelName}
             </h3>
           </div>
           <div>
@@ -241,7 +243,13 @@ const AttractionDetailsPage = () => {
               )
           )}
         </div>
-        <div>
+        <div className={attractionsStyle["trails-container"]}>
+          <div className={attractionsStyle["tracks-container-title"]}>
+            <h2 className={attractionsStyle["tracks-title"]}>Tracks for {hotelName}</h2>
+          </div>
+          <div className={attractionsStyle["tracks-container-subtitle"]}>
+            <h3 className={attractionsStyle["tracks-subtitle"]}>Tracks by difficulty</h3>
+          </div>
           {["hard", "medium", "easy"].map((difficulty) => renderTrail(difficulty))}
         </div>
       </div>

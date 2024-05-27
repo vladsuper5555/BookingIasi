@@ -1,6 +1,42 @@
 import { runQueryOnDatabaseAndFetchEntireResult } from '../../models/database.model.js';
 import crypto from 'crypto';
 
+async function editLoggedUserInfo(req, res){
+    const {firstNameTemp, lastNameTemp, emailTemp } = req.body;
+    const sqlUpdateQuery = `UPDATE users SET
+        email = "${emailTemp}", givenName = "${firstNameTemp}", familyName = "${lastNameTemp}" WHERE username = "${req.cookies.username}"`;
+    
+        try {
+            await runQueryOnDatabaseAndFetchEntireResult(sqlUpdateQuery);
+            res.send({ success: true, message: 'Profile data updated successfully' });
+        } catch (error) {
+            console.error('Failed to update profile data:', error);
+            res.status(500).send({ success: false, message: 'Failed to update profile data' });
+        }
+}
+async function getUserInfo(req, res){
+    //get the info for the user in the cookie and send it in a json via res
+    let sqlQuery = `SELECT * FROM users WHERE username = "${req.cookies.username}" AND password = "${req.cookies.pass}"`;
+    
+    //take the data and put it in a json and send it with res
+    try {
+        let results = await runQueryOnDatabaseAndFetchEntireResult(sqlQuery);
+        
+        if (results.length === 0) {
+          return res.status(404).json({ error: 'User not found' });
+        }
+    
+        const userData = results.map(user => {
+          const { password, ...userWithoutPassword } = user;
+          return userWithoutPassword;
+        });
+    
+        return res.json(userData);
+      } catch (error) {
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+
+}
 async function logout(req, res){
     if (req.cookies && req.cookies.pass && req.cookies.username) {
         res.clearCookie('username', {
@@ -19,7 +55,6 @@ async function logout(req, res){
         return res.status(401).send({ success: false, message: 'User is not authenticated' });
     }
 }
-
 async function checkCookie(req, res){
     console.log("check cookie function");
     if (req.cookies && req.cookies.pass && req.cookies.username) {
@@ -34,7 +69,6 @@ async function checkCookie(req, res){
         return res.status(401).send({ success: false, message: 'User is not authenticated' });
     }
 }
-
 async function checkCredentialsAgainstDatabase(req, res){
     
     const { username, password } = req.body;
@@ -83,7 +117,6 @@ async function checkCredentialsAgainstDatabase(req, res){
     }
     res.end();
 }
-
 async function addCredentialsToDatabase(req, res){
     const { givenName, familyName, username, email, password } = req.body;
 
@@ -128,7 +161,7 @@ async function addCredentialsToDatabase(req, res){
     const hashedPassword = hash.digest('hex');
 
     let sqlInsertQuery = `INSERT INTO users (givenName, familyName, username, email, password, birthDate, height, weight, gender, needsSpecialAssistance, userAgreedToFetchData, activityIndex) VALUES ("${givenName}", "${familyName}", "${username}", "${email}", "${hashedPassword}", 
-    "1990-01-01", 165.5, 60.2, "female", false, true, 120
+    "1990-01-01", 0, 0, "other", false, true, 0
     )`;
     console.log(sqlInsertQuery);
     let result = await runQueryOnDatabaseAndFetchEntireResult(sqlInsertQuery);
@@ -157,27 +190,39 @@ async function addCredentialsToDatabase(req, res){
 
       res.end();
 }
-
-//poate o folosesc si la editare profil 
 async function saveHealthData(req, res) {
-    
     const username = req.cookies.username;
 
     const {
         birthDate, height, weight, gender, needsSpecialAssistance, activityIndex
     } = req.body;
 
-  
     if (!username) {
         return res.status(401).send({ success: false, message: 'User is not authenticated' });
     }
 
-    const sqlUpdateQuery = `UPDATE users SET
-        birthDate = "${birthDate}", height = "${height}", weight = "${weight}", gender = "${gender}", needsSpecialAssistance = "${needsSpecialAssistance == true ? 1 : 0}",
-        activityIndex = ${activityIndex}
-        WHERE username = "${username}"`;
-
+    const sqlSelectQuery = `SELECT birthDate, height, weight, gender, needsSpecialAssistance, activityIndex FROM users WHERE username = "${username}"`;
+    
     try {
+        const results = await runQueryOnDatabaseAndFetchEntireResult(sqlSelectQuery);
+        if (results.length === 0) {
+            return res.status(404).send({ success: false, message: 'User not found' });
+        }
+
+        const currentData = results[0];
+
+        const updatedBirthDate = birthDate || currentData.birthDate;
+        const updatedHeight = height || currentData.height;
+        const updatedWeight = weight || currentData.weight;
+        const updatedGender = gender || currentData.gender;
+        const updatedNeedsSpecialAssistance = needsSpecialAssistance !== undefined ? (needsSpecialAssistance == true ? 1 : 0) : currentData.needsSpecialAssistance;
+        const updatedActivityIndex = activityIndex !== 0 ? activityIndex : currentData.activityIndex;
+
+        const sqlUpdateQuery = `UPDATE users SET
+            birthDate = "${updatedBirthDate}", height = "${updatedHeight}", weight = "${updatedWeight}", gender = "${updatedGender}", needsSpecialAssistance = ${updatedNeedsSpecialAssistance},
+            activityIndex = ${updatedActivityIndex}
+            WHERE username = "${username}"`;
+
         await runQueryOnDatabaseAndFetchEntireResult(sqlUpdateQuery);
         res.send({ success: true, message: 'Health data updated successfully' });
     } catch (error) {
@@ -192,5 +237,7 @@ export {
     addCredentialsToDatabase,
     checkCookie,
     saveHealthData,
-    logout
+    logout,
+    getUserInfo,
+    editLoggedUserInfo
 }

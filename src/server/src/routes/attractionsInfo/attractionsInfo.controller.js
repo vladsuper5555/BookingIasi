@@ -38,6 +38,30 @@ async function getAttractionsForHotel(req, res) {
     res.end();
 }
 
+async function getHotelIdByName(req, res) {
+    const hotelName = req.body.hotelName;
+    try {
+      const sqlQuery = `
+        SELECT id, name 
+        FROM hotelGeneral 
+        WHERE name = '${hotelName}'
+      `;
+      
+      const hotelIdResult = await runQueryOnDatabaseAndFetchEntireResult(sqlQuery);
+      
+      if (hotelIdResult.length > 0) {
+        const hotelId = hotelIdResult[0].id;
+        res.status(200).json({ success: true, hotelId });
+      } else {
+        res.status(404).json({ success: false, message: 'Hotel not found' });
+      }
+    } catch (error) {
+      console.error('Error fetching hotel ID: ', error);
+      res.status(500).json({ success: false, message: 'Server error' });
+    }
+    res.end();
+  }
+
 async function getAttractionsAndHotelCoordinates(req, res) {
     const hotelName = req.body.hotelName;
     try {
@@ -78,4 +102,4 @@ async function getAttractionsWithDirections(req, res) {
 }
 
 
-export { getHotelsNamesFromDatabase, getAttractionsForHotel, getAttractionsWithDirections, getAttractionsAndHotelCoordinates };
+export { getHotelsNamesFromDatabase, getAttractionsForHotel, getAttractionsWithDirections, getAttractionsAndHotelCoordinates, getHotelIdByName };

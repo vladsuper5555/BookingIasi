@@ -1,7 +1,7 @@
 // MainPage.jsx
 import React from 'react';
-import { Link, redirect } from 'react-router-dom';
-import { useState, useEffect } from 'react'
+import { Link, redirect, useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react'
 import Button from '@mui/material/Button';
 import Mesaj from './Mesaj';
 import PrincipalImageUnirea from "./images/hotels/UnireaHotelSpa/principal.jpg";
@@ -27,19 +27,30 @@ import contact_email from "./images/Icons/contact/email.svg";
 import contact_location from "./images/Icons/contact/location.svg";
 import contact_telephone from "./images/Icons/contact/telephone.svg";
 import "./styles/main-page.css";
+import ScrollToTop from '../attractions/utils/hooks/ScrollToTop';
+
 const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, description, petsAllowed,
   parkingFacility, smokingAllowed, event, review, aggregateRating, address, email,
   telephone, paymentAccepted, currenciesAccepted, amenityFeature }) => {
 
   const [hotelData, setHotelData] = useState([]);
   const [error, setError] = useState('');
+  const { hotelId } = useParams();
+  const navigate = useNavigate();
+  const isNavigating = useRef(false); 
+  const isNavigatingPanoramas = useRef(false);
   
-  const hotelName = 'Unirea Hotel & Spa';
+  const hotelName = hotelId;
+
+  function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    section.scrollIntoView({ behavior: "smooth" });
+  }
 
   const fetchInfoForHotel = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5173/api/hotelsinfo",
+        "/api/hotelsinfo",
         {
           method: "POST",
           headers: {
@@ -66,18 +77,77 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
     if (hotelName) {
       fetchInfoForHotel(hotelName);
     }
-  }, []);
+  }, hotelName);
+
   if (error) {
     return <div className="error">{error}</div>;
   }
+
+  const handleSeeAttractionsClick = async (hotelName) => {
+    if (isNavigating.current) return; 
+    isNavigating.current = true;
+
+    try {
+      const response = await fetch("/api/attractionshotel", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ hotelName }),
+      });
+      if (!response.ok) {
+        throw new Error("Response was not ok");
+      }
+      const data = await response.json();
+      console.log(data);
+      if (data.success) {
+          navigate(`/attractions/${hotelName}`);
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      setError("An error occurred. Please try again later");
+    } finally {
+      isNavigating.current = false; 
+    }
+  };
+  const handleSeePanoramasClick = async (hotelName) => {
+    if (isNavigating.current) return; 
+    isNavigating.current = true;
+
+    try {
+      const response = await fetch("/api/attractionshotel", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ hotelName }),
+      });
+      if (!response.ok) {
+        throw new Error("Response was not ok");
+      }
+      const data = await response.json();
+      console.log(data);
+      if (data.success) {
+          navigate(`/attractions/${hotelName}`); //de schimbat cu adresa generala de la panorama view
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      setError("An error occurred. Please try again later");
+    } finally {
+      isNavigating.current = false; 
+    }
+  };
   return (
-    <div className='general-stucture'>   
+    <div className='general-stucture'>
+      <ScrollToTop />   
       <nav className="navbar">
-        <a href="#section_About">About</a>
-        <a href="#section_Features">Features</a>
-        <a href="#section_Review">Reviews</a>
-        <a href="#section_Contact">Contact</a>
-      </nav>   
+      <a href="#section_About" onClick={(e) => { e.preventDefault(); scrollToSection("section_About"); }}>About</a>
+      <a href="#section_Features" onClick={(e) => { e.preventDefault(); scrollToSection("section_Features"); }}>Features</a>
+      <a href="#section_Review" onClick={(e) => { e.preventDefault(); scrollToSection("section_Review"); }}>Reviews</a>
+      <a href="#section_Contact" onClick={(e) => { e.preventDefault(); scrollToSection("section_Contact"); }}>Contact</a>
+    </nav>
       <div className="hotels">
         <header className="header">
           <h1>{hotelData?.name}</h1>
@@ -157,8 +227,28 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
             <div className="sectiuneText">
               <div className="oneUnderAnother">
                 {hotelData?.amenityFeature}
-                <a href="http://localhost:5173/Hotels">Click to see the hotel rooms 3D!</a>
-                <a href="http://localhost:5173/Hotels">Click to see attractions around!</a>
+                <div 
+                  className = "linksDistance"
+                  onClick={() => handleSeePanoramasClick(hotelName)}
+                >
+                  <div>
+                    <a>
+                    Click to see the virtual tour!
+                    </a>
+                  </div>
+                </div>
+                
+                <div 
+                   className = "linksDistance"
+                  onClick={() => handleSeeAttractionsClick(hotelName)}
+                >
+                  <div>
+                    <a>
+                    Click to see attraction around!
+                    </a>
+                  </div>
+                </div>
+            
               </div>
             </div>
             <div className="featuresBox">

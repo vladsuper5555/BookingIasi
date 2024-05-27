@@ -3,8 +3,10 @@ import { Button, Checkbox, InputLabel, MenuItem, Select, TextField } from '@mui/
 import { Link, useNavigate} from 'react-router-dom';
 import  './UserProf.css';
 import profilePicture from './profilepic.jpg';
+import { Save } from '@mui/icons-material';
 
 function UserProf() {
+  ///const [userInfo, setUserInfo] = useState(null);
   const [editingProfile, setEditingProfile] = useState(false);
   const [editingHealthData, setEditingHealthData] = useState(false);
   const [firstName, setFirstName] = useState('John');
@@ -30,18 +32,38 @@ function UserProf() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch('http://localhost:5173/api/check-auth', {
+        const response = await fetch('/api/check-auth', {
           method: "GET",
           credentials: "include",
         });
 
         if (response.ok) {
+          const userResponse = await fetch('/api/get-logged-user-info', {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          });
+
+          const responseObject = await userResponse.json();
+          if (responseObject.length > 0) {
+            const userData = responseObject[0]; 
+            setFirstName(userData.givenName);
+            setLastName(userData.familyName);
+            setEmail(userData.email);
+            setBirthDate(formatDate(userData.birthDate));
+            setHeight(userData.height.toString());
+            setWeight(userData.weight.toString());
+            setGender(userData.gender);
+            setNeedsSpecialAssistance(userData.needsSpecialAssistance === 1);
+          }
+
           navigate('/userProf');
-        }else{
+        } else {
           navigate('/login');
         }
       } catch (error) {
-        
         console.error("An error occurred while checking authentication:", error);
       }
     };
@@ -54,7 +76,7 @@ function UserProf() {
     event.preventDefault();
     
     try {
-      const response = await fetch('http://localhost:5173/api/logout', {
+      const response = await fetch('/api/logout', {
                 method: "GET",
                 credentials: "include"
             });
@@ -83,13 +105,44 @@ function UserProf() {
     setEditingProfile(true);
   };
 
-  const handleSaveProfile = () => {
+  function formatDate(isoString) {
+    const date = new Date(isoString);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString(undefined, options);
+  }
+
+  const handleSaveProfile = async (event) => {
+    event.preventDefault();
+    
     setFirstName(firstNameTemp);
     setLastName(lastNameTemp);
     setEmail(emailTemp);
     setPhoneNumber(phoneNumberTemp);
     setEditingProfile(false);
-    // logica pentru salvarea in baza de date
+
+    //in momentul in care da click pe save, se salveaza si in baza de date alea
+    try {
+      const response = await fetch('/api/update-logged-user-info', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          firstNameTemp,
+          lastNameTemp,
+          emailTemp
+        }),
+        credentials: "include"
+      });
+      
+      if (response.ok) {
+        console.log('Profile data saved successfully.');
+      } else {
+        console.error('Failed to save profile data.');
+      }
+    } catch (error) {
+      console.error('Error while saving  data:', error);
+    }
   };
   
   const handleCancelProfile = () => {

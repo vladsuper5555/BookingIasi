@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; 
+import {useParams} from 'react-router-dom';
 import Login from './userInteractions/Login';
 import Signup from './userInteractions/Signup';
 import Welcome from './userInteractions/Wellcome';
@@ -16,6 +17,12 @@ import "./App.css";
 import UserProf from './userInteractions/UserProf';
 import HealthForm from './userInteractions/HealthForm';
 
+function HotelsPage() {
+  // Get the hotelId param from the URL.
+  let { hotelId } = useParams();
+  // ...
+}
+
 function App() {
   return (
     <Router>
@@ -27,11 +34,15 @@ function App() {
         <Route path="/health-form" element={<HealthForm />} />
         {/* <Route path="/register" element={<RegisterPage />} /> */}
         <Route path="/panoramas" element={<PanoramaTour />} />
-        <Route path="/hotels" element={<Hotels />} />
+        <Route path="/hotels">
+          <Route path=":hotelId" element={<Hotels />} />
+        </Route>
         <Route path='/map' element={<Map />} />
         <Route path='/check-auth' />
         <Route path='/logout' />
         <Route path='/saveHealthForm' />
+        <Route path='/get-logged-user-info' />
+        <Route path='/update-logged-user-info' />
         <Route path="/attractions" element={<AttractionsPage />} />
         <Route
           path="/attractions/:hotelName"

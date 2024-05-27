@@ -54,3 +54,59 @@
     font-size: 2.2rem;
     font-weight: bolder;
 }
+
+.trails-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: 80px;
+}
+
+.trail-category {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 50px;
+    margin-left: 100px;
+}
+
+.trail-category-title {
+    font-weight: bold;
+    font-size: 1.7rem;
+    color: #005FB7;
+}
+
+.button-to-maps {
+    color: var(--font-color);
+    background-color: transparent;
+    border: 1px solid var(--font-color);
+    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+}
+
+.button-to-maps:hover {
+    background-color: var(--font-color);
+    color: var(--background-color);
+    border: 1px solid var(--background-color);
+}
+
+.link-to-maps {
+    color: var(--font-color);
+    transition: color 0.3s ease;
+}
+
+.link-to-maps:hover {
+    color: var(--background-color);
+}
+
+.tracks-container-subtitle {
+    margin-left: 100px;
+    margin-top: -30px;
+    margin-bottom: 30px;
+}
+
+.tracks-subtitle {
+    font-weight: 600;
+    font-size: 1.9rem;
+}
