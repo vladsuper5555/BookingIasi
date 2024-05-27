@@ -161,7 +161,7 @@ async function addCredentialsToDatabase(req, res){
     const hashedPassword = hash.digest('hex');
 
     let sqlInsertQuery = `INSERT INTO users (givenName, familyName, username, email, password, birthDate, height, weight, gender, needsSpecialAssistance, userAgreedToFetchData, activityIndex) VALUES ("${givenName}", "${familyName}", "${username}", "${email}", "${hashedPassword}", 
-    "1990-01-01", 165.5, 60.2, "female", false, true, 120
+    "1990-01-01", 0, 0, "other", false, true, 0
     )`;
     console.log(sqlInsertQuery);
     let result = await runQueryOnDatabaseAndFetchEntireResult(sqlInsertQuery);
