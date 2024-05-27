@@ -1,6 +1,6 @@
 // MainPage.jsx
 import React from 'react';
-import { Link, redirect } from 'react-router-dom';
+import { Link, redirect, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react'
 import Button from '@mui/material/Button';
 import Mesaj from './Mesaj';
@@ -33,8 +33,9 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
 
   const [hotelData, setHotelData] = useState([]);
   const [error, setError] = useState('');
+  const { hotelId } = useParams();
   
-  const hotelName = 'Unirea Hotel & Spa';
+  const hotelName = hotelId;
 
   const fetchInfoForHotel = async () => {
     try {
@@ -66,7 +67,8 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
     if (hotelName) {
       fetchInfoForHotel(hotelName);
     }
-  }, []);
+  }, hotelName);
+
   if (error) {
     return <div className="error">{error}</div>;
   }
