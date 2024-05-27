@@ -21,7 +21,7 @@ const hotelData = [
         description: "Centrally situated in Iasi, nearby the Palace of Culture and Palace Mall",
     },
     {
-        name: "Hotel Unirea",
+        name: "Unirea Hotel & Spa",
         image: hotelUnirea,
         description: "Centrally located on Union Square in the heart of Iasi",
     },
@@ -36,7 +36,7 @@ const hotelData = [
         description: "Set in the centre of Iasi, Hotel International offers accommodation with free WiFi and complimentary access to a fitness center, indoor swiming pool, dry and wet sauna and a hot tub.",
     },
     {
-        name: "Apartament Hotel Prestige",
+        name: "Prestige Hotel",
         image: hotelPrestige,
         description: "Prestige Hotel is set in Iaşi, 120 metres away from Chamber of Commerce and Industry and 180 metres away from Copou Park.",
     },

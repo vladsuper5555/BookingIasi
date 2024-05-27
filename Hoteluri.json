@@ -14,7 +14,7 @@
     },
     {
       "ID_hotel": 2,
-      "Nume_hotel": "Hotel Unirea",
+      "Nume_hotel": "Unirea Hotel & Spa",
       "Adresa": "Str. Piata Unirii nr. 1",
       "Telefon": "0232205000",
       "Rating": 4.6,
@@ -50,7 +50,7 @@
     },
     {
       "ID_hotel": 5,
-      "Nume_hotel": "Apartament Hotel Prestige",
+      "Nume_hotel": "Prestige Hotel",
       "Adresa": "Strada Titu Maiorescu 1A",
       "Telefon": "0724502502",
       "Rating": 4.6,

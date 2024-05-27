@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./styles/main-page-style.module.css";
 import photoIasi from "./assets/svg/photo-attractions-iasi.png";
 import "./styles/custom-variables.css";
@@ -28,7 +28,6 @@ const AttractionsPage = () => {
         throw new Error("Response was not ok");
       }
       const data = await response.json();
-      console.log(data);
       if (data.success) {
         setHotelNames(data.hotelNames);
       } else {
@@ -56,26 +55,29 @@ const AttractionsPage = () => {
     isNavigating.current = true;
 
     try {
-      const response = await fetch("/api/attractionshotel", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ hotelName }),
-      });
-      if (!response.ok) {
-        throw new Error("Response was not ok");
-      }
-      const data = await response.json();
-      console.log(data);
-      if (data.success) {
-        if (hotelName === "Hotel Unirea" || hotelName === "Apartament Hotel Prestige") {
-          navigate(`/hotels`);
+      let hotelId;
+      if (hotelName === "Unirea Hotel & Spa" || hotelName === "Prestige Hotel") {
+        const response = await fetch("/api/attractionsbyid", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ hotelName }),
+        });
+
+        if (!response.ok) {
+            throw new Error("Response was not ok");
+        }
+
+        const data = await response.json();
+        if (data.success) {
+            hotelId = data.name; 
+            navigate(`/hotels/${hotelName}`);
         } else {
-          navigate(`/attractions/${hotelName}`);
+            setError(data.message);
         }
       } else {
-        setError(data.message);
+        navigate(`/attractions/${hotelName}`);
       }
     } catch (error) {
       setError("An error occurred. Please try again later");
@@ -89,9 +91,9 @@ const AttractionsPage = () => {
     isNavigatingProfile.current = true;
 
     try {
-      navigate(`/userProf`, {replace: true});
+      navigate(`/userProf`);
     } catch (error) {
-      setError("An error occured. Please try again later")
+      setError("An error occurred. Please try again later")
     } finally {
       isNavigatingProfile.current = false; 
     }

@@ -10,29 +10,38 @@ const HotelCard = ({ hotelName, hotelDescription, hotelPhoto }) => {
   const navigate = useNavigate();
 
   const fetchAttractionsForHotel = async (hotelName) => {
+    if (isNavigating.current) return; 
+    isNavigating.current = true;
+
     try {
-      const response = await fetch(
-        "/api/attractionshotel",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ hotelName }),
+      let hotelId;
+      if (hotelName === "Unirea Hotel & Spa" || hotelName === "Prestige Hotel") {
+        const response = await fetch("/api/attractionsbyid", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ hotelName }),
+        });
+
+        if (!response.ok) {
+            throw new Error("Response was not ok");
         }
-      );
-      if (!response.ok) {
-        throw new Error("Response was not ok");
-      }
-      const data = await response.json();
-      console.log(data);
-      if (data.success) {
-        navigate(`/attractions/${hotelName}`);
+
+        const data = await response.json();
+        if (data.success) {
+            hotelId = data.name;
+            navigate(`/hotels/${hotelName}`, {replace: true});
+        } else {
+            setError(data.message);
+        }
       } else {
-        setError(data.message);
+        navigate(`/attractions/${hotelName}`, {replace: true});
       }
     } catch (error) {
       setError("An error occurred. Please try again later");
+    } finally {
+      isNavigating.current = false; 
     }
   };
 

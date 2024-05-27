@@ -27,6 +27,8 @@ import contact_email from "./images/Icons/contact/email.svg";
 import contact_location from "./images/Icons/contact/location.svg";
 import contact_telephone from "./images/Icons/contact/telephone.svg";
 import "./styles/main-page.css";
+import ScrollToTop from '../attractions/utils/hooks/ScrollToTop';
+
 const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, description, petsAllowed,
   parkingFacility, smokingAllowed, event, review, aggregateRating, address, email,
   telephone, paymentAccepted, currenciesAccepted, amenityFeature }) => {
@@ -39,6 +41,11 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
   const isNavigatingPanoramas = useRef(false);
   
   const hotelName = hotelId;
+
+  function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    section.scrollIntoView({ behavior: "smooth" });
+  }
 
   const fetchInfoForHotel = async () => {
     try {
@@ -133,13 +140,14 @@ const Hotels = ({ name, checkinTime, checkoutTime, openingHours, priceRange, des
     }
   };
   return (
-    <div className='general-stucture'>   
+    <div className='general-stucture'>
+      <ScrollToTop />   
       <nav className="navbar">
-        <a href="#section_About">About</a>
-        <a href="#section_Features">Features</a>
-        <a href="#section_Review">Reviews</a>
-        <a href="#section_Contact">Contact</a>
-      </nav>   
+      <a href="#section_About" onClick={(e) => { e.preventDefault(); scrollToSection("section_About"); }}>About</a>
+      <a href="#section_Features" onClick={(e) => { e.preventDefault(); scrollToSection("section_Features"); }}>Features</a>
+      <a href="#section_Review" onClick={(e) => { e.preventDefault(); scrollToSection("section_Review"); }}>Reviews</a>
+      <a href="#section_Contact" onClick={(e) => { e.preventDefault(); scrollToSection("section_Contact"); }}>Contact</a>
+    </nav>
       <div className="hotels">
         <header className="header">
           <h1>{hotelData?.name}</h1>
