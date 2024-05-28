@@ -41,14 +41,12 @@ async function logout(req, res){
     if (req.cookies && req.cookies.pass && req.cookies.username) {
         res.clearCookie('username', {
             httpOnly: true,
-            secure: true,
-            sameSite: 'None'
+            sameSite: 'Strict'
           });
 
           res.clearCookie('pass', {
             httpOnly: true,
-            secure: true,
-            sameSite: 'None'
+            sameSite: 'Strict'
           });
           return res.status(200).send({ success: false, message: 'User is logged out' }); 
     } else {
