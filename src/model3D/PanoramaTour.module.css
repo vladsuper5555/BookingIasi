@@ -69,6 +69,10 @@
 
 @media (max-width: 960px) {
 
+    .leftArrow{
+       display: none;
+    }
+
     .panoramaContent{
         flex-direction: column;
     }
@@ -78,16 +82,29 @@
     }
 
     .panoramaButtonsContainer{
-        background-color: #f0f0f0;
         flex-grow: 1;
     } 
 
     .cardContent{
-        flex-direction: row;
+        flex-direction: column;
     }
 
     .buttonsHeader{
         display: none;
     }
+
+}
+
+@media (max-width: 560px){
+
+    .heading h1{
+    margin-right: 10%;
+    }
+
+    .leftArrow{
+        display: none;
+     }
+
+
 
 }

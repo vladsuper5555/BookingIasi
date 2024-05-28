@@ -6,7 +6,6 @@
         "yaw": 0,
         "type": "equirectangular",
         "title": "Bathroom",
-        "showControls": false,
         "hotSpots": [
             {
                 "pitch": -2,

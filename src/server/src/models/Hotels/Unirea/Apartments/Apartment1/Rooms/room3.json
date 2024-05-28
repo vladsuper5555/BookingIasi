@@ -6,7 +6,6 @@
         "yaw": 0,
         "type": "equirectangular",
         "title": "Room 3",
-        "showControls": false,
         "hotSpots": [
             {
                 "pitch": 0,

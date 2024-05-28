@@ -3,7 +3,6 @@
     "config": {
         "title" : "Room 1",
         "autoLoad": true,
-        "showControls": false,
         "hotSpots": [
             {
                 "pitch": -8,
