@@ -12,6 +12,13 @@
                 "sceneId": "Balcony"
             },
             {
+                "pitch": -11,
+                "yaw": 113,
+                "type": "scene",
+                "text": "Hall",
+                "sceneId": "Hall"
+            },
+            {
                 "pitch": 20,
                 "yaw": -92,
                 "type": "info",
