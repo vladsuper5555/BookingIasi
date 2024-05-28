@@ -56,10 +56,11 @@ async function logout(req, res){
 async function checkCookie(req, res){
     console.log("check cookie function");
     console.log(req.cookies);
-    console.log(req);
     if (req.cookies && req.cookies.pass && req.cookies.username) {
+        console.log(req.cookies);
         let sqlQuery = `SELECT * FROM users WHERE username = "${req.cookies.username}" AND password = "${req.cookies.pass}"`;
         let results = await runQueryOnDatabaseAndFetchEntireResult(sqlQuery);
+        console.log(results);
         if (results.length === 0) {
             res.status(401).send({ success: false, message: 'Invalid cookies!' });
         }else{
