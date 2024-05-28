@@ -240,13 +240,18 @@ address {
   font-style: normal;
 }
 .contact {
-  padding: 40px 20px;
   color: black;
   text-align: center;
+  padding-bottom: 20%;
 }
 
 .contact-image-container {
   position: relative;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  height: fit-content;
+
 }
 
 .contact-image {
@@ -256,17 +261,15 @@ address {
 
 .contactBox {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  margin-right: 2%;
+  top: 2%;
+  right: 2%;
   background-color:#f0f0f0; 
-  height: 115%;
+  height: fit-content;
   color: black;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   padding: 20px;
   border-radius: 0 15px 15px 0; 
-  width: 30%; 
+  width: 40%; 
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   font-size: 1.5em;
@@ -319,14 +322,9 @@ h1, h2, p, li {
     bottom: -40px;
     font-size: 0.9em;
   }
-  .contactBox {
-    width: 40%;
-    height: 100%;
-  }
-}
-@media (max-width: 1300px){
-  .contactBox{
-    height: 100%;
+
+  .contact{
+    padding-bottom: 30%;
   }
 }
 
@@ -336,22 +334,24 @@ h1, h2, p, li {
     bottom: -60px;
     font-size: 0.8em;
   }
-  .contactBox{
-    height: 150%;
+
+  .contact{
+    padding-bottom: 30%;
   }
+
 }
 
 @media (max-width: 1040px) {
+
+  .contact{
+    padding-bottom: 50%;
+  }
+
   .header-info{
     bottom: -60px;
     font-size: 0.6em;
   }
-  .contactBox {
-    padding: 10px;
-    font-size: 1em;
-    height: 100%;
-    
-  }
+
   .contactBox .titluSectiune {
     font-size: 1.5rem; /* Ajuste font-size pentru titlul sectiunii */
   }
@@ -363,13 +363,10 @@ h1, h2, p, li {
     margin-bottom: 5%;
   }
 }
-@media (max-width: 880px){
-  .contactBox{
-    height: 120%;
-  }
-}
 
 @media (max-width: 768px) {
+
+
   .header-image{
     width: 100%;
     height: 100%;
@@ -411,7 +408,7 @@ h1, h2, p, li {
   }
 
 .contact {
-  padding: 40px 20px;
+  padding-bottom: 80%;
   color: black;
   background-size: cover;
   background-position: center;
@@ -421,11 +418,6 @@ h1, h2, p, li {
 .continut{
 display: flex;
 flex-direction: column;
-}
-.contactBox {
-  width: 45%; /* Slightly larger width for smaller screens */
-  padding: 15px; /* Adjust padding */
-  height: 150%;
 }
 
 .contactBox .titluSectiune {
@@ -456,23 +448,10 @@ flex-direction: column;
   margin-bottom: 10px;
 }
 }
-@media (max-width: 645px){
-  .contactBox{
-    height: 180%;
-  }
-}
-@media(max-width: 580px){
-  .contactBox{
-    height: 200%;
-  }
-}
-@media(max-width: 580px){
-  .contactBox{
-    height: 230%;
-  }
-}
 
 @media (max-width: 480px) {
+
+
   .header-image{
     width: 100%;
     height: 100%;
@@ -483,11 +462,6 @@ flex-direction: column;
     font-size: 0.5em;
   }
 
-  .contactBox {
-    width: 50%; /* Full width for very small screens */
-    padding: 10px; /* Adjust padding */
-    height: 150%;
-}
 
 .contactBox .titluSectiune {
     font-size: 1rem; /* Smaller font size for the title */
@@ -497,17 +471,17 @@ flex-direction: column;
     font-size: 0.6rem; /* Further adjust font size */
 }
 }
-@media (max-width: 450px) {
+
+@media (max-width: 400px) {
+
+  .contact-image-container{
+    justify-content: center;
+  }
+
   .contactBox{
-    max-height: 300%;
     width: 80%;
   }
-}
-@media (max-width: 400px) {
-  .contactBox{
-    max-height: 200%;
-    width: 90%;
-  }
+
   .contactBox address div{
     margin-bottom: 2%;
   }
@@ -518,10 +492,6 @@ flex-direction: column;
     bottom: -50px;
     text-size-adjust: 50%
   }
-  .contactBox {
-    width: 60%; /* Full width for very small screens */
-    padding: 8px; /* Adjust padding */
-}
 
 .contactBox .titluSectiune {
     font-size: 1.2rem; /* Smaller font size for the title */
@@ -529,12 +499,6 @@ flex-direction: column;
 
 .contactBox p, .contactBox address {
     font-size: 0.8rem; /* Further adjust font size */
-}
-.contactBox {
-  width: 60%; /* Full width for very small screens */
-  padding: 8px; /* Adjust padding */
-  height: 280%;
-  
 }
 
 .contactBox .titluSectiune {
@@ -567,15 +531,13 @@ align-items: center;
 margin-bottom: 3px;
 }
 
+.header h1{
+  font-size: 4em;
+
 }
-@media (max-width: 390px) {
-.contactBox{
-  width: 80%;
+
+.navbar a{
+  font-size: small;
 }
+
 }
-@media (max-width: 280px) {
-  .contactBox{
-    width: 80%;
-    height: 500%;
-  }
-  }
