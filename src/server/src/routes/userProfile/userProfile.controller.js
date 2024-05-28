@@ -171,13 +171,13 @@ async function addCredentialsToDatabase(req, res){
             res.cookie('username', username, {
                 httpOnly: true, 
                 // secure: true,    
-                sameSite: 'None', 
+                sameSite: 'Strict', 
                 maxAge: 3600000  // 1 hour
             });
             res.cookie('pass', hashedPassword, {
                 httpOnly: true,  
                 // secure: true,    
-                sameSite: 'None', 
+                sameSite: 'Strict', 
                 maxAge: 3600000  
             });
         }else{
