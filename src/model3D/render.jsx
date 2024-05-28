@@ -5,6 +5,8 @@ const MainPage = ({ url }) => {
     const [panoConfig, setPanoConfig] = useState({ imageSource: "", config: {} });
     const [viewer, setViewer] = useState(null);
     const [panoramas, setPanoramas] = useState([]);
+    const mobileWidth = 60
+    
 
     const fetchPanoConfig = async () => {
         try {
@@ -74,7 +76,6 @@ const MainPage = ({ url }) => {
                 type: "equirectangular",
                 title: item.config.title || "Untitled Scene",
                 imageSource: item.config.imageSource,
-                showControls: false,
                 hotSpots: item.config.hotSpots || []
             });
         }
@@ -90,7 +91,9 @@ const MainPage = ({ url }) => {
                 sceneId="Start"
                 config={panoConfig.config}
                 onScenechange={handleViewerLoad}
-                style={{ width: '60vw', height: '40vw' , borderRadius: '20px'}}
+                style={{
+                     width: '60vw', height: '25vw' , borderRadius: '20px'
+                }}
             />
         </div>
     );

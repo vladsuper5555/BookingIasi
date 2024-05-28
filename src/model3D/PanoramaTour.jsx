@@ -29,8 +29,10 @@ const ModelPage = () => {
       <div className={styles.panoramaContent}>
 
         <div className={styles.panoramaTour}>
+          <div className={styles.panoHeader}>
           <h1 className={styles.heading}>Virtual Hotel Tour</h1>
           <h2 className={styles.heading}>Explore the hotel and its amenities</h2>
+          </div>
           <PanoramaTour url={url} />
         </div>
 
