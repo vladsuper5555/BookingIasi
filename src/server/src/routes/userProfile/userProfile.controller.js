@@ -100,12 +100,12 @@ async function checkCredentialsAgainstDatabase(req, res){
         if (!req.cookies || !req.cookies.pass ||!req.cookies.username ) {
             res.cookie('username', username, {
                 httpOnly: true, 
-                sameSite: 'none', 
+                sameSite: 'Strict', 
                 maxAge: 3600000  // 1 hour
             });
             res.cookie('pass', hashedPassword, {
                 httpOnly: true,  
-                sameSite: 'none', 
+                sameSite: 'Strict', 
                 maxAge: 3600000  
             });
         }else{
