@@ -100,14 +100,12 @@ async function checkCredentialsAgainstDatabase(req, res){
         if (!req.cookies || !req.cookies.pass ||!req.cookies.username ) {
             res.cookie('username', username, {
                 httpOnly: true, 
-                secure: true,    
-                sameSite: 'None', 
+                sameSite: 'none', 
                 maxAge: 3600000  // 1 hour
             });
             res.cookie('pass', hashedPassword, {
                 httpOnly: true,  
-                secure: true,    
-                sameSite: 'None', 
+                sameSite: 'none', 
                 maxAge: 3600000  
             });
         }else{
@@ -172,13 +170,13 @@ async function addCredentialsToDatabase(req, res){
         if (!req.cookies || !req.cookies.pass ||!req.cookies.username ) {
             res.cookie('username', username, {
                 httpOnly: true, 
-                secure: true,    
+                // secure: true,    
                 sameSite: 'None', 
                 maxAge: 3600000  // 1 hour
             });
             res.cookie('pass', hashedPassword, {
                 httpOnly: true,  
-                secure: true,    
+                // secure: true,    
                 sameSite: 'None', 
                 maxAge: 3600000  
             });
