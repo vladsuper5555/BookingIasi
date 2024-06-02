@@ -52,19 +52,30 @@
 }
 
 @media (max-width:768px) {
-
     .category-card-item {
-        width: 18rem;
-        overflow-x: hidden;
+        flex-direction:row;
+        width: 100%;
+        margin-left: 10px;
     }
 
     .main-container-category {
-        overflow: hidden;
-        margin-top: 15px;
+        align-items: center;
+        flex-direction: column;
+        margin-right: 10px;
+    }
+
+    .attractions-list {
+        margin-left: 0;
+    }
+
+    .category-header {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .category-picture {
         width: 20px;
         height: 20px;
+        margin-left: 0;
     }
 }
