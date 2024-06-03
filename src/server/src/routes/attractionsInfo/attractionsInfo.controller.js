@@ -101,5 +101,23 @@ async function getAttractionsWithDirections(req, res) {
     }
 }
 
+async function getUserActivityIndex(req, res) {
+    try {
+        const username = req.cookies.username;
+        const sqlQuery = `SELECT activityIndex FROM users WHERE username = '${username}'`;
 
-export { getHotelsNamesFromDatabase, getAttractionsForHotel, getAttractionsWithDirections, getAttractionsAndHotelCoordinates, getHotelIdByName };
+        const result = await runQueryOnDatabaseAndFetchEntireResult(sqlQuery);
+        if (result.length > 0) {
+            const activityIndex = result[0].activityIndex;
+            res.status(200).json({ success: true, activityIndex });
+        } else {
+            res.status(404).json({ success: false, message: 'User not found' });
+        }
+    } catch (error) {
+        console.error('Error fetching user activity index: ', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+    res.end();
+}
+
+export { getHotelsNamesFromDatabase, getAttractionsForHotel, getAttractionsWithDirections, getAttractionsAndHotelCoordinates, getHotelIdByName, getUserActivityIndex };
