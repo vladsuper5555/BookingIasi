@@ -1,0 +1,25 @@
+.map-style{
+    height: 30rem;
+    width: 105rem;
+    margin-left: 7rem;
+}
+
+@media (max-width:768px){
+    .map-style{
+        width: 22rem;
+        height: 22rem;
+        margin-left: 20px;
+    }
+}
+
+@media (min-width:769px) and (max-width:1240px) {
+    .map-style {
+        width: 43rem;
+    }
+}
+
+@media (min-width:1241px) and (max-width:1900px) {
+    .map-style {
+        width: 70rem;
+    }
+}

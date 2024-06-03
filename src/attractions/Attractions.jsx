@@ -104,8 +104,8 @@ const AttractionsPage = () => {
       <ScrollToTop />
       {error && <p>{error}</p>}
       <div className={styles["person-profile-container"]} onClick={() => handleProfileButton()}>
-        <div><img src={personProfile} alt="person icon"/></div>
-        <div><h2>Profile</h2></div>
+        <div><img src={personProfile} alt="person icon" className={styles["person-profile-icon"]}/></div>
+        <div><h2 className={styles["person-profile-title"]}>Profile</h2></div>
       </div>
       <div className={styles["main-container-info-attractions"]}>
         <div className={styles["main-info-hotels-attr"]}>

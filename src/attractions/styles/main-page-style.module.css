@@ -200,7 +200,7 @@
     }
 
     .person-profile-container{
-        margin-left:0;
+        margin-left:10px;
     }
     .container-subtitle-hotel{
         justify-content: space-evenly;
@@ -215,6 +215,13 @@
 
     }
 
+    .person-profile-icon {
+        width: 25px;
+    }
+
+    .person-profile-title {
+        font-size: 1.1rem;
+    }
 
     p{
         font-size: 14px;

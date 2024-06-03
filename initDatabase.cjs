@@ -222,7 +222,7 @@ con.connect(async function (err) {
               'Making a reservation and arriving within the agreed time frame is necessary to gain access to the establsihment', 
               false, 
               'Prestige Hotel is a historical monument. It has a spot on the Iasi monument list at nr.1112, code IS-II-B-03933. The first owners of this building were Iancu and Victoria Corjescu in 1895. In 2011, the building was claimed by the descendants of the Cerchez family, namely Don Rosetti Maria Ioana, Rosetti Scarlat Alexandru Anton and Rosetti Catrina Irina. Political meetings with important people of the time took place here. From 2014 until today, this building belongs to the owners Cogălniceanu Dumitru and Cogălniceanu Geta.',            
-              '-',             
+              'prestigehotel@gmail.com',             
               '-',            
               'Str Titu Maiorescu, Nr. 1, Iasi, Romania',           
               4.6,            

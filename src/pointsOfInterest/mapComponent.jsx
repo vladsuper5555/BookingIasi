@@ -1,5 +1,6 @@
 import { LanOutlined, Language } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
+import mapStyle from "./map.module.css";
 
 const apiKey = "AIzaSyB66hTrBl9RqFQsBqzwbCcBtVECWaqHrkE";
 
@@ -72,7 +73,7 @@ function MapComponent({ query }) {
 
   return (
     <div>
-      <div id="map" style={{ height: '500px', width: '1700px', marginLeft: '100px' }}></div>
+      <div id="map" className={mapStyle["map-style"]}></div>
     </div>
   );
 }
