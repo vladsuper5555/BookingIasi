@@ -45,7 +45,7 @@ function Login() {
 
             if (response.ok) {
               console.log("Login successful and cookie set");
-              navigate('/userProf')
+              navigate('/attractions')
           } else {
             navigate('/login')
             console.error("Login failed");

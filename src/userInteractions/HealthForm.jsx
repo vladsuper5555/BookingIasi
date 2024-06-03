@@ -88,7 +88,7 @@ function HealthForm() {
       
       if (response.ok) {
         console.log('Health data saved successfully.');
-        navigate('/userProf');
+        navigate('/attractions');
       } else {
         console.error('Failed to save health data.');
       }
