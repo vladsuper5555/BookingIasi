@@ -33,8 +33,9 @@ const ModelPage = () => {
           <h1 className={styles.heading}>Virtual Hotel Tour</h1>
           <h2 className={styles.heading}>Explore the hotel and its amenities</h2>
           </div>
-          <PanoramaTour url={url} />
+        <PanoramaTour url={url} />
         </div>
+
 
         <div className={styles.panoramaButtonsContainer}>
           <Card className={styles.buttonsCard} sx={{ backgroundColor: '#2f2f30', borderRadius: '6%' }}>

@@ -81,6 +81,16 @@ const MainPage = ({ url }) => {
         }
     };
 
+    const getWindowDimensions = () => {
+        const { innerHeight: height } = window;
+        return {
+            height
+        };
+    }
+    
+
+    const { height } = getWindowDimensions();
+
 
     return (
         <div className="render">
@@ -91,9 +101,11 @@ const MainPage = ({ url }) => {
                 sceneId="Start"
                 config={panoConfig.config}
                 onScenechange={handleViewerLoad}
-                style={{
-                     width: '60vw', height: '25vw' , borderRadius: '20px'
-                }}
+            style={{
+                width: '60vw', 
+                height: height < 960 ? '40em' : '20em', 
+                borderRadius: '20px'
+            }}
             />
         </div>
     );
