@@ -25,7 +25,7 @@ const AttractionDetailsPage = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ username: 'Alex90210' }), // replace with actual username
+          body: JSON.stringify({ username: '' }),
         });
         const data = await response.json();
         if (data.success) {
