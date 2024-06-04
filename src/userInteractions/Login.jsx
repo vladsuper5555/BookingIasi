@@ -18,7 +18,7 @@ function Login() {
         });
 
         if (response.ok) {
-          navigate('/userProf');
+          navigate('/attractions');
         }
       } catch (error) {
         console.error("An error occurred while checking authentication:", error);
