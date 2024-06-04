@@ -109,7 +109,7 @@ function HealthForm() {
   };
 
   return (
-    <div className="health-form-container" style={{ ...commonStyles, backgroundColor: '#fff', padding: '80px', borderRadius: '8px', boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)', margin: '180px', marginTop: '40px',position: 'relative' }}> 
+    <div className="health-form-container" style={{ commonStyles, backgroundColor: '#fff', padding: '80px', borderRadius: '8px', boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)', margin: '180px', marginTop: '40px',position: 'relative' }}> 
       <Button
         startIcon={<ArrowBackIcon />}
         onClick={() => navigate(-1)} 

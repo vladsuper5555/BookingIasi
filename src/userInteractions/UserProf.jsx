@@ -3,7 +3,7 @@ import { Button, Checkbox, InputLabel, MenuItem, Select, TextField } from '@mui/
 import { Link, useNavigate} from 'react-router-dom';
 import  './UserProf.css';
 import profilePicture from './profilepic.jpg';
-import { Save } from '@mui/icons-material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function UserProf() {
   ///const [userInfo, setUserInfo] = useState(null);
@@ -28,6 +28,7 @@ function UserProf() {
   const [genderTemp, setGenderTemp] = useState('');
   const [needsSpecialAssistanceTemp, setNeedsSpecialAssistanceTemp] = useState(false);
   const navigate = useNavigate();
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -188,38 +189,32 @@ function UserProf() {
   };
 
   return (
-    <div className="page-container">
-      {/* bara de navigare */}
-      <div className="navbar-container">
-        <header className="navbar">
-          <div className="breadcrumbs">
-            <Link to="/" className="breadcrumb">Home</Link> / User Profile
-          </div>
-        </header>
-      </div>
-
-      {/* profil */}
-      <div className="profile-container-wrapper">
-        {/*        <div className={style.profile-container}>
- */}
-        <div className="profile-container">
-          <div className="profil">
-            <div className="profile-header">
-              <h1 className="profile-title">Profile</h1>
-            </div>
-            <img className="profile-picture" src={profilePicture} alt="Profile" />
-            <div className="edit-buttons">
-              <Button variant="outlined" className="header-btn" style={commonStyles} onClick={handleEditProfile}>Edit</Button>
-              <Button variant="outlined" className="header-btn logout-btn" style={commonStyles} onClick={handleLogout}>Logout</Button>
-            </div>
-          </div>
+    <div className="user-wrapper">
+        <div className="user-header">
+          <div className="left-content">
+          <Button
+            startIcon={<ArrowBackIcon />}
+            onClick={() => navigate(-1)}
+            style={{ color: '#18181A', marginRight:'0px'}}
+            className="back-button"
+          />
         </div>
-
-        {/* informatii profil */}
-        <div className="profile-info-container">
-          <div className="info-item">
-            <h2 className="input-label">First Name:</h2>
-            {editingProfile ? (
+        <div className="center-content" style={{textAlign:'center', flex:'2'}}>
+          <p className="greeting" style={{margin:'0px'}}>Hello {firstName}!</p>
+        </div>
+      </div>
+      <div className="user-main">
+        <img src={profilePicture} alt="alt-text" />
+        <p className="user-about-label" style={{  fontSize: '30px', fontWeight: 'bold'}}>About</p>
+        <p className="user-name" style={{  fontSize: '30px',  fontWeight: '500', marginBottom: '0'}}>{firstName} {lastName}</p>
+        <div className="user-email" style={{  fontSize: '25px', fontWeight: '400', padding: '0'}}>{email}</div>
+        <Button variant="outlined" className="logout" onClick={handleLogout} style={{commonStyles, marginTop:'20px'}}>Logout</Button>
+      </div>
+      <div className="user-info">
+        <div className="user-personal">
+          <p className="user-personal__headline" style={{color: '#000', fontSize: '36px', fontStyle: 'normal' ,fontWeight: '700'}}>Personal info</p>
+          <p className="user-data" style={{  padding: '0', margin: '10', fontSize: '20px'}}>
+            <strong>First Name:</strong> {editingProfile ? (
               <TextField
                 className="first-name"
                 type="text"
@@ -227,12 +222,11 @@ function UserProf() {
                 onChange={(e) => setFirstNameTemp(e.target.value)}
               />
             ) : (
-              <h2 className="info-content">{firstName}</h2>
+              <span>{firstName}</span>
             )}
-          </div>
-          <div className="info-item">
-            <h2 className="input-label">Last Name:</h2>
-            {editingProfile ? (
+          </p>
+          <p className="user-data" style={{  padding: '0', margin: '10', fontSize: '20px'}}>
+            <strong>Last Name:</strong> {editingProfile ? (
               <TextField
                 className="last-name"
                 type="text"
@@ -240,12 +234,11 @@ function UserProf() {
                 onChange={(e) => setLastNameTemp(e.target.value)}
               />
             ) : (
-              <h2 className="info-content">{lastName}</h2>
+              <span>{lastName}</span>
             )}
-          </div>
-          <div className="info-item">
-            <h2 className="input-label">Email:</h2>
-            {editingProfile ? (
+          </p>
+          <p className="user-data" style={{  padding: '0', margin: '10', fontSize: '20px'}}>
+            <strong>Email:</strong> {editingProfile ? (
               <TextField
                 className="email"
                 type="email"
@@ -253,100 +246,97 @@ function UserProf() {
                 onChange={(e) => setEmailTemp(e.target.value)}
               />
             ) : (
-              <h2 className="info-content">{email}</h2>
+              <span>{email}</span>
             )}
-          </div>
+          </p>
           {editingProfile && (
             <div className="edit-buttons">
-              <Button variant="outlined" className="save-btn" style={commonStyles} onClick={handleSaveProfile}>Save</Button>
-              <Button variant="outlined" className="cancel-btn" style={commonStyles} onClick={handleCancelProfile}>Cancel</Button>
+              <Button variant="outlined" className="save-btn" style={{commonStyles, margin: '20px' }} onClick={handleSaveProfile}>Save</Button>
+              <Button variant="outlined" className="cancel-btn" style={{commonStyles, margin: '20px' }}  onClick={handleCancelProfile}>Cancel</Button>
             </div>
           )}
-        </div>
-      </div>
 
-      {/* health */}
-      <div className="health-data-container-wrapper">
-        <div className="health-data-container">
-          <div className="info-item">
-            <h2 className="input-label">Birth Date:</h2>
-            {editingHealthData ? (
-                <TextField
-                  className="health-data-input"
-                  type="date"
-                  value={birthDate}
-                  onChange={(e) => setBirthDate(e.target.value)}
-                />
-            ) : (
-              <h2 className="info-content">{birthDate}</h2>
-            )}
-          </div>
-          <div className="info-item">
-            <h2 className="input-label">Height (cm):</h2>
-            {editingHealthData ? (
-            <TextField
-                className="health-data-input"
-                type="text"
-                value={height}
-                onChange={(e) => setHeight(e.target.value)}
-              />
-            ) : (
-              <h2 className="info-content">{height}</h2>
-            )}
-          </div>
-          <div className="info-item">
-            <h2 className="input-label">Weight (kg):</h2>
-            {editingHealthData ? (
-              <TextField
-              className="health-data-input"
-              type="text"
-              value={weight}
-              onChange={(e) => setWeight(e.target.value)}
-            />
-            ) : (
-              <h2 className="info-content">{weight}</h2>
-            )}
-          </div>
-          <div className="info-item">
-            <h2 className="input-label">Gender:</h2>
-            {editingHealthData ? (
-            <Select
-                     className="health-data-input"
-                     value={gender}
-                     onChange={(e) => setGender(e.target.value)}>
-                     <MenuItem value="Male">Male</MenuItem>
-                     <MenuItem value="Female">Female</MenuItem>
-                     <MenuItem value="Other">Other</MenuItem>
-                   </Select>
-            ) : (
-              <h2 className="info-content">{gender}</h2>
-            )}
-          </div>
-          <div className="info-item">
-          <InputLabel className='input-laber' style={labelStyles}>Needs Special Assistance:</InputLabel>
-          {editingHealthData ? (
-              <Checkbox
-                className="health-data-input"
-                type="checkbox"
-                checked={needsSpecialAssistanceTemp}
-                onChange={(e) => setNeedsSpecialAssistanceTemp(e.target.checked)}
-              />
-            ) : (
-              <h2 className="info-content">{needsSpecialAssistance ? 'Yes' : 'No'}</h2>
-            )}
-          </div>
-          {editingHealthData && (
-            <div className="health-data-buttons">
-              <Button varinat="outlined" className="save-btn" style={commonStyles} onClick={handleSaveHealthData}>Save</Button>
-              <Button varinat="outlined" className="cancel-btn" style={commonStyles} onClick={handleCancelHealthData}>Cancel</Button>
+          <div className="health-data">
+              <p className="user-data" style={{  padding: '0', margin: '10', fontSize: '20px'}}>
+                <strong>Birth Date:</strong> {editingHealthData ? (
+                  <TextField
+                    className="health-data-input"
+                    type="date"
+                    value={birthDateTemp}
+                    onChange={(e) => setBirthDateTemp(e.target.value)}
+                  />
+                ) : (
+                  <span>{birthDate}</span>
+                )}
+              </p>
+              <p className="user-data" style={{  padding: '0', margin: '10', fontSize: '20px'}}>
+                <strong>Height (cm):</strong> {editingHealthData ? (
+                  <TextField
+                    className="health-data-input"
+                    type="number"
+                    value={heightTemp}
+                    onChange={(e) => setHeightTemp(e.target.value)}
+                  />
+                ) : (
+                  <span>{height}</span>
+                )}
+              </p>
+              <p className="user-data" style={{  padding: '0', margin: '10', fontSize: '20px'}}>
+                <strong>Weight (kg):</strong> {editingHealthData ? (
+                  <TextField
+                    className="health-data-input"
+                    type="number"
+                    value={weightTemp}
+                    onChange={(e) => setWeightTemp(e.target.value)}
+                  />
+                ) : (
+                  <span>{weight}</span>
+                )}
+              </p>
+              <p className="user-data" style={{  padding: '0', margin: '10', fontSize: '20px'}}>
+                <strong>Gender:</strong> {editingHealthData ? (
+                  <Select
+                    className="health-data-input"
+                    value={genderTemp}
+                    onChange={(e) => setGenderTemp(e.target.value)}
+                  >
+                    <MenuItem value="Other">Other</MenuItem>
+                    <MenuItem value="Female">Female</MenuItem>
+                    <MenuItem value="Male">Male</MenuItem>
+                  </Select>
+                ) : (
+                  <span>{gender}</span>
+                )}
+              </p>
+              <p className="user-data" style={{  padding: '0', margin: '10', fontSize: '20px'}}>
+                <strong>Needs special assistance:</strong> {editingHealthData ? (
+                  <Checkbox
+                    className="health-data-input"
+                    checked={needsSpecialAssistanceTemp}
+                    onChange={(e) => setNeedsSpecialAssistanceTemp(e.target.checked)}
+                  />
+                ) : (
+                  <span>{needsSpecialAssistance ? 'Yes' : 'No'}</span>
+                )}
+              </p>
+              {editingHealthData && (
+                <div className="edit-buttons">
+                  <Button variant="outlined" className="save-btn" style={{commonStyles, margin: '20px' }}  onClick={handleSaveHealthData}>Save</Button>
+                  <Button variant="outlined" className="cancel-btn" style={{commonStyles, margin: '20px' }}  onClick={handleCancelHealthData}>Cancel</Button>
+                </div>
+              )}
             </div>
-          )}
-          {!editingHealthData && (
-            <div className="health-data-buttons">
-              <Button variant="outlined" className="edit-health-btn" style={commonStyles} onClick={handleEditHealthData}>Edit Health Data</Button>
-              <Button variant="outlined" className="health-formular-btn" style={commonStyles} onClick={handleHealthFormClick}>HEALTH FORMULAR</Button>
-            </div>
-          )}
+        </div>
+        <div className="user-actions">
+          <div className="user-options" style={{ display: 'flex', flexDirection: 'column',  gap: '10px'}}>
+            <p className="user-options-label" style={{color: '#000', fontSize: '36px', fontStyle: 'normal' ,fontWeight: '700', marginBottom:'10px'}}>Options</p>
+            <Button variant="outlined" onClick={handleEditProfile} style={{color: '#000', fontFamily: 'Montserrat'}}>Edit personal info</Button>
+            <Button variant="contained" onClick={handleEditHealthData} sx={{background: '#000'}} style={{color: '#FFF', fontFamily: 'Montserrat'}}>Edit health data</Button>
+          </div>
+          <div className="user-health">
+            <p className="user-health-label" style={{color: '#000', fontSize: '36px', fontStyle: 'normal' ,fontWeight: '700'}}>Health data</p>
+            <a href="#" onClick={handleHealthFormClick} style={{fontFamily: 'Montserrat', fontSize: '16px', fontStyle: 'normal', textDecoration:'none' }}>Access the health formular</a>
+          </div>
         </div>
       </div>
     </div>
