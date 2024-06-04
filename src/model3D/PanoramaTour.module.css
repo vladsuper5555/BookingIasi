@@ -76,6 +76,10 @@
 
 }
 
+body{
+    display: block !important;
+}
+
 
 @media (max-width: 960px) {
 
