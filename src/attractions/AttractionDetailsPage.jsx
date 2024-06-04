@@ -41,7 +41,7 @@ const AttractionDetailsPage = () => {
     fetchUserActivityIndex();
   }, []);
 
-  const generateRecommendedTrail = (attractions, activityIndex) => {
+  const generateRecommendedTrail = (attractions, activityIndex, maxDistance) => {
     let numberOfAttractions;
     if (activityIndex <= 30) {
       numberOfAttractions = 3;
@@ -54,6 +54,7 @@ const AttractionDetailsPage = () => {
     }
 
     const selectedAttractions = attractions
+        .filter(attraction => attraction.distance <= maxDistance)
         .sort(() => 0.5 - Math.random())
         .slice(0, numberOfAttractions)
         .map((attraction) => attraction.name);
@@ -63,7 +64,7 @@ const AttractionDetailsPage = () => {
 
   useEffect(() => {
     if (activityIndex !== null && attractions.length > 0) {
-      const newRecommendedTrail = generateRecommendedTrail(attractions, activityIndex);
+      const newRecommendedTrail = generateRecommendedTrail(attractions, activityIndex, 3000);
       setRecommendedTrail(newRecommendedTrail);
     }
   }, [activityIndex, attractions]);
