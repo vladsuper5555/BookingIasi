@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-
+import background from './download.jpg';
 function Welcome() {
   return (
     <div
       style={{
         height: '100vh',
-        backgroundImage: 'url("https://s3-alpha-sig.figma.com/img/eefa/c6d8/9662c3dd404d083e2346c12bedc1dd0a?Expires=1717372800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nX039MenPo6Js4uZddoHNB6Ua9I0Tcpuc3S9lywAodak9-Pw7LQXmFSt8rTa6OJPguZ~kVQCLj5mSrVy5TZ-6UADhe7ofzT~NivTYXDTsizHz5NqwcoS3-rXIXu-G9Yg0Uc7eaPGQapzQLOPoND2sgsglH8o7LbjVYJcd6hqCCIiwdRFp-6fumkuCXQIyDzPrW-AkkC8gezdXN6CIkGxrixXGb77Q1vj-T1tMU5A5RAtxds5tKQlcNZzlMNJwKyQBDndFIdzWhjsBArYwrytdnNQ1FfZwambChCCVpW7FTeiObJ~3u7yeF6eWylR0SXu90rvif1oIjOq9P2UXQFRgg__")',
+        backgroundImage: `url(${background})`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',

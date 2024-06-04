@@ -331,8 +331,7 @@ function UserProf() {
           <div className="user-options" style={{ display: 'flex', flexDirection: 'column',  gap: '10px'}}>
             <p className="user-options-label" style={{color: '#000', fontSize: '36px', fontStyle: 'normal' ,fontWeight: '700', marginBottom:'10px'}}>Options</p>
             <Button variant="outlined" onClick={handleEditProfile} style={{color: '#000', fontFamily: 'Montserrat'}}>Edit personal info</Button>
-            <Button variant="contained" onClick={handleEditHealthData} sx={{background: '#000'}} style={{color: '#FFF', fontFamily: 'Montserrat'}}>Edit health data</Button>
-          </div>
+            </div>
           <div className="user-health">
             <p className="user-health-label" style={{color: '#000', fontSize: '36px', fontStyle: 'normal' ,fontWeight: '700'}}>Health data</p>
             <a href="#" onClick={handleHealthFormClick} style={{fontFamily: 'Montserrat', fontSize: '16px', fontStyle: 'normal', textDecoration:'none' }}>Access the health formular</a>
