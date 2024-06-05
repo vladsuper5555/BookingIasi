@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import CategoryCard from "./components/CategoryCard";
-import MapComponent from "../pointsOfInterest/mapComponent";
 import axios from "axios";
 import attractionsStyle from "./styles/attraction-detail-page.module.css";
 import ScrollToTop from "./utils/hooks/ScrollToTop";
@@ -251,9 +250,9 @@ const AttractionDetailsPage = () => {
             About {hotelName}
           </h3>
         </div>
-        <div ref={mapRef}>
+        {/* <div ref={mapRef}>
           <MapComponent query={selectedAttraction || hotelName} />
-        </div>
+        </div> */}
         <div className={attractionsStyle["subtitle-container"]}>
           <div>
             <h3 className={attractionsStyle["attr-subtitle-page"]}>

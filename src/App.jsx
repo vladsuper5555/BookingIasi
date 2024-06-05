@@ -12,7 +12,6 @@ import Hotels from './hotels/Hotels';
 import NotFoundPage from './NotFoundPage';
 import AttractionsPage from './attractions/Attractions';
 import AttractionDetailsPage from "./attractions/AttractionDetailsPage";
-import Map from './pointsOfInterest/map';
 import "./App.css"; 
 import UserProf from './userInteractions/UserProf';
 import HealthForm from './userInteractions/HealthForm';
