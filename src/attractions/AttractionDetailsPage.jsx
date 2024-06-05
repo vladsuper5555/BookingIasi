@@ -228,8 +228,10 @@ const AttractionDetailsPage = () => {
   };
 
   const handleDistanceChange = (e) => {
-    setMaxDistance(Number(e.target.value));
+    const newValue = Number(e.target.value);
+    setMaxDistance(newValue);
   };
+  
 
   const groupAttractionsByCategory = (attractions) => {
     return attractions.reduce((groups, attraction) => {
@@ -266,16 +268,19 @@ const AttractionDetailsPage = () => {
                   htmlFor="distanceFilter"
                   className={attractionsStyle["label-search"]}
               >
-                Show attractions within (meters):
+                Show attractions by range:
               </label>
               <input
-                  type="input"
-                  id="distanceFilter"
-                  value={maxDistance}
-                  onChange={handleDistanceChange}
-                  min="0"
-                  className={attractionsStyle["input-search-distance"]}
-              />
+              type="range"
+              id="distanceFilter"
+              value={maxDistance}
+              onChange={handleDistanceChange}
+              min="0"
+              max="10000" 
+              step="100" 
+              className={attractionsStyle["input-search-distance"]}
+            />
+            <span>{maxDistance} meters</span> {/* Display selected value */}
             </div>
           </div>
         </div>
