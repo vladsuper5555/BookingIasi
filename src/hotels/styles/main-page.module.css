@@ -100,7 +100,7 @@
   bottom: -20px;
   left: 5%;
   right: 5%;
-  background: white;
+  background: var(--background-color);
   color: var(--font-color);
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   padding: 10px;
@@ -108,7 +108,7 @@
   display: flex;
   align-items: center;
 }
-.sectiuneInfo {
+.header-info-sections {
   align-items: center;
   -ms-flex-align:center;
   margin-left: 5%;
@@ -197,7 +197,7 @@
   margin-left: 4rem;
 }
 
-.subtitle-text {
+.horizontal-line-text {
   font-size: 20px; /* Dimensiunea textului mic */
   white-space: nowrap; /* Previne textul să fie împărțit pe mai multe linii */
   padding: 0 10px; 
@@ -477,7 +477,7 @@ h1, h2, p, li {
   .contact-image-container {
     position: relative;
   }
-  .sectiuneInfo {
+  .header-info-sections {
     position: static; /* Anulează poziționarea absolută */
     margin: 10px 0; /* Ajustează marginile pentru a lăsa spațiu între imagine și informații */
     width: 100%; /* Asigură că informațiile ocupă întreaga lățime a ecranului */

@@ -6,7 +6,7 @@ import attractionsStyle from "./styles/attraction-detail-page.module.css";
 import ScrollToTop from "./utils/hooks/ScrollToTop";
 
 const AttractionDetailsPage = () => {
-  const [attractions, setAttractions] = useState([]);
+  const [attractions, setAttractions] = useState([]);f
   const [filteredAttractions, setFilteredAttractions] = useState([]);
   const [error, setError] = useState("");
   const [selectedAttraction, setSelectedAttraction] = useState(null);
