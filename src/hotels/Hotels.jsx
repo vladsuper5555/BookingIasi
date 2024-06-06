@@ -382,7 +382,7 @@ const Hotels = ({
               className="contact-image"
             />
             <div className="contactBox">
-              <div className="titluSectiune">Contact Us</div>
+              <div className="titluSectiune">Contact</div>
               <p>
                 Discover the pleasure of a perfect stay in a hotel located right
                 in the heart of Iași.
