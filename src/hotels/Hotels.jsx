@@ -252,7 +252,7 @@ const Hotels = ({
             <div className="subtitle-text"> </div>
             <div className="horizontal-line-about"></div>
           </div>
-          <div className="titluSectiune">Features</div>
+          <div className="titluSectiune1">Features</div>
           <div className="feature-images">
             {hotelData?.name === "Unirea Hotel & Spa" ? (
               <img src={Feature1Unirea} alt="Unirea Hotel & Spa" />
