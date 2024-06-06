@@ -41,14 +41,12 @@ async function logout(req, res){
     if (req.cookies && req.cookies.pass && req.cookies.username) {
         res.clearCookie('username', {
             httpOnly: true,
-            secure: true,
-            sameSite: 'None'
+            sameSite: 'Strict'
           });
 
           res.clearCookie('pass', {
             httpOnly: true,
-            secure: true,
-            sameSite: 'None'
+            sameSite: 'Strict'
           });
           return res.status(200).send({ success: false, message: 'User is logged out' }); 
     } else {
@@ -57,9 +55,12 @@ async function logout(req, res){
 }
 async function checkCookie(req, res){
     console.log("check cookie function");
+    console.log(req.cookies);
     if (req.cookies && req.cookies.pass && req.cookies.username) {
+        console.log(req.cookies);
         let sqlQuery = `SELECT * FROM users WHERE username = "${req.cookies.username}" AND password = "${req.cookies.pass}"`;
         let results = await runQueryOnDatabaseAndFetchEntireResult(sqlQuery);
+        console.log(results);
         if (results.length === 0) {
             res.status(401).send({ success: false, message: 'Invalid cookies!' });
         }else{
@@ -100,14 +101,12 @@ async function checkCredentialsAgainstDatabase(req, res){
         if (!req.cookies || !req.cookies.pass ||!req.cookies.username ) {
             res.cookie('username', username, {
                 httpOnly: true, 
-                secure: true,    
-                sameSite: 'None', 
+                sameSite: 'Strict', 
                 maxAge: 3600000  // 1 hour
             });
             res.cookie('pass', hashedPassword, {
                 httpOnly: true,  
-                secure: true,    
-                sameSite: 'None', 
+                sameSite: 'Strict', 
                 maxAge: 3600000  
             });
         }else{
@@ -172,14 +171,14 @@ async function addCredentialsToDatabase(req, res){
         if (!req.cookies || !req.cookies.pass ||!req.cookies.username ) {
             res.cookie('username', username, {
                 httpOnly: true, 
-                secure: true,    
-                sameSite: 'None', 
+                // secure: true,    
+                sameSite: 'Strict', 
                 maxAge: 3600000  // 1 hour
             });
             res.cookie('pass', hashedPassword, {
                 httpOnly: true,  
-                secure: true,    
-                sameSite: 'None', 
+                // secure: true,    
+                sameSite: 'Strict', 
                 maxAge: 3600000  
             });
         }else{

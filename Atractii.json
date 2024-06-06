@@ -1821,20 +1821,6 @@
       "Longitudine_atractie": null
     },
     {
-      "Adresa": "Strada Piata Stefan cel Mare si Sfant 1",
-      "ID_hotel": 1,
-      "Categorie": "Muzeu",
-      "Descriere": "History museum featuring artifacts from the Moldovan region",
-      "Latitudine": 47.1664,
-      "ID_atractie": 131,
-      "Longitudine": 27.5826,
-      "Nume_atractie": "Muzeul de Istorie a Moldovei",
-      "Adresa_coordonate": "47.1664, 27.5826",
-      "Latitudine_atractie": null,
-      "Distanta_de_la_hotel": 400.0,
-      "Longitudine_atractie": null
-    },
-    {
       "Adresa": "Strada I. C. Brătianu 26",
       "ID_hotel": 2,
       "Categorie": "Muzeu",

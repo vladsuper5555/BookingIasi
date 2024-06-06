@@ -4,6 +4,8 @@
 
 This project is developed as part of the Software Engineering class at the Faculty of Computer Science, Alexandru Ioan Cuza University in Iași. It aims to provide an intuitive and efficient booking system for various locations within Iași. The system features user profile creation, 3D visualization of exteriors and interiors of locations, and deployment on a local server using Docker. This project adheres to strict CSP (Content Security Policy) rules with nonce-based fetching to ensure security and reliability.
 
+Link to project's documentation: https://docs.google.com/document/d/1McsK5NDPtU15WLZfz5U1vgrB-H19WagZp-XIBk4z6sU/edit
+
 ### Technologies Used
 
 - **Frontend**: Vite, React

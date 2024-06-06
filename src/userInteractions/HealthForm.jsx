@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Checkbox, FormControlLabel, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate} from 'react-router-dom';
 function HealthForm() {
   const [birthDate, setBirthDate] = useState('');
@@ -67,7 +68,7 @@ function HealthForm() {
     console.log('Activity Index:', activityIndex);
     ///mai trebuie un checkCookie call
     try {
-      const response = await fetch('http://localhost:5173/api/saveHealthForm', {
+      const response = await fetch('/api/saveHealthForm', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -87,7 +88,7 @@ function HealthForm() {
       
       if (response.ok) {
         console.log('Health data saved successfully.');
-        navigate('/userProf');
+        navigate('/attractions');
       } else {
         console.error('Failed to save health data.');
       }
@@ -108,8 +109,21 @@ function HealthForm() {
   };
 
   return (
-    <div className="health-form-container" style={{ ...commonStyles, backgroundColor: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)', margin: '20px' }}> 
-      <div className="info-item">
+    <div className="health-form-container" style={{ commonStyles, backgroundColor: '#fff', padding: '80px', borderRadius: '8px', boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)', margin: '180px', marginTop: '40px',position: 'relative' }}> 
+      <Button
+        startIcon={<ArrowBackIcon />}
+        onClick={() => navigate(-1)} 
+        style={{ position: 'absolute', top: '30px', left: '10px', color: '#18181A', width:' 30.01px' }}
+      >
+      </Button>
+      
+      <div style={{ marginTop: '60px', textAlign:'start' }}> 
+        <h1 style={{ ...commonStyles, fontSize: '48px', fontWeight: 'bold' }}>Health Formular</h1>
+      </div>
+      <div className="line" style={{maxWidth: '1430px',height:' 1px', background: 'rgba(0, 0, 0, 0.40)'}}></div>
+      <div className='section' style={{marginTop:'20px'}}>
+      <h2 style={{ ...commonStyles, fontSize: '24px', fontWeight: 'bold' , textAlign:'start'}}>General Info</h2>
+      <div className="info-item" style={{marginLeft:'30%', marginBottom:'30px'}}>
         <InputLabel className="input-label" style={labelStyles}>Birth Date:</InputLabel>
         <TextField
           className="health-data-input"
@@ -120,7 +134,7 @@ function HealthForm() {
           style={commonStyles}
         />
       </div>
-      <div className="info-item">
+      <div className="info-item" style={{marginLeft:'30%', marginBottom:'30px'}}> 
         <InputLabel className="input-label" style={labelStyles}>Height (cm):</InputLabel>
         <TextField
           className="health-data-input"
@@ -131,7 +145,7 @@ function HealthForm() {
           style={commonStyles}
         />
       </div>
-      <div className="info-item">
+      <div className="info-item" style={{marginLeft:'30%', marginBottom:'30px'}}>
         <InputLabel className="input-label" style={labelStyles}>Weight (kg):</InputLabel>
         <TextField
           className="health-data-input"
@@ -142,7 +156,7 @@ function HealthForm() {
           style={commonStyles}
         />
       </div>
-      <div className="info-item">
+      <div className="info-item" style={{marginLeft:'30%', marginBottom:'30px'}}>
         <InputLabel className="input-label" style={labelStyles}>Gender:</InputLabel>
         <Select
           className="health-data-input"
@@ -156,7 +170,7 @@ function HealthForm() {
           <MenuItem value="Other">Other</MenuItem>
         </Select>
       </div>
-      <div className="info-item">
+      <div className="info-item" style={{marginLeft:'30%', marginBottom:'30px'}}>
         <InputLabel className='input-laber' style={labelStyles}>Needs Special Assistance:</InputLabel>
         <FormControlLabel
           control={<Checkbox checked={needsSpecialAssistance} onChange={(e) => setNeedsSpecialAssistance(e.target.checked)} />}
@@ -164,7 +178,11 @@ function HealthForm() {
           style={commonStyles}
         />
       </div>
-      <div className="info-item">
+      </div>
+      <div className="line" style={{maxWidth: '1430px',height:' 1px', background: 'rgba(0, 0, 0, 0.40)'}}></div>
+      <div className='section' style={{marginTop:'20px'}}>
+      <h2 style={{ ...commonStyles, fontSize: '24px', fontWeight: 'bold' , textAlign:'start'}}>Physical Activity</h2>
+      <div className="info-item" style={{marginLeft:'30%', marginBottom:'30px'}}>
         <InputLabel className="input-label" style={labelStyles}>How often do you walk?</InputLabel>
         <Select
           className="health-data-input"
@@ -183,7 +201,7 @@ function HealthForm() {
           <MenuItem value="7">7 days a week</MenuItem>
         </Select>
       </div>
-      <div className="info-item">
+      <div className="info-item" style={{marginLeft:'30%', marginBottom:'30px'}}>
         <InputLabel className="input-label" style={labelStyles}>The average distance of the walk (km):</InputLabel>
         <TextField
           className="health-data-input"
@@ -195,20 +213,22 @@ function HealthForm() {
         />
       </div>
 
-      <div className="info-item">
+      <div className="info-item" style={{marginLeft:'30%', marginBottom:'30px'}}>
         <InputLabel className="input-label" style={labelStyles}>Do you practice any sports?</InputLabel>
+      </div>
+      <div className="info-item" style={{marginLeft:'30%', marginBottom:'30px'}}>
         <div className="sports-container">
           {['running', 'football', 'basketball', 'tennis', 'volleyball', 'handball', 'swimming', 'going to the gym', 'something else'].map((sport) => (
             <div key={sport} className="sport-item">
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <FormControlLabel
                   control={<Checkbox checked={sportsPracticed.includes(sport)} onChange={() => handleSportSelection(sport)} />}
-                  id = {'${sport}'}
+                  id={`${sport}`}
                   label={sport}
                   style={commonStyles}
                 />
                 {sportsPracticed.includes(sport) && (
-                  <>
+                  <div style={{ marginLeft: '24px', display: 'flex', flexDirection: 'column' }}>
                     <InputLabel className="input-label" style={commonStyles}>Frequency:</InputLabel>
                     <Select
                       className="health-data-input"
@@ -235,14 +255,15 @@ function HealthForm() {
                       <MenuItem value="Medium">Medium</MenuItem>
                       <MenuItem value="High">High</MenuItem>
                     </Select>
-                  </>
+                  </div>
                 )}
               </div>
             </div>
           ))}
         </div>
       </div>
-
+      </div>
+      <div className="line" style={{maxWidth: '1430px',height:' 1px', background: 'rgba(0, 0, 0, 0.40)'}}></div>
       <div className="health-data-buttons">
         <Button variant="outlined" className="save-btn" id="save-btn" style={commonStyles} onClick={handleSaveHealthData}>Save</Button>
       </div>

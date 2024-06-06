@@ -29,10 +29,13 @@ const ModelPage = () => {
       <div className={styles.panoramaContent}>
 
         <div className={styles.panoramaTour}>
+          <div className={styles.panoHeader}>
           <h1 className={styles.heading}>Virtual Hotel Tour</h1>
           <h2 className={styles.heading}>Explore the hotel and its amenities</h2>
-          <PanoramaTour url={url} />
+          </div>
+        <PanoramaTour url={url} />
         </div>
+
 
         <div className={styles.panoramaButtonsContainer}>
           <Card className={styles.buttonsCard} sx={{ backgroundColor: '#2f2f30', borderRadius: '6%' }}>
@@ -50,7 +53,7 @@ const ModelPage = () => {
                   }
                 }}
                 onClick={() =>
-                  setUrl(`http://localhost:5173/api/panoramas/?hotel=${firstWord}&appType=Apartments&appId=Apartment1`)
+                  setUrl(`/api/panoramas/?hotel=${firstWord}&appType=Apartments&appId=Apartment1`)
                 }
                 endIcon={<BedOutlinedIcon />}
               >
@@ -60,7 +63,7 @@ const ModelPage = () => {
               <Button
                 sx={{ mb: 2, backgroundColor: '#18181A', color: '#fff', border: '1px solid #fff', borderRadius: '0.5rem', padding: '10px', fontSize: '1rem', textTransform: 'none' }}
                 onClick={() =>
-                  setUrl(`http://localhost:5173/api/panoramas/?hotel=${firstWord}&appType=Pool&appId=Apartment1`)
+                  setUrl(`/api/panoramas/?hotel=${firstWord}&appType=Pool&appId=Apartment1`)
                 }
                 endIcon={<SpaOutlinedIcon />}
               >
@@ -76,7 +79,7 @@ const ModelPage = () => {
                   }
                 }}
                 onClick={() =>
-                  setUrl(`http://localhost:5173/api/panoramas/?hotel=${firstWord}&appType=ConferenceRoom&appId=Apartment1`)
+                  setUrl(`/api/panoramas/?hotel=${firstWord}&appType=ConferenceRoom&appId=Apartment1`)
                 }
                 endIcon={<MeetingRoomOutlinedIcon />}
               >

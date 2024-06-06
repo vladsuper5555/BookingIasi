@@ -41,6 +41,7 @@ async function getAttractionsForHotel(req, res) {
 async function getHotelIdByName(req, res) {
     const hotelName = req.body.hotelName;
     try {
+
       const sqlQuery = `
         SELECT id, name 
         FROM hotelGeneral 
@@ -85,6 +86,15 @@ async function getAttractionsAndHotelCoordinates(req, res) {
 async function getAttractionsWithDirections(req, res) {
     const { hotelName, difficulty, trails } = req.body;
     try {
+
+        const sqlQuery1 = `
+        SELECT id
+        FROM hotelGeneral 
+        WHERE name = 'Muzeul de Istorie a Moldovei'
+      `;
+      const hotelIdResult1 = await runQueryOnDatabaseAndFetchEntireResult(sqlQuery1);
+        console.log("ADSFSDF:" + hotelIdResult1)
+
         const origin = `${hotelName},Iasi`;
         const waypoints = trails[difficulty].map(name => `${name},Iasi`).join('|');
         const destination = origin;
@@ -101,5 +111,23 @@ async function getAttractionsWithDirections(req, res) {
     }
 }
 
+async function getUserActivityIndex(req, res) {
+    try {
+        const username = req.cookies.username;
+        const sqlQuery = `SELECT activityIndex FROM users WHERE username = '${username}'`;
 
-export { getHotelsNamesFromDatabase, getAttractionsForHotel, getAttractionsWithDirections, getAttractionsAndHotelCoordinates, getHotelIdByName };
+        const result = await runQueryOnDatabaseAndFetchEntireResult(sqlQuery);
+        if (result.length > 0) {
+            const activityIndex = result[0].activityIndex;
+            res.status(200).json({ success: true, activityIndex });
+        } else {
+            res.status(404).json({ success: false, message: 'User not found' });
+        }
+    } catch (error) {
+        console.error('Error fetching user activity index: ', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+    res.end();
+}
+
+export { getHotelsNamesFromDatabase, getAttractionsForHotel, getAttractionsWithDirections, getAttractionsAndHotelCoordinates, getHotelIdByName, getUserActivityIndex };

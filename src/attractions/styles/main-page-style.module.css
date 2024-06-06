@@ -185,17 +185,107 @@
 @media (max-width:768px) {
 
     .category-card-item {
-        width: 18rem;
+        width: 100%;
         overflow-x: hidden;
     }
-
+    
     .main-container-category {
         overflow: hidden;
         margin-top: 15px;
     }
-
+    
     .category-picture {
         width: 20px;
         height: 20px;
+    }
+
+    .person-profile-container{
+        margin-left:10px;
+    }
+    .container-subtitle-hotel{
+        justify-content: space-evenly;
+        margin-left: 0;
+    }
+    .container-subtitle-hotel h2{
+        text-wrap: nowrap;
+    }
+    .container-subtitle-hotel .search-input{
+        margin-right: 0;
+        width: 100%;
+
+    }
+
+    .person-profile-icon {
+        width: 25px;
+    }
+
+    .person-profile-title {
+        font-size: 1.1rem;
+    }
+
+    p{
+        font-size: 14px;
+    }
+    
+    .attr-title-page {
+        margin-left: 0px;
+        font-size: 12px;
+        text-align: center;
+    }
+    
+    .main-body-attractions {
+        width: 100%;
+    }
+    
+    .attractions-list {
+        margin-left: 0; 
+    }
+    
+    .category-header {
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+    }
+    
+    .grid-layout {
+        margin-left: 0;
+    }
+       
+    .main-container-info-attractions {
+        flex-direction: column;
+    }
+    
+    .header-container-attr {
+        justify-content: center;
+        margin-bottom: 0; 
+    }
+    
+    .header-title-attr {
+        align-items: center;
+    }
+    
+    .main-info-hotels-attr {
+        margin-left: 0; 
+    }
+    
+    .description-hotel-attr {
+        margin-top: 0; 
+    }
+    
+    .hotels-title-attr {
+        font-size: 24px; 
+        margin-right: 0; 
+        z-index: 1;
+    }
+    
+    .main-photo-attr {
+        max-width: 100%;
+        height: auto;
+        z-index: 0;
+    }
+    
+    .grid-container {
+        margin-left: 0; 
+        margin-top: 50px;
     }
 }

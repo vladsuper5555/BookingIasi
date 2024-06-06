@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import CategoryCard from "./components/CategoryCard";
-import MapComponent from "../pointsOfInterest/mapComponent";
 import axios from "axios";
 import attractionsStyle from "./styles/attraction-detail-page.module.css";
 import ScrollToTop from "./utils/hooks/ScrollToTop";
@@ -14,6 +13,61 @@ const AttractionDetailsPage = () => {
   const [maxDistance, setMaxDistance] = useState(7000);
   const mapRef = useRef(null);
   const { hotelName } = useParams();
+  const [activityIndex, setActivityIndex] = useState(null);
+  const [recommendedTrail, setRecommendedTrail] = useState([]);
+
+  useEffect(() => {
+    const fetchUserActivityIndex = async () => {
+      try {
+        const response = await fetch('/api/useractivityindex', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username: '' }),
+        });
+        const data = await response.json();
+        if (data.success) {
+          setActivityIndex(data.activityIndex);
+        } else {
+          throw new Error(data.message);
+        }
+      } catch (error) {
+        console.error(`Error fetching user activity index: ${error.message}`);
+      }
+    };
+
+    fetchUserActivityIndex();
+  }, []);
+
+  const generateRecommendedTrail = (attractions, activityIndex, maxDistance) => {
+    let numberOfAttractions;
+    if (activityIndex <= 30) {
+      numberOfAttractions = 3;
+    } else if (activityIndex <= 60) {
+      numberOfAttractions = 5;
+    } else if (activityIndex <= 90) {
+      numberOfAttractions = 7;
+    } else {
+      numberOfAttractions = 10;
+    }
+
+    const selectedAttractions = attractions
+        .filter(attraction => attraction.distance <= maxDistance)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, numberOfAttractions)
+        .map((attraction) => attraction.name);
+
+    return selectedAttractions;
+  };
+
+  useEffect(() => {
+    if (activityIndex !== null && attractions.length > 0) {
+      const newRecommendedTrail = generateRecommendedTrail(attractions, activityIndex, 3000);
+      setRecommendedTrail(newRecommendedTrail);
+    }
+  }, [activityIndex, attractions]);
+
 
   const [newTrails, setNewTrails] = useState({
     hard: [],
@@ -140,12 +194,12 @@ const AttractionDetailsPage = () => {
     }
   }, [newTrails]);
 
-  const renderTrail = (difficulty) => {
-    // const originalTrail = newTrails[difficulty].join(" -> ");
-    const optimizedTrail = trails[difficulty + "Order"].join(" -> ");
+  const renderTrail = (difficulty, trail) => {
+    if (!trail) {
+      return null; // or some default value
+    }
 
-    console.log(`Original trail length for ${difficulty}:`, newTrails[difficulty].length); // Debug line
-    console.log(`Optimized trail length for ${difficulty}:`, trails[difficulty + "Order"].length); // Debug line
+    const optimizedTrail = trail.join(" -> ");
 
     const googleMapsUrl = (trail) => `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(
         hotelName
@@ -156,13 +210,7 @@ const AttractionDetailsPage = () => {
     return (
         <div key={difficulty} className={attractionsStyle["trail-category"]}>
           <h2 className={attractionsStyle["trail-category-title"]}>{difficulty.charAt(0).toUpperCase() + difficulty.slice(1)} Trail</h2>
-          {/* <p>Original order: {originalTrail}</p> */}
           <p>{optimizedTrail}</p>
-        {/*  <button>*/}
-        {/*    /!* <a href={googleMapsUrl(originalTrail)} target="_blank" rel="noopener noreferrer">*/}
-        {/*  See Original Trail on Maps*/}
-        {/*</a> *!/*/}
-        {/*  </button>*/}
           <button className={attractionsStyle["button-to-maps"]}>
             <a className={attractionsStyle["link-to-maps"]} href={googleMapsUrl(optimizedTrail)} target="_blank" rel="noopener noreferrer">
               View on Maps
@@ -180,8 +228,10 @@ const AttractionDetailsPage = () => {
   };
 
   const handleDistanceChange = (e) => {
-    setMaxDistance(Number(e.target.value));
+    const newValue = Number(e.target.value);
+    setMaxDistance(newValue);
   };
+  
 
   const groupAttractionsByCategory = (attractions) => {
     return attractions.reduce((groups, attraction) => {
@@ -202,9 +252,9 @@ const AttractionDetailsPage = () => {
             About {hotelName}
           </h3>
         </div>
-        <div ref={mapRef}>
+        {/* <div ref={mapRef}>
           <MapComponent query={selectedAttraction || hotelName} />
-        </div>
+        </div> */}
         <div className={attractionsStyle["subtitle-container"]}>
           <div>
             <h3 className={attractionsStyle["attr-subtitle-page"]}>
@@ -218,16 +268,19 @@ const AttractionDetailsPage = () => {
                   htmlFor="distanceFilter"
                   className={attractionsStyle["label-search"]}
               >
-                Show attractions within (meters):
+                Show attractions by range:
               </label>
               <input
-                  type="input"
-                  id="distanceFilter"
-                  value={maxDistance}
-                  onChange={handleDistanceChange}
-                  min="0"
-                  className={attractionsStyle["input-search-distance"]}
-              />
+              type="range"
+              id="distanceFilter"
+              value={maxDistance}
+              onChange={handleDistanceChange}
+              min="0"
+              max="10000" 
+              step="100" 
+              className={attractionsStyle["input-search-distance"]}
+            />
+            <span>{maxDistance} meters</span> {/* Display selected value */}
             </div>
           </div>
         </div>
@@ -250,7 +303,10 @@ const AttractionDetailsPage = () => {
           <div className={attractionsStyle["tracks-container-subtitle"]}>
             <h3 className={attractionsStyle["tracks-subtitle"]}>Tracks by difficulty</h3>
           </div>
-          {["hard", "medium", "easy"].map((difficulty) => renderTrail(difficulty))}
+          {recommendedTrail.length > 0 && renderTrail('Recommended', recommendedTrail)}
+          {trails.hardOrder.length > 0 && renderTrail('Hard', trails.hardOrder)}
+          {trails.mediumOrder.length > 0 && renderTrail('Medium', trails.mediumOrder)}
+          {trails.easyOrder.length > 0 && renderTrail('Easy', trails.easyOrder)}
         </div>
       </div>
   );
