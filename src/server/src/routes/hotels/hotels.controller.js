@@ -21,7 +21,7 @@ async function getInformationAboutHotel(req, res) {
     const hotelName = req.body.hotelName;
     try {
         const sqlQuery = 
-            `SELECT name, checkinTime, checkoutTime, openingHours, priceRange, description, petsAllowed, parkingFacility, smokingAllowed, event, review, aggregateRating, address, email, telephone, paymentAccepted, currenciesAccepted 
+            `SELECT name, checkinTime, checkoutTime, openingHours, priceRange, description, petsAllowed, parkingFacility, smokingAllowed, event, review, aggregateRating, address, email, telephone, paymentAccepted, currenciesAccepted, amenityFeature 
             FROM hotelGeneral WHERE name = '${hotelName}'`;
         
             const info = await runQueryOnDatabaseAndFetchEntireResult(sqlQuery);
