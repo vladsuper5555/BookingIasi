@@ -366,9 +366,9 @@ const Hotels = ({
               <img src={profilePerson} alt="profile person icon" />
             </div>
             {hotelData?.name === "Unirea Hotel & Spa" ? (
-               <a href="https://maps.app.goo.gl/1RtMrNvJyZVkfMwR8"> <div className="recenzie">{hotelData?.review}</div></a>
+               <a href="https://maps.app.goo.gl/1RtMrNvJyZVkfMwR8" target="_blank"> <div className="recenzie">{hotelData?.review}</div></a>
             ) : (
-               <a href="https://maps.app.goo.gl/8Tq3jKjTrhGmjTQU9"> <div className="recenzie">{hotelData?.review}</div></a>
+               <a href="https://maps.app.goo.gl/8Tq3jKjTrhGmjTQU9" target="_blank"> <div className="recenzie">{hotelData?.review}</div></a>
             )}
           
           </div>
