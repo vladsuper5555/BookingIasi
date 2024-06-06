@@ -3,14 +3,14 @@
   --background-color: #f5f5f5;
 }
 .general-structure{
-  overflow-x: hidden;
   padding: 0;
   margin: 0;
-  width: 100vw;
+  width: 100%;
   height: auto;
   background-color: #F5F5F5;
   color: var(--font-color);
   font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
   }
 .navbar {
   top: 0;
@@ -35,6 +35,7 @@
   font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 .titluSectiune {
   font-family: 'Montserrat', sans-serif;
@@ -368,10 +369,6 @@ address {
   margin-right: 0.5em; /* Adaugă un spațiu între imagine și text */
 }
 
-
-h1, h2, p, li {
-  color: black;
-}
 /* Media Queries for Responsive Design */
 @media (max-width: 1400px) {
   .header-info{

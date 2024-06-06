@@ -29,6 +29,12 @@ import contact_telephone from "./images/Icons/contact/telephone.svg";
 import styles from "./styles/main-page.module.css";
 import ScrollToTop from "../attractions/utils/hooks/ScrollToTop";
 import profilePerson from "../attractions/assets/svg/person-profile.svg";
+import trailsIcon from "../hotels/images/Icons/trails-icon.svg";
+import culturePalat from "../hotels/images/Icons/culturePalat.png";
+import AttractionCategory from "./components/AttractionsCategory";
+import attractionStyleSec from "./styles/attractions-section-style.module.css";
+import axios from "axios";
+import RenderTracks from "./components/RenderTracks";
 
 const Hotels = ({
   name,
@@ -51,11 +57,18 @@ const Hotels = ({
   amenityFeature,
 }) => {
   const [hotelData, setHotelData] = useState([]);
+  const [attractions, setAttractions] = useState([]);
   const [error, setError] = useState("");
+  const [maxDistance, setMaxDistance] = useState(12000);
+
   const { hotelId } = useParams();
   const navigate = useNavigate();
   const isNavigating = useRef(false);
   const isNavigatingPanoramas = useRef(false);
+  const [filteredAttractions, setFilteredAttractions] = useState([]);
+
+  const [activityIndex, setActivityIndex] = useState(null);
+  const [recommendedTrail, setRecommendedTrail] = useState([]);
 
   const hotelName = hotelId;
 
@@ -63,6 +76,61 @@ const Hotels = ({
     const section = document.getElementById(sectionId);
     section.scrollIntoView({ behavior: "smooth" });
   }
+
+  useEffect(() => {
+    const fetchAttractionsForHotel = async () => {
+      try {
+        const response = await fetch("/api/attractionshotel", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ hotelName }),
+        });
+        if (!response.ok) {
+          throw new Error("Response was not ok");
+        }
+        const data = await response.json();
+        if (data.success) {
+          const transformedAttractions = data.attractions.map((attraction) => ({
+            name: attraction.Nume_atractie,
+            distance: attraction.Distanta_de_la_hotel,
+            category: attraction.Categorie,
+            description: attraction.Descriere,
+            link: attraction.link,
+          }));
+          transformedAttractions.sort((a, b) => a.distance - b.distance);
+          setAttractions(transformedAttractions);
+        } else {
+          setError(data.message);
+        }
+      } catch (error) {
+        setError("An error occurred. Please try again later");
+      }
+    };
+
+    fetchAttractionsForHotel();
+  }, [hotelName]);
+
+  useEffect(() => {
+    const filtered = attractions.filter(
+      (attraction) => attraction.distance <= maxDistance
+    );
+    setFilteredAttractions(filtered);
+  }, [maxDistance, attractions]);
+
+
+  // Function to group attractions by category
+  const groupAttractionsByCategory = (attractions) => {
+    const groupedAttractions = {};
+    attractions.forEach((attraction) => {
+      if (!groupedAttractions[attraction.category]) {
+        groupedAttractions[attraction.category] = [];
+      }
+      groupedAttractions[attraction.category].push(attraction);
+    });
+    return groupedAttractions;
+  };
 
   const fetchInfoForHotel = async () => {
     try {
@@ -130,7 +198,7 @@ const Hotels = ({
     isNavigating.current = true;
 
     try {
-          navigate(`/panoramas?hotel=${hotelName}`); 
+      navigate(`/panoramas?hotel=${hotelName}`);
     } catch (error) {
       setError("An error occurred. Please try again later");
     } finally {
@@ -160,6 +228,15 @@ const Hotels = ({
           Features
         </a>
         <a
+          href="#attraction-section"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("attraction-section");
+          }}
+        >
+          Attractions
+        </a>
+        <a
           href="#section_Review"
           onClick={(e) => {
             e.preventDefault();
@@ -181,7 +258,9 @@ const Hotels = ({
       <div className={styles.hotels}>
         <div className={styles.header}>
           <div className={styles["container-header"]}>
-            <h1 className={styles["hotel-name-title-header"]}>{hotelData?.name}</h1>
+            <h1 className={styles["hotel-name-title-header"]}>
+              {hotelData?.name}
+            </h1>
             <div className={styles.subtitle}>
               <div className={styles["horizontal-line"]}></div>
               <div className={styles["horizontal-line-text"]}>Hotel</div>
@@ -234,7 +313,9 @@ const Hotels = ({
             <div className={styles["continut-container-info"]}>
               {" "}
               <div className={styles.titluSectiune1}>About</div>
-              <div className={styles.sectiuneText}>{hotelData?.description}</div>
+              <div className={styles.sectiuneText}>
+                {hotelData?.description}
+              </div>
             </div>
 
             <div className={styles.sectiuneImagine}>
@@ -297,12 +378,20 @@ const Hotels = ({
               <div className={styles["feature-container"]}>
                 {hotelData?.petsAllowed ? (
                   <>
-                    <img src={Pets} alt="image" className={styles.smallerSize} />
+                    <img
+                      src={Pets}
+                      alt="image"
+                      className={styles.smallerSize}
+                    />
                     Pets allowed
                   </>
                 ) : (
                   <>
-                    <img src={No_pets} alt="image" className={styles.smallerSize} />
+                    <img
+                      src={No_pets}
+                      alt="image"
+                      className={styles.smallerSize}
+                    />
                     No pets allowed
                   </>
                 )}
@@ -331,12 +420,20 @@ const Hotels = ({
               <div className={styles["feature-container"]}>
                 {hotelData?.smokingAllowed ? (
                   <div>
-                    <img src={Smoking} alt="image" className={styles.smallerSize} />
+                    <img
+                      src={Smoking}
+                      alt="image"
+                      className={styles.smallerSize}
+                    />
                     Smoking is allowed
                   </div>
                 ) : (
-                  <div >
-                    <img src={No_smoking} alt="image" className={styles.smallerSize} />
+                  <div>
+                    <img
+                      src={No_smoking}
+                      alt="image"
+                      className={styles.smallerSize}
+                    />
                     Smoking is not allowed
                   </div>
                 )}
@@ -354,9 +451,61 @@ const Hotels = ({
             </div>
           </div>
         </section>
+        <section
+          id="attraction-section"
+          className={attractionStyleSec["attraction-section"]}
+        >
+          <div className={attractionStyleSec["attraction-section-header"]}>
+            <div className={attractionStyleSec["attraction-title-container"]}>
+              <h1 className={attractionStyleSec["attraction-title"]}>
+                Attractions
+              </h1>
+              <img
+                src={trailsIcon}
+                alt="trails-icon"
+                className={attractionStyleSec["attraction-title-icon"]}
+              />
+            </div>
+            <div className={attractionStyleSec["attraction-description-intro"]}>
+              <p>
+                Our hotel is conveniently located near a variety of attractions
+                that cater to all interests. Whether you're here for business or
+                leisure, you'll find plenty to see and do in the surrounding
+                area.
+              </p>
+            </div>
+          </div>
+          <div className={attractionStyleSec["container-attractions-lists"]}>
+            <div className={attractionStyleSec["attractions-list-categories"]}>
+              {Object.entries(
+                groupAttractionsByCategory(filteredAttractions)
+              ).map(([category, attractions]) => (
+                <div>
+                  {" "}
+                  <AttractionCategory
+                    key={category}
+                    category={category}
+                    attractions={attractions}
+                  />
+                  <div className={attractionStyleSec["horizontal-line"]}></div>
+                </div>
+              ))}
+            </div>
+            <div className={attractionStyleSec["attractions-image-list"]}>
+              <img src={culturePalat} alt="palace of culture iasi" />
+            </div>
+          </div>
+          <RenderTracks hotelName={hotelName} />
+        </section>
         <section id="section_Review" className={styles.reviews}>
-          <div className={`${styles.upperSection} ${styles["reviews-container"]}`}>
-            <div className={`${styles.titluSectiune} ${styles["reviews-title"]}`}>Reviews</div>
+          <div
+            className={`${styles.upperSection} ${styles["reviews-container"]}`}
+          >
+            <div
+              className={`${styles.titluSectiune} ${styles["reviews-title"]}`}
+            >
+              Reviews
+            </div>
             <div className={styles.overallRating}>
               Overall rating: {hotelData?.aggregateRating} ★
             </div>
@@ -366,11 +515,22 @@ const Hotels = ({
               <img src={profilePerson} alt="profile person icon" />
             </div>
             {hotelData?.name === "Unirea Hotel & Spa" ? (
-               <a href="https://maps.app.goo.gl/1RtMrNvJyZVkfMwR8" target="_blank"> <div className={styles.recenzie}>{hotelData?.review}</div></a>
+              <a
+                href="https://maps.app.goo.gl/1RtMrNvJyZVkfMwR8"
+                target="_blank"
+              >
+                {" "}
+                <div className={styles.recenzie}>{hotelData?.review}</div>
+              </a>
             ) : (
-               <a href="https://maps.app.goo.gl/8Tq3jKjTrhGmjTQU9" target="_blank"> <div className={styles.recenzie}>{hotelData?.review}</div></a>
+              <a
+                href="https://maps.app.goo.gl/8Tq3jKjTrhGmjTQU9"
+                target="_blank"
+              >
+                {" "}
+                <div className={styles.recenzie}>{hotelData?.review}</div>
+              </a>
             )}
-          
           </div>
         </section>
 
