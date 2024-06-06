@@ -130,24 +130,7 @@ const Hotels = ({
     isNavigating.current = true;
 
     try {
-      // const response = await fetch("", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ hotelName }),
-      // });
-
-      // if (!response.ok) {
-      //   throw new Error("Response was not ok");
-      // }
-      // const data = await response.json();
-      // console.log(data);
-      // if (data.success) {
-          navigate(`/panoramas?hotel=${hotelName}`); //de schimbat cu adresa generala de la panorama view
-    //   } else {
-    //     setError(data.message);
-    //   }
+          navigate(`/panoramas?hotel=${hotelName}`); 
     } catch (error) {
       setError("An error occurred. Please try again later");
     } finally {
@@ -382,7 +365,12 @@ const Hotels = ({
             <div className="profile-person-icon">
               <img src={profilePerson} alt="profile person icon" />
             </div>
-            <div className="recenzie">{hotelData?.review}</div>
+            {hotelData?.name === "Unirea Hotel & Spa" ? (
+               <a href="https://maps.app.goo.gl/1RtMrNvJyZVkfMwR8"> <div className="recenzie">{hotelData?.review}</div></a>
+            ) : (
+               <a href="https://maps.app.goo.gl/8Tq3jKjTrhGmjTQU9"> <div className="recenzie">{hotelData?.review}</div></a>
+            )}
+          
           </div>
         </section>
 
