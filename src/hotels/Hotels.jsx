@@ -490,12 +490,13 @@ const Hotels = ({
                   <div className={attractionStyleSec["horizontal-line"]}></div>
                 </div>
               ))}
+              <RenderTracks hotelName={hotelName} />
+
             </div>
             <div className={attractionStyleSec["attractions-image-list"]}>
               <img src={culturePalat} alt="palace of culture iasi" />
             </div>
           </div>
-          <RenderTracks hotelName={hotelName} />
         </section>
         <section id="section_Review" className={styles.reviews}>
           <div

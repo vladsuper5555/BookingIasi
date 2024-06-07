@@ -4,7 +4,7 @@ import CategoryCard from "./components/CategoryCard";
 import axios from "axios";
 import attractionsStyle from "./styles/attraction-detail-page.module.css";
 import ScrollToTop from "./utils/hooks/ScrollToTop";
-import RenderTracks from "../hotels/components/RenderTracks";
+import RenderTracks from "./components/TracksSection";
 
 const AttractionDetailsPage = () => {
   const [attractions, setAttractions] = useState([]);

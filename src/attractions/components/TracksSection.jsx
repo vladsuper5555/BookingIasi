@@ -1,31 +1,14 @@
-import tracksStyle from "../styles/tracks-section-style.module.css";
+import attractionStyleSec from "../styles/attraction-detail-page.module.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import arrow from "../images/Icons/arrow-attr.svg";
 
 const RenderTracks = ({ hotelName }) => {
   const [activityIndex, setActivityIndex] = useState(null);
   const [recommendedTrail, setRecommendedTrail] = useState([]);
   const [attractions, setAttractions] = useState([]);
-  const [expandedTrails, setExpandedTrails] = useState(false); 
-  const [newTrails, setNewTrails] = useState({
-    hard: [],
-    medium: [],
-    easy: [],
-  });
-  const [trails, setTrails] = useState({
-    hardOrder: [],
-    mediumOrder: [],
-    easyOrder: [],
-  });
+  const [newTrails, setNewTrails] = useState({ hard: [], medium: [], easy: [] });
+  const [trails, setTrails] = useState({ hardOrder: [], mediumOrder: [], easyOrder: [] });
   const [error, setError] = useState("");
-
-  const [arrowRotation, setArrowRotation] = useState(0); 
-
-  const toggleTrailsExpansion = () => { 
-    setExpandedTrails(!expandedTrails);
-    setArrowRotation(arrowRotation === 0 ? 90 : 0); 
-  };
 
   useEffect(() => {
     const fetchAttractionsForHotel = async () => {
@@ -70,7 +53,7 @@ const RenderTracks = ({ hotelName }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ username: "" }),
+          body: JSON.stringify({ username: '' }),
         });
         const data = await response.json();
         if (data.success) {
@@ -86,11 +69,7 @@ const RenderTracks = ({ hotelName }) => {
     fetchUserActivityIndex();
   }, []);
 
-  const generateRecommendedTrail = (
-    attractions,
-    activityIndex,
-    maxDistance
-  ) => {
+  const generateRecommendedTrail = (attractions, activityIndex, maxDistance) => {
     let numberOfAttractions;
     if (activityIndex <= 30) {
       numberOfAttractions = 3;
@@ -113,11 +92,7 @@ const RenderTracks = ({ hotelName }) => {
 
   useEffect(() => {
     if (activityIndex !== null && attractions.length > 0) {
-      const newRecommendedTrail = generateRecommendedTrail(
-        attractions,
-        activityIndex,
-        3000
-      );
+      const newRecommendedTrail = generateRecommendedTrail(attractions, activityIndex, 3000);
       setRecommendedTrail(newRecommendedTrail);
     }
   }, [activityIndex, attractions]);
@@ -190,7 +165,7 @@ const RenderTracks = ({ hotelName }) => {
       }));
     }
   };
-
+  
   useEffect(() => {
     if (
       newTrails.hard.length > 0 ||
@@ -220,14 +195,14 @@ const RenderTracks = ({ hotelName }) => {
       )}&travelmode=walking`;
 
     return (
-      <div key={difficulty} className={tracksStyle["trail-category"]}>
-        <h2 className={tracksStyle["trail-category-title"]}>
+      <div key={difficulty} className={attractionStyleSec["trail-category"]}>
+        <h2 className={attractionStyleSec["trail-category-title"]}>
           {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)} Trail
         </h2>
         <p>{optimizedTrail}</p>
-        <button className={tracksStyle["button-to-maps"]}>
+        <button className={attractionStyleSec["button-to-maps"]}>
           <a
-            className={tracksStyle["link-to-maps"]}
+            className={attractionStyleSec["link-to-maps"]}
             href={googleMapsUrl(optimizedTrail)}
             target="_blank"
             rel="noopener noreferrer"
@@ -240,28 +215,21 @@ const RenderTracks = ({ hotelName }) => {
   };
 
   return (
-    <div className={tracksStyle["trails-container"]}>
-      <div className={tracksStyle["tracks-container-title"]} onClick={toggleTrailsExpansion}>
-        <h2 className={tracksStyle["tracks-title"]}>Tracks</h2>
-
-        <div>
-          <img 
-            src={arrow} 
-            alt="arrow" 
-            className={tracksStyle["arrow-attr"]} 
-            style={{ transform: `rotate(${arrowRotation}deg)` }} 
-          />
-        </div>
+    <div className={attractionStyleSec["trails-container"]}>
+      <div className={attractionStyleSec["tracks-container-title"]}>
+        <h2 className={attractionStyleSec["tracks-title"]}>
+          Tracks for {hotelName}
+        </h2>
       </div>
-      <div className={tracksStyle["tracks-container-subtitle"]}></div>
-      {expandedTrails && (
-        <>
-          {recommendedTrail.length > 0 && renderTrail("Recommended", recommendedTrail)}
-          {trails.hardOrder.length > 0 && renderTrail("Hard", trails.hardOrder)}
-          {trails.mediumOrder.length > 0 && renderTrail("Medium", trails.mediumOrder)}
-          {trails.easyOrder.length > 0 && renderTrail("Easy", trails.easyOrder)}
-        </>
-      )}
+      <div className={attractionStyleSec["tracks-container-subtitle"]}>
+        <h3 className={attractionStyleSec["tracks-subtitle"]}>
+          Tracks by difficulty
+        </h3>
+      </div>
+      {recommendedTrail.length > 0 && renderTrail("Recommended", recommendedTrail)}
+      {trails.hardOrder.length > 0 && renderTrail("Hard", trails.hardOrder)}
+      {trails.mediumOrder.length > 0 && renderTrail("Medium", trails.mediumOrder)}
+      {trails.easyOrder.length > 0 && renderTrail("Easy", trails.easyOrder)}
     </div>
   );
 };

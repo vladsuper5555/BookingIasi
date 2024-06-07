@@ -6,7 +6,7 @@ import arrow from "../images/Icons/arrow-attr.svg";
 const AttractionCategory = ({ category, attractions }) => {
   const [activeDescription, setActiveDescription] = useState(null);
   const [expandedCategory, setExpandedCategory] = useState(null);
-  const { hotelName } = useParams();
+  const { hotelId } = useParams();
 
   const handleDescriptionClick = (description) => {
     if (activeDescription === description) {
@@ -71,7 +71,7 @@ const AttractionCategory = ({ category, attractions }) => {
                   <p>
                     <a
                       href={`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(
-                        hotelName
+                        hotelId
                       )}&destination=${encodeURIComponent(
                         attraction.name
                       )}&travelmode=walking`}

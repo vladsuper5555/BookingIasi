@@ -1,0 +1,41 @@
+.trails-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.trail-category {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 38rem;
+    border: 1px solid rgba(24, 24, 26, 0.4);
+    padding: 0px 15px;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.tracks-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.tracks-container-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 39rem;
+}
+
+.arrow-attr {
+    width: 0.75rem;
+    transition: transform 0.3s ease;
+}
+
+.tracks-title:hover {
+    cursor: pointer;
+}
+
