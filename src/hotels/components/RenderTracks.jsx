@@ -134,10 +134,17 @@ const RenderTracks = ({ hotelName }) => {
         trails: newTrails,
       });
       if (response.data.success) {
-        const waypointOrder = response.data.directions.routes[0].waypoint_order;
-        let orderedTrail = waypointOrder.map(
-          (index) => newTrails[difficulty][index]
-        );
+        const routes = response.data.directions.routes;
+        let orderedTrail;
+        if (routes.length > 0 && routes[0].waypoint_order) {
+          const waypointOrder = routes[0].waypoint_order;
+          orderedTrail = waypointOrder.map(
+            (index) => newTrails[difficulty][index]
+          );
+        } else {
+          console.error(`No waypoint order for ${difficulty} trail`);
+          orderedTrail = newTrails[difficulty];
+        }
         orderedTrail = orderedTrail.filter(
           (attraction) => attraction !== undefined
         );
@@ -152,9 +159,13 @@ const RenderTracks = ({ hotelName }) => {
       console.error(
         `Error fetching trail data for ${difficulty} trail: ${error.message}`
       );
+      setTrails((prevTrails) => ({
+        ...prevTrails,
+        [difficulty + "Order"]: newTrails[difficulty],
+      }));
     }
   };
-
+  
   useEffect(() => {
     if (
       newTrails.hard.length > 0 ||

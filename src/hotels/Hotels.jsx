@@ -270,7 +270,7 @@ const Hotels = ({
 
           <div className={styles["header-image"]}>
             {hotelData?.name === "Unirea Hotel & Spa" ? (
-              <img src={PrincipalImageUnirea} alt="Unirea Hotel & Spa" />
+              <img src={PrincipalImageUnirea} alt="Unirea Hotel" />
             ) : (
               <img src={PrincipalImagePrestige} alt="Prestige Hotel" />
             )}
@@ -320,7 +320,7 @@ const Hotels = ({
 
             <div className={styles.sectiuneImagine}>
               {hotelData?.name === "Unirea Hotel & Spa" ? (
-                <img src={Principal2Unirea} alt="Unirea Hotel & Spa" />
+                <img src={Principal2Unirea} alt="Unirea Hotel" />
               ) : (
                 <img src={Principal2Prestige} alt="Prestige Hotel" />
               )}
@@ -336,17 +336,17 @@ const Hotels = ({
           <div className={styles.titluSectiune1}>Features</div>
           <div className={styles["feature-images"]}>
             {hotelData?.name === "Unirea Hotel & Spa" ? (
-              <img src={Feature1Unirea} alt="Unirea Hotel & Spa" />
+              <img src={Feature1Unirea} alt="Unirea Hotel" />
             ) : (
               <img src={Feature1Prestige} alt="Prestige Hotel" />
             )}
             {hotelData?.name === "Unirea Hotel & Spa" ? (
-              <img src={Feature2Unirea} alt="Unirea Hotel & Spa" />
+              <img src={Feature2Unirea} alt="Unirea Hotel" />
             ) : (
               <img src={Feature2Prestige} alt="Prestige Hotel" />
             )}
             {hotelData?.name === "Unirea Hotel & Spa" ? (
-              <img src={Feature3Unirea} alt="Unirea Hotel & Spa" />
+              <img src={Feature3Unirea} alt="Unirea Hotel" />
             ) : (
               <img src={Feature3Prestige} alt="Prestige Hotel" />
             )}
