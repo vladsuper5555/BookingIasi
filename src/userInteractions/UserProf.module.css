@@ -1,0 +1,181 @@
+:root {
+  --background-color: #F5F5F5;
+  --font-color: #18181A;
+  --custom-blue: #005FB7;
+}
+
+.userWrapper {
+  width: 90rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.userPersonalHeadline {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userHeader {
+  display: flex;
+  width: 80rem;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+}
+
+.leftContent {
+  flex: 0 0 auto;
+}
+
+.centerContent {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.greeting {
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.userMain {
+  display: flex;
+  padding: 20px;
+  width: 80rem;
+}
+
+.user-general-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.user-profile-picture {
+  width: 20rem;
+}
+
+.userInfo {
+  flex-grow: 1;
+}
+
+.userPersonal {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-left: 2rem;
+  box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  flex-grow: 1;
+  padding: 5px 30px;
+}
+
+.healthData {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.55rem;
+}
+
+.userActions {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 2rem;
+  margin-top: 2rem;
+  box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  flex-grow: 1;
+  padding: 15px 30px;
+}
+
+.firstName, .lastName, .email, .healthDataInput {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.personal-info-container {
+  display: flex;
+  align-items: center;
+}
+
+.personal-info-icon, .user-options-icon, .health-icon {
+  width: 30px;
+  margin-left: 0.75rem;
+}
+
+.userOptions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.user-options-container {
+  display: flex;
+  align-items: center;
+}
+
+.userHealth {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-right: 5rem;
+}
+
+.user-health-container {
+  display: flex;
+  align-items: center;
+}
+
+.userOptionsLabel, .userHealthLabel {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.userAboutLabel {
+  font-weight: 700;
+  color: var(--custom-blue);
+  font-size: 1.5rem;
+}
+
+.userName {
+  margin-top: -0.1rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.userEmail {
+  margin-top: -1rem;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.logout-button {
+  margin-top: 2rem;
+}
+
+@media only screen and (max-width: 650px) {
+  .user-main {
+    grid-column: 1 / 12;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .user-info {
+    grid-column: 1 / 12;
+  }
+}
