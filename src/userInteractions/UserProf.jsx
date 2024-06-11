@@ -46,13 +46,13 @@ function UserProf() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch("/api/check-auth", {
+        const response = await fetch("/users/check-auth", {
           method: "GET",
           credentials: "include",
         });
 
         if (response.ok) {
-          const userResponse = await fetch("/api/get-logged-user-info", {
+          const userResponse = await fetch("/users/get-logged-user-info", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -136,7 +136,7 @@ function UserProf() {
 
     //in momentul in care da click pe save, se salveaza si in baza de date alea
     try {
-      const response = await fetch("/api/update-logged-user-info", {
+      const response = await fetch("/users/update-logged-user-info", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -12,7 +12,7 @@ function Login() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch('/api/check-auth', {
+        const response = await fetch('/users/check-auth', {
           method: "GET",
           credentials: "include",
         });
@@ -35,7 +35,7 @@ function Login() {
     const password = formData.get('password');
     
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch('/users/login', {
                 method: "POST",
                 body: JSON.stringify({username, password}), 
                 headers: {

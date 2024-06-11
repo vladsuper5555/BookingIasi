@@ -68,7 +68,7 @@ function HealthForm() {
     console.log('Activity Index:', activityIndex);
     ///mai trebuie un checkCookie call
     try {
-      const response = await fetch('/api/saveHealthForm', {
+      const response = await fetch('/users/saveHealthForm', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
