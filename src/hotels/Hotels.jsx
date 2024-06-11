@@ -237,19 +237,19 @@ const Hotels = ({
           Attractions
         </a>
         <a
-          href="#section_Review"
+          href="#review-section"
           onClick={(e) => {
             e.preventDefault();
-            scrollToSection("section_Review");
+            scrollToSection("review-section");
           }}
         >
           Reviews
         </a>
         <a
-          href="#section_Contact"
+          href="#contact-section"
           onClick={(e) => {
             e.preventDefault();
-            scrollToSection("section_Contact");
+            scrollToSection("contact-section");
           }}
         >
           Contact
@@ -257,8 +257,8 @@ const Hotels = ({
       </nav>
       <div className={styles.hotels}>
         <div className={styles.header}>
-          <div className={styles["container-header"]}>
-            <h1 className={styles["hotel-name-title-header"]}>
+          <div className={styles["title-page-container"]}>
+            <h1 className={styles["title-page-container-hotel-name"]}>
               {hotelData?.name}
             </h1>
             <div className={styles.subtitle}>
@@ -268,14 +268,14 @@ const Hotels = ({
             </div>
           </div>
 
-          <div className={styles["header-image"]}>
+          <div className={styles["title-page-container-image"]}>
             {hotelData?.name === "Unirea Hotel & Spa" ? (
               <img src={PrincipalImageUnirea} alt="Unirea Hotel" />
             ) : (
               <img src={PrincipalImagePrestige} alt="Prestige Hotel" />
             )}
-            <div className={styles["header-info"]}>
-              <div className={styles["header-info-sections"]}>
+            <div className={styles["title-page-container-hotel-info"]}>
+              <div className={styles["title-page-container-hotel-info-sections"]}>
                 <p>
                   <span className={styles.inBold}>Check-in:</span>{" "}
                   {hotelData?.checkinTime}PM
@@ -286,14 +286,14 @@ const Hotels = ({
                 </p>
               </div>
               <div className={styles["vertical-line"]}></div>
-              <div className={styles["header-info-sections"]}>
+              <div className={styles["title-page-container-hotel-info-sections"]}>
                 <p>
                   <span className={styles.inBold}>Opening hours:</span>{" "}
                   {hotelData?.openingHours}
                 </p>
               </div>
               <div className={styles["vertical-line"]}></div>
-              <div className={styles["header-info-sections"]}>
+              <div className={styles["title-page-container-hotel-info-sections"]}>
                 <p>
                   <span className={styles.inBold}>Price: </span>
                   {hotelData?.priceRange}€{" "}
@@ -310,7 +310,7 @@ const Hotels = ({
           </div>
 
           <div className={styles.continut}>
-            <div className={styles["continut-container-info"]}>
+            <div className={styles["about-container-content"]}>
               {" "}
               <div className={styles.titluSectiune1}>About</div>
               <div className={styles.sectiuneText}>
@@ -498,7 +498,7 @@ const Hotels = ({
             </div>
           </div>
         </section>
-        <section id="section_Review" className={styles.reviews}>
+        <section id="review-section" className={styles.reviews}>
           <div
             className={`${styles.upperSection} ${styles["reviews-container"]}`}
           >
@@ -535,7 +535,7 @@ const Hotels = ({
           </div>
         </section>
 
-        <section id="section_Contact" className={styles.contact}>
+        <section id="contact-section" className={styles.contact}>
           <div className={styles["contact-image-container"]}>
             <img
               src={ContactImageUnirea}

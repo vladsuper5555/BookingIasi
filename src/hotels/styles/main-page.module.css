@@ -58,7 +58,7 @@
   gap: 20px;
 }
 
-.continut-container-info {
+.about-container-content {
   display: flex;
   flex-direction: column;
   text-align: right;
@@ -86,16 +86,16 @@
   font-weight: 900; /* Bold weight */
   font-size: 5em; /* Adjusted for better scaling */
 }
-.header-image {
+.title-page-container-image {
   position: relative;
   display: inline-block;
   width: 100%;
 }
-.header-image img {
+.title-page-container-image img {
   width: 90%;
   border-radius: 15px;
 }
-.header-info {
+.title-page-container-hotel-info {
   position: absolute;
   text-size-adjust: 50%;
   bottom: -20px;
@@ -109,7 +109,7 @@
   display: flex;
   align-items: center;
 }
-.header-info-sections {
+.title-page-container-hotel-info-sections {
   align-items: center;
   -ms-flex-align:center;
   margin-left: 5%;
@@ -326,7 +326,7 @@ address {
   z-index: 10;
 }
 
-.container-header {
+.title-page-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -371,7 +371,7 @@ address {
 
 /* Media Queries for Responsive Design */
 @media (max-width: 1400px) {
-  .header-info{
+  .title-page-container-hotel-info{
     padding: 8px;
     bottom: -40px;
     font-size: 0.9em;
@@ -383,7 +383,7 @@ address {
 }
 
 @media (max-width: 1200px) {
-  .header-info{
+  .title-page-container-hotel-info{
     padding: 7px;
     bottom: -60px;
     font-size: 0.8em;
@@ -401,7 +401,7 @@ address {
     padding-bottom: 50%;
   }
 
-  .header-info{
+  .title-page-container-hotel-info{
     bottom: -60px;
     font-size: 0.6em;
   }
@@ -452,12 +452,12 @@ address {
     margin-bottom: 10px;
   }
 
-  .header-image{
+  .title-page-container-image{
     width: 100%;
     height: 100%;
     max-height: 350px;
   }
-  .header-info {
+  .title-page-container-hotel-info {
     position: absolute;
     text-size-adjust: 50%;
     bottom: -60px;
@@ -474,7 +474,7 @@ address {
   .contact-image-container {
     position: relative;
   }
-  .header-info-sections {
+  .title-page-container-hotel-info-sections {
     position: static; /* Anulează poziționarea absolută */
     margin: 10px 0; /* Ajustează marginile pentru a lăsa spațiu între imagine și informații */
     width: 100%; /* Asigură că informațiile ocupă întreaga lățime a ecranului */
@@ -533,12 +533,12 @@ flex-direction: column;
   margin-bottom: 10px;
 }
 
-.container-header {
+.title-page-container {
   text-align: left;
   margin-left: 2rem;
 }
 
-.hotel-name-title-header {
+.title-page-container-hotel-name {
   font-size: 2rem;
 }
 
@@ -558,12 +558,12 @@ flex-direction: column;
 
 @media (max-width: 480px) {
 
-  .header-image{
+  .title-page-container-image{
     width: 100%;
     height: 100%;
     max-height: 200px;
   }
-  .header-info{
+  .title-page-container-hotel-info{
     padding: 0px;
     font-size: 0.5em;
   }
@@ -594,7 +594,7 @@ flex-direction: column;
 }
 
 @media (max-width: 390px) {
-  .header-info{
+  .title-page-container-hotel-info{
     bottom: -50px;
     text-size-adjust: 50%
   }
