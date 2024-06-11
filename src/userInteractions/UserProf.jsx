@@ -46,7 +46,7 @@ function UserProf() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch("/users/check-auth", {
+        const response = await fetch("/users/accessTokens", {
           method: "GET",
           credentials: "include",
         });
