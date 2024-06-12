@@ -52,7 +52,7 @@ function UserProf() {
         });
 
         if (response.ok) {
-          const userResponse = await fetch("/users/get-logged-user-info", {
+          const userResponse = await fetch("/users", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -92,8 +92,8 @@ function UserProf() {
     event.preventDefault();
 
     try {
-      const response = await fetch("/api/logout", {
-        method: "GET",
+      const response = await fetch("/api/accessTokens", {
+        method: "DELETE",
         credentials: "include",
       });
 
@@ -136,8 +136,8 @@ function UserProf() {
 
     //in momentul in care da click pe save, se salveaza si in baza de date alea
     try {
-      const response = await fetch("/users/update-logged-user-info", {
-        method: "POST",
+      const response = await fetch("/users", {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
