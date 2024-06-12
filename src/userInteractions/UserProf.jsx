@@ -92,7 +92,7 @@ function UserProf() {
     event.preventDefault();
 
     try {
-      const response = await fetch("/api/accessTokens", {
+      const response = await fetch("/users/accessTokens", {
         method: "DELETE",
         credentials: "include",
       });
