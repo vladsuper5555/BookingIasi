@@ -436,13 +436,13 @@ function UserProf() {
                     />
                   </div>
                 </div>
-                <a
-                  href="#"
+                <Button
+                  variant="outlined"
                   onClick={handleHealthFormClick}
                   className={styleUserProf.healthFormLink}
                 >
                   Access the health formular
-                </a>
+                </Button>
               </div>
             </div>
           </div>
