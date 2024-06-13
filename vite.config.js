@@ -24,7 +24,7 @@ export default defineConfig({
           return path;
         }
       },
-      '/panoramas': {
+      '/panoramaTours': {
         target: 'http://74.242.168.151:5050',
         changeOrigin: true,
         rewrite: (path) => {
