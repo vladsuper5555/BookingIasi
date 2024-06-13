@@ -3,7 +3,7 @@ import mysql from 'mysql'
 var config = {
     host: "localhost",
     user: "root",
-    password: "",
+    password: "pass",
     database: "BookingIasi",
 };
 
