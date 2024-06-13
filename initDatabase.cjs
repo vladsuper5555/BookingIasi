@@ -5,7 +5,7 @@ const fs = require("node:fs");
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "",
+  password: "pass",
 });
 
 con.connect(async function (err) {
@@ -24,7 +24,7 @@ con.connect(async function (err) {
     var conDB = mysql.createConnection({
       host: "localhost",
       user: "root",
-      password: "",
+      password: "pass",
       database: "BookingIasi",
     });
 
