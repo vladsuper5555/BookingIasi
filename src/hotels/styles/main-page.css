@@ -1,0 +1,652 @@
+:root {
+  --font-color: #181818;
+  --background-color: #f5f5f5;
+}
+.general-structure{
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: auto;
+  background-color: #F5F5F5;
+  color: var(--font-color);
+  font-family: 'Montserrat', sans-serif;
+  }
+.navbar {
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  overflow: hidden;
+}
+.navbar a {
+  float: left;
+  display: block;
+  color: var(--font-color);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.smallerSize {
+  width: 20px;
+  margin-right: 15px;
+}
+.hotels {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.titluSectiune {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900; /* Bold weight */
+  font-size: 2.5em; /* Adjusted for better scaling */
+  margin-bottom: 20px;
+}
+.titluSectiune1 {
+  display: grid;
+  grid-template-columns: 1fr auto; /* Adjusts column sizing */
+  justify-content: end;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900; /* Bold weight */
+  font-size: 4.5em; /* Adjusted for better scaling */
+  margin-bottom: 20px;
+}
+.continut {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.continut-container-info {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  justify-content: center;
+  width: 90%;
+}
+
+.reviews-title {
+  font-size: 4rem;
+}
+
+.sectiuneText {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400; /* Regular weight */
+  font-size: 1.5em; /* Adjusted for better scaling */
+  align-self: center;
+}
+.header {
+  text-align: center;
+  background: var(--background-color);
+  padding: 20px;
+}
+.header h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900; /* Bold weight */
+  font-size: 5em; /* Adjusted for better scaling */
+}
+.header-image {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.header-image img {
+  width: 90%;
+  border-radius: 15px;
+}
+.header-info {
+  position: absolute;
+  text-size-adjust: 50%;
+  bottom: -20px;
+  left: 5%;
+  right: 5%;
+  background: white;
+  color: var(--font-color);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+}
+.sectiuneInfo {
+  align-items: center;
+  -ms-flex-align:center;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-left: 7%;
+  margin-right: 7%;
+}
+.linksDistance{
+  padding: 3%;
+}
+
+.inBold {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800; 
+  font-size: 1.5em; /* Adjusted for better scaling */
+}
+.sectiuneText a {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400; 
+  font-size: 0.875em; /* Adjusted for better scaling */
+  color: var(--font-color);
+  padding: 3%;
+  text-decoration: underline;
+}
+.overallRating {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600; /* Bold weight */
+  font-size: 1.5em; /* Adjusted for better scaling */
+  padding: 5%;
+}
+.upperSection {
+  display: flex;
+  align-items: center;
+}
+.recenzie {
+  text-align: left; /* Aliniază textul pe centru */
+  font-family: 'Montserrat', sans-serif; /* Utilizează fontul 'Montserrat' */
+  font-weight: 400; /* Greutatea normală a fontului */
+  font-size: 1.5em; /* Dimensiunea normală a fontului */
+  margin-left: 40px;
+  width: 90%;
+}
+.oneUnderAnother {
+  display: flex;
+  flex-direction: column;
+}
+.vertical-line {
+  height: 100px; 
+  border-left: 1px solid var(--font-color); 
+  margin: 0 auto; 
+}
+.subtitle {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.horizontal-line {
+  width: 5rem;
+  height: 1px;
+  background-color: var(--font-color); /* Poți schimba culoarea după cum dorești */
+  margin: 0 10px; /* Spațiu între linie și text */
+}
+
+.horizontal-line-about {
+  width: 40rem;
+  height: 1px;
+  background-color: var(--font-color); /* Poți schimba culoarea după cum dorești */
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.subtitle-about {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.reviews-container {
+  margin-left: 4rem;
+}
+
+.review-container-person {
+  display: flex;
+  align-items: flex-start;
+  margin-left: 4rem;
+}
+
+.subtitle-text {
+  font-size: 20px; /* Dimensiunea textului mic */
+  white-space: nowrap; /* Previne textul să fie împărțit pe mai multe linii */
+  padding: 0 10px; 
+}
+.featuresBox{
+  text-size-adjust: 50%;
+  background-color: white;
+  color: var(--font-color);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+  height: 60%;
+  margin: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600; 
+  font-size: 1.5em;   
+}
+
+.feature-container {
+  margin-left: 50px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+/* .contactBox {
+  background-color: #f0f0f0;
+  color: black;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400; 
+  font-size: 1em; 
+} */
+.contactBox p, .contactBox address {
+  font-size: 1em;
+  box-shadow: none;
+}
+.sectiuneImagine img {
+  width: 100%;
+  border-radius: 15px;
+  height: auto;
+}
+.about, .features, .reviews, .contact {
+  padding: 20px;
+  text-align: center;
+  margin-top: 6rem;
+}
+.about img, .feature-images img {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 10px;
+}
+.feature-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.feature-images img {
+  width: 30%;
+  margin: 10px 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+ul li {
+  margin: 10px 0;
+}
+blockquote {
+  font-style: italic;
+  margin: 20px;
+  padding: 10px;
+  border-left: 5px solid #ccc;
+}
+address {
+  font-style: normal;
+}
+.contact {
+  color: var(--font-color);
+  text-align: center;
+  padding-bottom: 20%;
+  margin-top: 10rem;
+}
+
+.contact-image-container {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  height: fit-content;
+
+}
+
+.contact-image {
+  width: 100%;
+  border-radius: 15px;
+}
+
+.contactBox {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  background-color:#f0f0f0; 
+  height: fit-content;
+  color: var(--font-color);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 0 15px 15px 0; 
+  width: 40%; 
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 1.5em;
+  z-index: 10;
+}
+
+.container-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 5rem;
+}
+
+.contactBox p, .contactBox address {
+  font-size: 1em;
+  box-shadow: none;
+  word-wrap: break-word; /* Sparge cuvintele lungi pentru a preveni overflow */
+}
+
+.contactBox address div {
+  margin-bottom: 10%; /* Spațiu între elementele de adresă */
+}
+
+.addressBox {
+  color: var(--font-color);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400; 
+  font-size: 1em; /* Adjusted for better scaling */
+}
+.addressBox div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.addressBox div img {
+  width: 1em; /* Setează o lățime fixă de 1 em */
+  height: 1em; /* Asigură ca înălțimea să fie aceeași cu lățimea pentru a face imaginea pătrată */
+  margin-right: 0.5em; /* Adaugă un spațiu între imagine și text */
+}
+
+
+h1, h2, p, li {
+  color: black;
+}
+/* Media Queries for Responsive Design */
+@media (max-width: 1400px) {
+  .header-info{
+    padding: 8px;
+    bottom: -40px;
+    font-size: 0.9em;
+  }
+
+  .contact{
+    padding-bottom: 30%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .header-info{
+    padding: 7px;
+    bottom: -60px;
+    font-size: 0.8em;
+  }
+
+  .contact{
+    padding-bottom: 30%;
+  }
+
+}
+
+@media (max-width: 1040px) {
+
+  .contact{
+    padding-bottom: 50%;
+  }
+
+  .header-info{
+    bottom: -60px;
+    font-size: 0.6em;
+  }
+
+  .contactBox .titluSectiune {
+    font-size: 1.5rem; /* Ajuste font-size pentru titlul sectiunii */
+  }
+  .contactBox p, .contactBox address {
+    font-size: 1em;
+    margin-bottom: 1px;
+  }
+  .contactBox address div{
+    margin-bottom: 5%;
+  }
+}
+
+@media (max-width: 768px) {
+
+
+  .reviews-title {
+    font-size: 2.5rem;
+  }
+
+  .overallRating {
+    font-size: 1.3rem;
+  }
+
+  .titluSectiune1 {
+    font-size: 3rem;
+  }
+
+  .sectiuneText {
+    font-size: 1.3rem;
+  }
+
+  .horizontal-line-about {
+    width: 10rem;
+    height: 1px;
+    background-color: var(--font-color); /* Poți schimba culoarea după cum dorești */
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .subtitle-about {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 10px;
+  }
+
+  .header-image{
+    width: 100%;
+    height: 100%;
+    max-height: 350px;
+  }
+  .header-info {
+    position: absolute;
+    text-size-adjust: 50%;
+    bottom: -60px;
+    left: 1%;
+    right: 1%;
+    background: white;
+    color: black;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    font-size: 0.5em;
+  }
+  .contact-image-container {
+    position: relative;
+  }
+  .sectiuneInfo {
+    position: static; /* Anulează poziționarea absolută */
+    margin: 10px 0; /* Ajustează marginile pentru a lăsa spațiu între imagine și informații */
+    width: 100%; /* Asigură că informațiile ocupă întreaga lățime a ecranului */
+  }
+  .continut{
+    display: flex;
+    flex-direction: column;
+  }
+  .feature-images {
+    flex-direction: column;
+    align-items: center;
+  }
+  .feature-images img {
+    width: 80%;
+    margin: 10px 0;
+  }
+
+.contact {
+  padding-bottom: 80%;
+  color: var(--font-color);
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  position: relative; /* Make the contact section relative */
+}
+.continut{
+display: flex;
+flex-direction: column;
+}
+
+.contactBox .titluSectiune {
+  font-size: 1.5rem; /* Smaller font size for the title */
+}
+
+.contactBox p, .contactBox address {
+  font-size: 1rem; /* Adjust font size for smaller screens */
+}
+.addressBox {
+  /*background-color: white;*/
+  color: var(--font-color);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400; 
+  font-size: 1em; /* Adjusted for better scaling */
+}
+.addressBox div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.container-header {
+  text-align: left;
+  margin-left: 2rem;
+}
+
+.hotel-name-title-header {
+  font-size: 2rem;
+}
+
+.recenzie {
+  font-size: 1.2rem;
+}
+
+.review-container-person {
+  margin-left: 1rem;
+}
+
+.reviews-container {
+  margin-left: 2rem;
+}
+
+}
+
+@media (max-width: 480px) {
+
+  .header-image{
+    width: 100%;
+    height: 100%;
+    max-height: 200px;
+  }
+  .header-info{
+    padding: 0px;
+    font-size: 0.5em;
+  }
+
+
+.contactBox .titluSectiune {
+    font-size: 1rem; /* Smaller font size for the title */
+}
+
+.contactBox p, .contactBox address {
+    font-size: 0.6rem; /* Further adjust font size */
+}
+}
+
+@media (max-width: 400px) {
+
+  .contact-image-container{
+    justify-content: center;
+  }
+
+  .contactBox{
+    width: 80%;
+  }
+
+  .contactBox address div{
+    margin-bottom: 2%;
+  }
+}
+
+@media (max-width: 390px) {
+  .header-info{
+    bottom: -50px;
+    text-size-adjust: 50%
+  }
+
+.contactBox .titluSectiune {
+    font-size: 1.2rem; /* Smaller font size for the title */
+}
+
+.contactBox p, .contactBox address {
+    font-size: 0.8rem; /* Further adjust font size */
+}
+
+.contactBox .titluSectiune {
+  font-size: 1.2rem; /* Smaller font size for the title */
+}
+
+.contactBox p, .contactBox address {
+  font-size: 0.8rem; /* Further adjust font size */
+}
+
+.addressBox {
+/*background-color: white;*/
+color: var(--font-color);
+box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+padding: 10px;
+border-radius: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 100%;
+margin: 20px 0;
+font-family: 'Montserrat', sans-serif;
+font-weight: 400; 
+font-size: 1em; /* Adjusted for better scaling */
+}
+
+.addressBox div {
+display: flex;
+align-items: center;
+margin-bottom: 3px;
+}
+
+.header h1{
+  font-size: 4em;
+
+}
+
+.navbar a{
+  font-size: small;
+}
+
+}
