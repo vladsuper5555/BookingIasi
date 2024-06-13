@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import styleUserProf from "./UserProf.module.css";
+import styleUserProf from "./styles/UserProf.module.css";
 import profilePicture from "./profilepic.jpg";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import womanProfile from "./images/woman-profile-picture.svg";

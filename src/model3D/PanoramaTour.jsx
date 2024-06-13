@@ -13,7 +13,7 @@ const ModelPage = () => {
   const [searchParams] = useSearchParams();
   const queryParamValue = searchParams.get('hotel');
   const firstWord = queryParamValue.split(' ')[0];
-  const [url, setUrl] = useState(`/api/panoramas/?hotel=${firstWord}&appType=Apartments&appId=Apartment1`);
+  const [url, setUrl] = useState(`/panoramaTours/?hotel=${firstWord}&appType=Apartments&appId=Apartment1`);
   console.log(firstWord);
 
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ const ModelPage = () => {
                   }
                 }}
                 onClick={() =>
-                  setUrl(`/api/panoramas/?hotel=${firstWord}&appType=Apartments&appId=Apartment1`)
+                  setUrl(`/panoramaTours/?hotel=${firstWord}&appType=Apartments&appId=Apartment1`)
                 }
                 endIcon={<BedOutlinedIcon />}
               >
@@ -63,7 +63,7 @@ const ModelPage = () => {
               <Button
                 sx={{ mb: 2, backgroundColor: '#18181A', color: '#fff', border: '1px solid #fff', borderRadius: '0.5rem', padding: '10px', fontSize: '1rem', textTransform: 'none' }}
                 onClick={() =>
-                  setUrl(`/api/panoramas/?hotel=${firstWord}&appType=Pool&appId=Apartment1`)
+                  setUrl(`/panoramaTours/?hotel=${firstWord}&appType=Pool&appId=Apartment1`)
                 }
                 endIcon={<SpaOutlinedIcon />}
               >
@@ -79,7 +79,7 @@ const ModelPage = () => {
                   }
                 }}
                 onClick={() =>
-                  setUrl(`/api/panoramas/?hotel=${firstWord}&appType=ConferenceRoom&appId=Apartment1`)
+                  setUrl(`/panoramaTours/?hotel=${firstWord}&appType=ConferenceRoom&appId=Apartment1`)
                 }
                 endIcon={<MeetingRoomOutlinedIcon />}
               >

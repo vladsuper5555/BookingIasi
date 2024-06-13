@@ -1,0 +1,49 @@
+.main-container {
+    height: 100vh;
+    background-image: url("../images/landing-page-image.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    overflow: hidden;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.info-container {
+    padding: 5%;
+    text-align: left;
+    color: #F5F5F5;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.title-container {
+    text-align: left;
+}
+
+.main-title {
+    font-size: 5.5vw;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    color: #F5F5F5;
+}
+
+.main-description {
+    font-size: 2.5vw;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+.welcome-button {
+    color: #18181A;
+    transition: font-weight 0.3s ease-in-out;
+}
+
+.welcome-button:hover {
+    color: #18181A;
+    background-color: #F5F5F5;
+    font-weight: 700;
+}

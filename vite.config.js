@@ -23,6 +23,14 @@ export default defineConfig({
           console.log('Proxying:', path);
           return path;
         }
+      },
+      '/panoramaTours': {
+        target: 'http://74.242.168.151:5050',
+        changeOrigin: true,
+        rewrite: (path) => {
+          console.log('Proxying:', path);
+          return path;
+        }
       }
     }
   },

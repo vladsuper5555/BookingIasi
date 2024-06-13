@@ -1,51 +1,27 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import background from './download.jpg';
+import background from './images/landing-page-image.svg';
+import styleLanding from './styles/landing-page-style.module.css';
 function Welcome() {
   return (
     <div
-      style={{
-        height: '100vh',
-        backgroundImage: `url(${background})`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        display: 'flex',
-        justifyContent: 'flex-start',
-        alignItems: 'flex-end',
-        overflow: 'hidden',
-        padding: '20px', 
-        boxSizing: 'border-box',
-      }}
+    className={styleLanding["main-container"]}
     >
       <div
-        style={{
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
-          padding: '5%',
-          borderRadius: '8px',
-          textAlign: 'left',
-          color: '#F5F5F5',
-          width: '100%',
-          maxWidth: '1000px',
-        }}
+      className={styleLanding["info-container"]}
       >
-        <div style={{ textAlign: 'start' }}>
-          <h1 style={{
-            fontSize: '5.5vw', 
-            fontWeight: 'bold',
-            fontFamily: 'Montserrat',
-            color:'#FFF'
-          }}>
+        <div
+        className={styleLanding["title-container"]}>
+          <h1 
+          className={styleLanding["main-title"]}
+          >
             Discover Iași
           </h1>
         </div>
-        <div style={{ textAlign: 'start' }}>
-          <h1 style={{
-            fontSize: '2.5vw', 
-            fontFamily: 'Montserrat',
-            color:'#FFF',
-          }}>
+        <div>
+          <h1 
+          className={styleLanding["main-description"]}>
             Experience the rich history, vibrant culture, and charming beauty of Iasi on your next getaway.
           </h1>
         </div>
